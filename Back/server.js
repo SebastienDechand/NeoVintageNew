@@ -67,11 +67,6 @@ app.use((err, req, res, next) => {
   });
 });
 
-// 404 handler
-app.use('*', (req, res) => {
-  res.status(404).json({ error: 'Route non trouvée' });
-});
-
 // Vercel ou dev server
 if (process.env.VERCEL) {
   module.exports = app;
