@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { validatePassword } = require('../middleware/auth.middleware');
+const { authenticateAdmin } = require('../middleware/auth.middleware');
 const {
   getFeedbacks,
   createFeedback,
@@ -8,12 +8,10 @@ const {
   updateFeedbackStatus
 } = require('../controllers/feedback.controller');
 
-// Routes publiques
 router.get('/', getFeedbacks);
 router.get('/stats', getFeedbackStats);
 router.post('/', createFeedback);
 
-// Routes protégées (modération)
-router.patch('/:id/status', validatePassword, updateFeedbackStatus);
+router.patch('/:id/status', authenticateAdmin, updateFeedbackStatus);
 
 module.exports = router;

@@ -1,16 +1,27 @@
-<button (click)="showPasswordModal = true" class="edit-button">
+<button (click)="showLoginModal = true" class="edit-button">
   Éditer le contenu
 </button>
 
-@if (showPasswordModal) {
+@if (showLoginModal) {
   <div class="modal-overlay" (click)="closeModals($event)">
     <div class="modal-content">
-      <div class="password-container">
-        <h3>Authentification</h3>
-        <input type="password" [(ngModel)]="password" placeholder="Entrez le mot de passe" />
+      <div class="login-container">
+        <h3>Connexion Admin</h3>
+        <input
+          type="email"
+          [(ngModel)]="email"
+          placeholder="Email"
+          autocomplete="email"
+        />
+        <input
+          type="password"
+          [(ngModel)]="password"
+          placeholder="Mot de passe"
+          autocomplete="current-password"
+        />
         <div class="modal-buttons">
-          <button (click)="enableEdit()">Valider</button>
-          <button (click)="showPasswordModal = false">Annuler</button>
+          <button (click)="enableEdit()">Se connecter</button>
+          <button (click)="showLoginModal = false">Annuler</button>
         </div>
       </div>
     </div>

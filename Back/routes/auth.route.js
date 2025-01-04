@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
-const { validatePassword } = require('../middleware/auth.middleware');
+const { authenticateAdmin } = require('../middleware/auth.middleware');
+const { login, getProfile } = require('../controllers/auth.controller');
 
-router.post('/validate-password', validatePassword, (req, res) => {
-  res.status(200).json({ message: 'Mot de passe valide' });
-});
+router.post('/login', login);
+router.get('/profile', authenticateAdmin, getProfile);
 
 module.exports = router;

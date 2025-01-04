@@ -1,19 +1,24 @@
-const crypto = require('crypto');
-const { hashedPassword } = require('../config/environment');
+const jwt = require('jsonwebtoken');
+const Admin = require('../models/admin.model');
 
-const validatePassword = (req, res, next) => {
-  const password = req.headers.password || req.body.password;
-  
-  if (!password) {
-    return res.status(401).json({ error: 'Mot de passe requis' });
+exports.authenticateAdmin = async (req, res, next) => {
+  try {
+    const authHeader = req.headers.authorization;
+    if (!authHeader) {
+      return res.status(401).json({ error: 'Token requis' });
+    }
+
+    const token = authHeader.split(' ')[1]; // Bearer token
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    const admin = await Admin.findById(decoded.id);
+    if (!admin) {
+      return res.status(401).json({ error: 'Admin non trouvé' });
+    }
+
+    req.admin = admin;
+    next();
+  } catch (error) {
+    res.status(401).json({ error: 'Non autorisé' });
   }
-
-  const hashedInput = crypto.createHash('sha256').update(password).digest('hex');
-  if (hashedInput !== hashedPassword) {
-    return res.status(403).json({ error: 'Mot de passe incorrect' });
-  }
-
-  next();
 };
-
-module.exports = { validatePassword };
