@@ -7,3 +7,9 @@ export interface Feedback {
   date: Date;
   verified: boolean;
 }
+
+export interface FeedbackStats {
+  averageRating: number;
+  totalCount: number;
+  ratingDistribution: { [key: number]: number };
+}

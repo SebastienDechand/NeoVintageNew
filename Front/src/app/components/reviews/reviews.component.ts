@@ -4,23 +4,14 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { Feedback } from '../../models/feedback.model';
 import { FeedbackService } from '../../services/feedback.service';
 import { finalize } from 'rxjs';
-
-interface Review {
-  id: number;
-  authorInitials: string;
-  rating: number;
-  productName: string;
-  comment: string;
-  date: Date;
-  verified: boolean;
-}
+import { HttpClientModule } from '@angular/common/http';
 
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule, ReactiveFormsModule]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule, HttpClientModule]
 })
 export class ReviewsComponent implements OnInit {
   reviews: Feedback[] = [];
@@ -38,9 +29,9 @@ export class ReviewsComponent implements OnInit {
   ) {
     this.reviewForm = this.fb.group({
       rating: ['', Validators.required],
-      authorInitials: ['', Validators.required],
+      authorInitials: ['', [Validators.required, Validators.maxLength(3)]],
       productName: ['', Validators.required],
-      comment: ['', Validators.required],
+      comment: ['', [Validators.required, Validators.minLength(10)]],
       consent: [false, Validators.requiredTrue]
     });
   }
@@ -53,26 +44,29 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.feedbackService.feedbacks$.subscribe(feedbacks => {
-      this.reviews = feedbacks;
-      this.updateVisibleReviews();
+    this.feedbackService.feedbacks$.subscribe({
+      next: (feedbacks) => {
+        this.reviews = feedbacks;
+        this.calculateAverageRating();
+      },
+      error: (error) => console.error('Erreur lors du chargement des avis:', error)
     });
 
-    this.feedbackService.getFeedbackStats().subscribe(stats => {
-      this.averageRating = stats.averageRating;
+    this.feedbackService.getFeedbackStats().subscribe({
+      next: (stats) => {
+        this.averageRating = stats.averageRating;
+      },
+      error: (error) => console.error('Erreur lors du chargement des statistiques:', error)
     });
   }
 
   next() {
-    if (this.currentStartIndex + this.maxDisplayed < this.reviews.length) {
-      this.currentStartIndex++;
-    }
+    const maxStart = Math.max(0, this.reviews.length - this.maxDisplayed);
+    this.currentStartIndex = Math.min(this.currentStartIndex + 1, maxStart);
   }
 
   previous() {
-    if (this.currentStartIndex > 0) {
-      this.currentStartIndex--;
-    }
+    this.currentStartIndex = Math.max(0, this.currentStartIndex - 1);
   }
 
   selectRating(rating: number) {
@@ -91,8 +85,8 @@ export class ReviewsComponent implements OnInit {
 
       this.feedbackService.addFeedback(newFeedback)
         .pipe(finalize(() => this.isSubmitting = false))
-        .subscribe(
-          () => {
+        .subscribe({
+          next: () => {
             this.submitSuccess = true;
             this.reviewForm.reset();
             setTimeout(() => {
@@ -100,14 +94,20 @@ export class ReviewsComponent implements OnInit {
               this.showForm = false;
             }, 3000);
           },
-          error => {
+          error: (error) => {
             console.error('Erreur lors de l\'ajout de l\'avis:', error);
           }
-        );
+        });
     }
   }
 
-  private updateVisibleReviews() {
-    // Mettre à jour les avis visibles dans le carousel
+  private calculateAverageRating() {
+    if (this.reviews.length === 0) {
+      this.averageRating = 0;
+      return;
+    }
+
+    const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0);
+    this.averageRating = sum / this.reviews.length;
   }
 }
