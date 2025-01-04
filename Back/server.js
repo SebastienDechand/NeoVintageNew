@@ -7,6 +7,7 @@ const mongoose = require('mongoose');
 // Import routes
 const photoRoutes = require('./routes/photo.routes');
 const creatorRoutes = require('./routes/creator.route');
+const feedbackRoutes = require('./routes/feedback.route');
 const authRoutes = require('./routes/auth.route');
 
 const app = express();
@@ -23,6 +24,7 @@ mongoose.connect(process.env.MONGODB_URL)
 // Routes
 app.use('/photos', photoRoutes);
 app.use('/creators', creatorRoutes);
+app.use('/feedbacks', feedbackRoutes);
 app.use('/auth', authRoutes);
 
 const PORT = process.env.PORT || 3000;

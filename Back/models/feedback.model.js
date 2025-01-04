@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const feedbackSchema = new mongoose.Schema({
+const FeedbackSchema = mongoose.Schema({
   authorInitials: {
     type: String,
     required: true,
@@ -29,6 +29,6 @@ const feedbackSchema = new mongoose.Schema({
     type: Boolean,
     default: true
   }
-});
+}, { timestamps: true });
 
-module.exports = mongoose.model('Feedback', feedbackSchema);
+module.exports = mongoose.model('Feedback', FeedbackSchema, 'Feedback');
