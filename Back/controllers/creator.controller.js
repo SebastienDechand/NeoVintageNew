@@ -1,6 +1,6 @@
 const Creator = require('../models/creator.model');
 
-exports.getAllCreators = async (req, res) => {
+exports.getCreators = async (req, res) => {
   try {
     const creators = await Creator.find();
     res.json(creators);

@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { validatePassword } = require('../middleware/auth.middleware');
-const photoController = require('../controllers/photo.controller');
+const { getPhotos, updatePhotos } = require('../controllers/photo.controller');
 
-router.get('/', photoController.getAllPhotos);
-router.put('/', validatePassword, photoController.updatePhotos);
+router.get('/', getPhotos);
+router.put('/', validatePassword, updatePhotos);
 
 module.exports = router;

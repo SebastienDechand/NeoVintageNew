@@ -1,23 +1,29 @@
+require('dotenv').config();
 const express = require('express');
+const bodyParser = require('body-parser');
 const cors = require('cors');
-const connectDB = require('./config/database');
-const { port } = require('./config/environment');
+const mongoose = require('mongoose');
 
+// Import routes
 const photoRoutes = require('./routes/photo.routes');
-const creatorRoutes = require('./routes/creator.routes');
-const feedbackRoutes = require('./routes/feedback.routes');
-const authRoutes = require('./routes/auth.routes');
+const creatorRoutes = require('./routes/creator.route');
+const authRoutes = require('./routes/auth.route');
 
 const app = express();
 
+// Middleware
 app.use(cors());
-app.use(express.json());
+app.use(bodyParser.json());
 
+// Database connection
+mongoose.connect(process.env.MONGODB_URL)
+  .then(() => console.log('Connecté à MongoDB'))
+  .catch(err => console.error('Erreur de connexion MongoDB:', err));
+
+// Routes
 app.use('/photos', photoRoutes);
 app.use('/creators', creatorRoutes);
-app.use('/feedback', feedbackRoutes);
 app.use('/auth', authRoutes);
 
-connectDB();
-
-app.listen(port, () => console.log(`Server: ${port}`));
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server: ${PORT}`));

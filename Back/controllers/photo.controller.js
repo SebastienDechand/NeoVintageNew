@@ -1,6 +1,6 @@
 const Photo = require('../models/photo.model');
 
-exports.getAllPhotos = async (req, res) => {
+exports.getPhotos = async (req, res) => {
   try {
     const photos = await Photo.find();
     res.json(photos);

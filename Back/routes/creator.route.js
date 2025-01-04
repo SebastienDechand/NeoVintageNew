@@ -1,9 +1,9 @@
 const express = require('express');
 const router = express.Router();
 const { validatePassword } = require('../middleware/auth.middleware');
-const creatorController = require('../controllers/creator.controller');
+const { getCreators, updateCreators } = require('../controllers/creator.controller');
 
-router.get('/', creatorController.getAllCreators);
-router.put('/', validatePassword, creatorController.updateCreators);
+router.get('/', getCreators);
+router.put('/', validatePassword, updateCreators);
 
 module.exports = router;
