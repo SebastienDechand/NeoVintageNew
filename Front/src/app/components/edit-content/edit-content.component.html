@@ -1,5 +1,5 @@
-<button (click)="showLoginModal = true" class="edit-button">
-  Éditer le contenu
+<button (click)="isLoggedIn ? logout() : showLoginModal = true" class="edit-button">
+  {{ isLoggedIn ? 'Déconnexion' : 'Éditer le contenu' }}
 </button>
 
 @if (showLoginModal) {

@@ -23,6 +23,7 @@ export class EditContentComponent implements OnInit {
   password = '';
   editMode = false;
   showLoginModal = false;
+  isLoggedIn = false;
 
   private readonly BASE_URL = environment.apiUrl;
 
@@ -33,6 +34,7 @@ export class EditContentComponent implements OnInit {
 
   ngOnInit() {
     this.loadContent();
+    this.isLoggedIn = !!localStorage.getItem('authToken');
   }
 
   loadContent() {
@@ -65,12 +67,22 @@ export class EditContentComponent implements OnInit {
 
     this.authService.login({ email: this.email, password: this.password }).subscribe({
       next: () => {
+        this.isLoggedIn = true;
         this.editMode = true;
         this.showLoginModal = false;
         this.resetForm();
+        if (this.authService.token) {
+          localStorage.setItem('authToken', this.authService.token);
+        }
       },
       error: (error) => this.handleError(error)
     });
+  }
+
+  logout(): void {
+    this.authService.logout();
+    this.isLoggedIn = false;
+    localStorage.removeItem('authToken');
   }
 
   saveAll(): void {

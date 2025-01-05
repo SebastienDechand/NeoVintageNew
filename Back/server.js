@@ -16,27 +16,6 @@ const creatorRoutes = require('./routes/creator.routes');
 const authRoutes = require('./routes/auth.routes');
 const feedbackRoutes = require('./routes/feedback.routes');
 
-// Route de debug (à supprimer en production)
-app.get('/debug', async (req, res) => {
-  try {
-    res.json({
-      env: {
-        node_env: process.env.NODE_ENV,
-        mongodb_url_exists: !!process.env.MONGODB_URL,
-        jwt_secret_exists: !!process.env.JWT_SECRET
-      },
-      mongo: {
-        readyState: mongoose.connection.readyState,
-        host: mongoose.connection.host,
-        name: mongoose.connection.name
-      },
-      timestamp: new Date().toISOString()
-    });
-  } catch (err) {
-    res.status(500).json({ error: err.message });
-  }
-});
-
 // MongoDB connection
 mongoose.connect(process.env.MONGODB_URL)
   .then(() => {
