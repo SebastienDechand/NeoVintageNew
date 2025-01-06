@@ -46,7 +46,6 @@ export class ReviewsComponent implements OnInit {
   ngOnInit() {
     this.feedbackService.feedbacks$.subscribe({
       next: (feedbacks) => {
-        console.log('Avis reçus dans ReviewsComponent :', feedbacks); // Vérifiez ici
         this.reviews = feedbacks;
         this.calculateAverageRating();
       },
@@ -112,10 +111,4 @@ export class ReviewsComponent implements OnInit {
     const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0);
     this.averageRating = sum / this.reviews.length;
   }
-
-  forceReload(): void {
-    console.log('Forçage du rechargement des avis...');
-    this.feedbackService.loadAllFeedbacks();
-  }
-
 }
