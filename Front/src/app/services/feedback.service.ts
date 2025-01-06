@@ -19,7 +19,7 @@ export class FeedbackService {
     this.loadAllFeedbacks();
   }
 
-  private loadAllFeedbacks(): void {
+  public loadAllFeedbacks(): void {
     this.http.get<Feedback[]>(this.apiUrl).pipe(
       map(feedbacks => feedbacks.map(feedback => ({
         ...feedback,
