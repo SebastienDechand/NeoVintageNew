@@ -88,8 +88,8 @@ export class ReviewsComponent implements OnInit {
         .subscribe({
           next: () => {
             this.submitSuccess = true;
+            this.isSubmitting = false;
             this.reviewForm.reset();
-            this.feedbackService.loadAllFeedbacks();
             setTimeout(() => {
               this.submitSuccess = false;
               this.showForm = false;

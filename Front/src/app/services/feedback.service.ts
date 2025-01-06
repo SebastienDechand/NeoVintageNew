@@ -37,10 +37,7 @@ export class FeedbackService {
 
   addFeedback(feedback: Omit<Feedback, 'id'>): Observable<Feedback> {
     return this.http.post<Feedback>(this.apiUrl, feedback).pipe(
-      tap(newFeedback => {
-        const currentFeedbacks = this.feedbacksSubject.value;
-        this.feedbacksSubject.next([newFeedback, ...currentFeedbacks]);
-      })
+      tap(() => this.loadAllFeedbacks())
     );
   }
 }
