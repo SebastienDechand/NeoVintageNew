@@ -1,3 +1,3 @@
 export const environment = {
-  apiUrl: 'https://neo-vintage-api.vercel.app'
+  apiUrl: 'https://https://neovintagenew-production.up.railway.app'
 };
