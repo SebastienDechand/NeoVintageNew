@@ -44,6 +44,7 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.feedbackService.loadAllFeedbacks();
     this.feedbackService.feedbacks$.subscribe({
       next: (feedbacks) => {
         this.reviews = feedbacks;
