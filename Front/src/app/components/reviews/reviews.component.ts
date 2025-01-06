@@ -44,13 +44,13 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.feedbackService.loadAllFeedbacks();
     this.feedbackService.feedbacks$.subscribe({
       next: (feedbacks) => {
+        console.log('Avis reçus dans ReviewsComponent :', feedbacks); // Vérifiez ici
         this.reviews = feedbacks;
         this.calculateAverageRating();
       },
-      error: (error) => console.error('Erreur lors du chargement des avis:', error)
+      error: (error) => console.error('Erreur lors du chargement des avis :', error),
     });
 
     this.feedbackService.getFeedbackStats().subscribe({
@@ -89,12 +89,12 @@ export class ReviewsComponent implements OnInit {
         .subscribe({
           next: () => {
             this.submitSuccess = true;
-            this.isSubmitting = false;
             this.reviewForm.reset();
             setTimeout(() => {
               this.submitSuccess = false;
               this.showForm = false;
             }, 3000);
+            this.feedbackService.loadAllFeedbacks();
           },
           error: (error) => {
             console.error('Erreur lors de l\'ajout de l\'avis:', error);
@@ -112,4 +112,10 @@ export class ReviewsComponent implements OnInit {
     const sum = this.reviews.reduce((acc, curr) => acc + curr.rating, 0);
     this.averageRating = sum / this.reviews.length;
   }
+
+  forceReload(): void {
+    console.log('Forçage du rechargement des avis...');
+    this.feedbackService.loadAllFeedbacks();
+  }
+
 }

@@ -19,17 +19,19 @@ export class FeedbackService {
     this.loadAllFeedbacks();
   }
 
-  public loadAllFeedbacks(): void {
-    this.http.get<Feedback[]>(this.apiUrl).pipe(
-      map(feedbacks => feedbacks.map(feedback => ({
-        ...feedback,
-        date: new Date(feedback.date)
-      })))
-    ).subscribe(
-      feedbacks => this.feedbacksSubject.next(feedbacks),
-      error => console.error('Erreur de chargement des avis:', error)
-    );
+
+  loadAllFeedbacks(): void {
+    const timestamp = new Date().getTime();
+    this.http.get<Feedback[]>(`${this.apiUrl}?nocache=${timestamp}`).subscribe({
+      next: (feedbacks) => {
+        this.feedbacksSubject.next(feedbacks);
+      },
+      error: (error) => {
+        console.error('Erreur lors du chargement des avis :', error);
+      },
+    });
   }
+
 
   getFeedbackStats(): Observable<FeedbackStats> {
     return this.http.get<FeedbackStats>(`${this.apiUrl}/stats`);
