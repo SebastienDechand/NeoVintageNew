@@ -30,6 +30,8 @@
     border-radius: 4px;
     font-size: 1rem;
     transition: all 0.3s ease;
+    border: none;
+    cursor: pointer;
 
     &:hover {
       background-color: var(--text-primary);

@@ -16,6 +16,7 @@ export class PhotoGalleryComponent implements OnInit {
   photos: any[] = [];
   selectedPhoto: any;
   currentIndex = 0;
+  isExpanded: {[key: string]: boolean} = {};
 
   private readonly API_URL = `${environment.apiUrl}/photos` || process.env['API_URL_PHOTOS'] || '';
 
@@ -49,5 +50,9 @@ export class PhotoGalleryComponent implements OnInit {
       ? (this.currentIndex - 1 + this.photos.length) % this.photos.length
       : (this.currentIndex + 1) % this.photos.length;
     this.selectedPhoto = this.photos[this.currentIndex];
+  }
+
+  toggleExpand(section: string): void {
+    this.isExpanded[section] = !this.isExpanded[section];
   }
 }

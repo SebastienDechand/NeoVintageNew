@@ -1,6 +1,11 @@
 <app-about></app-about>
-<app-services></app-services>
-<app-photo-gallery></app-photo-gallery>
-<app-creators-gallery></app-creators-gallery>
-<app-custom-shopping></app-custom-shopping>
+<app-services (toggleServices)="onToggleServices($event)"></app-services>
+<div *ngIf="activeDropdown" class="dropdown-wrapper">
+  <ng-container [ngSwitch]="activeDropdown">
+    <app-photo-gallery *ngSwitchCase="'app-photo-gallery'"></app-photo-gallery>
+    <app-creators-gallery *ngSwitchCase="'app-creators-gallery'"></app-creators-gallery>
+    <app-custom-shopping *ngSwitchCase="'app-custom-shopping'"></app-custom-shopping>
+  </ng-container>
+</div>
+
 <app-reviews></app-reviews>
