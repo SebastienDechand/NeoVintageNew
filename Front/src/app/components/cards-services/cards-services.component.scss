@@ -1,7 +1,6 @@
 .card {
   border-radius: 8px;
   text-align: center;
-  padding: 20px;
   transition: transform 0.3s ease;
 
   .card-image {
@@ -18,22 +17,7 @@
 
   .card-description {
     font-size: 1rem;
-    color: var(--text-tertiary);
+    color: var(--text-secondary);
     margin-bottom: 25px;
-  }
-
-  .card-button {
-    text-decoration: none;
-    background-color: var(--text-secondary);
-    color: var(--text-primary);
-    padding: 10px 20px;
-    border-radius: 4px;
-    font-size: 1rem;
-    transition: all 0.3s ease;
-
-    &:hover {
-      background-color: var(--text-primary);
-      color: var(--text-secondary);
-    }
   }
 }

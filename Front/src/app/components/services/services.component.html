@@ -5,11 +5,10 @@
   <div class="services-content">
     @for (service of services; track $index) {
       <app-cards-services
-      [image]="service.image"
-      [title]="service.title"
-      [description]="service.description"
-      [link]="service.link">
-    </app-cards-services>
+        [image]="service.image"
+        [title]="service.title"
+        [description]="service.description"
+      ></app-cards-services>
     }
   </div>
 </section>

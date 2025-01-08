@@ -10,5 +10,4 @@ export class CardsServicesComponent {
   @Input() image: string = '';
   @Input() title: string = '';
   @Input() description: string = '';
-  @Input() link: string = '';
 }

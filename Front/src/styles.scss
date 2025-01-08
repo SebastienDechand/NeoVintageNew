@@ -1,19 +1,60 @@
 :root {
+  /* Couleurs principales de la palette Neo Vintage */
+  --neo-peach: rgb(246, 180, 167);
+  --neo-pink: #F16C82;
+  --neo-orange: rgb(255, 87, 51);
+  --neo-fuchsia: #ff3e89;
+  --neo-yellow: #ffd700;
+
+  /* Couleurs de texte */
   --text-primary: #000000;
   --text-secondary: #ffffff;
   --text-tertiary: #333333;
+  --text-stars: #838383;
+
+  /* Couleurs de fond */
   --background-primary: #f8f9fa;
-  --background-secondary: #F68E7D;
-  --background-tertiary: #d4d4d4;
-  --button-color: #F68E7D;
-  --button-color-hover: #ff8c00;
+  --background-secondary: var(--neo-peach);
+  --background-tertiary: #f0f0f0;
+
+  /* Couleurs des boutons */
+  --button-color: var(--neo-pink);
+  --button-color-hover: var(--neo-fuchsia);
+
+  /* Variables additionnelles */
+  --accent-color: var(--neo-fuchsia);
+  --gradient-primary: linear-gradient(180deg, var(--neo-pink), var(--neo-peach));
+  --gradient-secondary: linear-gradient(35deg, var(--neo-orange), var(--neo-fuchsia));
+
+  /* Polices de caractères */
+  --font-heading: 'Gliker', sans-serif;
+  --font-body: 'OpenSans', cursive;
+  --font-decorative: 'Retrograde', sans-serif;
+}
+
+@font-face {
+  font-family: 'Gliker';
+  src: url('/assets/fonts/Gliker.woff2') format('woff2'),
+       url('/assets/fonts/Gliker.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'OpenSans';
+  src: url('/assets/fonts/OpenSans.woff2') format('woff2'),
+       url('/assets/fonts/OpenSans.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Retrograde';
+  src: url('/assets/fonts/Retrograde.woff2') format('woff2'),
+       url('/assets/fonts/Retrograde.woff') format('woff');
 }
 
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: 'Roboto', sans-serif;
+  font-family: var(--font-body);
   color: var(--text-primary);
   overflow-x: hidden;
 }
@@ -23,5 +64,11 @@ body {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  font-family: 'Manrope',Helvetica,Arial,Lucida,sans-serif;
+  font-family: var(--font-heading);
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.text-decorative {
+  font-family: var(--font-decorative);
 }

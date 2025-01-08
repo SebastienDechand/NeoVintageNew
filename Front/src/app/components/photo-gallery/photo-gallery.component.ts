@@ -4,13 +4,46 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { EditContentComponent } from '../edit-content/edit-content.component';
+import { trigger, transition, style, animate } from '@angular/animations';
+import { provideAnimations } from '@angular/platform-browser/animations';
 
 @Component({
   selector: 'app-photo-gallery',
   templateUrl: './photo-gallery.component.html',
   styleUrls: ['./photo-gallery.component.scss'],
   imports: [CommonModule, FormsModule, EditContentComponent],
-  standalone: true
+  standalone: true,
+  providers: [provideAnimations()],
+  animations: [
+    trigger('crossFadeZoom', [
+      transition('* => *', [
+        style({
+          opacity: 0,
+          transform: 'translate3d(15px, 0, 0)'
+        }),
+        animate('400ms cubic-bezier(0.4, 0, 0.2, 1)',
+          style({
+            opacity: 1,
+            transform: 'translate3d(0, 0, 0)'
+          })
+        )
+      ])
+    ]),
+    trigger('crossFadeZoomInv', [
+      transition('* => *', [
+        style({
+          opacity: 0,
+          transform: 'translate3d(-15px, 0, 0)'
+        }),
+        animate('400ms cubic-bezier(0.4, 0, 0.2, 1)',
+          style({
+            opacity: 1,
+            transform: 'translate3d(0, 0, 0)'
+          })
+        )
+      ])
+    ])
+  ]
 })
 export class PhotoGalleryComponent implements OnInit {
   photos: any[] = [];

@@ -7,8 +7,8 @@
       Une manière simple et accessible de consommer autrement, depuis chez vous !
     </p>
 
-    <div class="about-cards">
-      <div class="about-card">
+    <div class="gallery-cards">
+      <div class="gallery-card">
         <h4>
           <i class="fa-solid fa-store"></i>
           Visitez notre boutique Vinted
@@ -18,7 +18,7 @@
         </p>
       </div>
 
-      <div class="about-vinted">
+      <div class="gallery-vinted">
         <a href="https://www.vinted.fr/member/11729892" target="_blank" rel="noopener noreferrer" class="vinted-link">
           <span class="new-badge">Nouveau</span>
           Accéder à la boutique Vinted
@@ -45,7 +45,10 @@
 
   <div class="gallery-images">
     <div class="main-photo">
-      <img [src]="selectedPhoto?.url" [alt]="selectedPhoto?.title" />
+      <img
+        [@crossFadeZoom]="selectedPhoto?.url"
+        [src]="selectedPhoto?.url"
+        [alt]="selectedPhoto?.title" />
       <p>{{ selectedPhoto?.title }}</p>
     </div>
 
@@ -54,7 +57,10 @@
         *ngFor="let photo of getThumbnails()"
         class="thumbnail"
         (click)="selectPhoto(photo)">
-        <img [src]="photo.url" [alt]="photo.title" />
+        <img
+          [@crossFadeZoomInv]="photo.url"
+          [src]="photo.url"
+          [alt]="photo.title" />
       </div>
     </div>
   </div>

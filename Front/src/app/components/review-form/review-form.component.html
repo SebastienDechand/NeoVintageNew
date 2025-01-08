@@ -1,0 +1,85 @@
+<div class="add-review-button">
+  <button (click)="showForm = !showForm" class="btn-primary">
+    {{ showForm ? 'Fermer' : 'Laisser un avis' }}
+  </button>
+</div>
+
+@if (showForm) {
+  <div class="review-form-container">
+    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
+      <h3>Donnez votre avis</h3>
+
+      <div class="form-group">
+        <label>Note *</label>
+        <div class="rating-input">
+          @for (star of [5,4,3,2,1]; track $index) {
+            <span
+              (click)="selectRating(star)"
+              [class.filled]="star <= reviewForm.get('rating')?.value"
+              class="star clickable">★
+            </span>
+          }
+        </div>
+        @if (reviewForm.get('rating')?.errors?.['required'] && reviewForm.get('rating')?.touched) {
+          <div class="error-message">
+            Veuillez donner une note
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Initiales *</label>
+        <input type="text" formControlName="authorInitials" maxlength="3" placeholder="Ex: A.B.">
+        @if (reviewForm.get('authorInitials')?.errors?.['required'] && reviewForm.get('authorInitials')?.touched) {
+          <div class="error-message">
+            Les initiales sont requises
+          </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Produit acheté *</label>
+        <input type="text" formControlName="productName" placeholder="Nom du produit">
+        @if (reviewForm.get('productName')?.errors?.['required'] && reviewForm.get('productName')?.touched) {
+        <div class="error-message">
+          Le nom du produit est requis
+        </div>
+        }
+      </div>
+
+      <div class="form-group">
+        <label>Votre commentaire *</label>
+        <textarea formControlName="comment" rows="4" placeholder="Partagez votre expérience d'achat"></textarea>
+        @if (reviewForm.get('comment')?.errors?.['required'] && reviewForm.get('comment')?.touched) {
+          <div class="error-message">
+            Un commentaire est requis
+          </div>
+        }
+      </div>
+
+      <div class="form-group checkbox">
+        <label>
+          <input type="checkbox" formControlName="consent">
+          J'accepte que mon avis soit publié sur ce site *
+        </label>
+        @if (reviewForm.get('consent')?.errors?.['required'] && reviewForm.get('consent')?.touched) {
+          <div class="error-message">
+            Vous devez accepter la publication de votre avis
+          </div>
+        }
+      </div>
+
+      <div class="form-actions">
+        <button type="submit" [disabled]="!reviewForm.valid || isSubmitting" class="btn-submit">
+          {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer mon avis' }}
+        </button>
+      </div>
+
+      @if (submitSuccess) {
+        <div class="success-message">
+          Merci ! Votre avis a été envoyé avec succès.
+        </div>
+      }
+    </form>
+  </div>
+}

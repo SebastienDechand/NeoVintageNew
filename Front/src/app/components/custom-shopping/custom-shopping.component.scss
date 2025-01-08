@@ -5,16 +5,10 @@
   gap: 100px;
   width: 80%;
 
-  .custom-shopping-image {
-    flex: 1;
-    display: flex;
-    justify-content: center;
+  .carousel-container {
+    display: block;
+    height: 600px;
     width: 30%;
-
-    img {
-      border-radius: 50% 10% 50% 10%;
-      object-fit: cover;
-    }
   }
 
   .custom-shopping-content {
@@ -27,7 +21,7 @@
 
     .custom-shopping-title {
       font-size: 20px;
-      color: var(--background-secondary);
+      color: var(--neo-orange);
       text-align: left;
     }
 
@@ -51,7 +45,7 @@
       justify-content: center;
 
       .custom-shopping-card {
-        background: var(--background-secondary);
+        background: var(--gradient-secondary);
         border-radius: 8px;
         padding: 30px;
         flex: 1;

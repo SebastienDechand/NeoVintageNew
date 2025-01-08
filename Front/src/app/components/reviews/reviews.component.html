@@ -1,105 +1,44 @@
-<div class="add-review-button">
-  <button (click)="showForm = !showForm" class="btn-primary">
-    {{ showForm ? 'Fermer' : 'Laisser un avis' }}
-  </button>
-</div>
-
-@if (showForm) {
-  <div class="review-form-container">
-    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
-      <h3>Donnez votre avis</h3>
-
-      <div class="form-group">
-        <label>Note *</label>
-        <div class="rating-input">
-          @for (star of [5,4,3,2,1]; track $index) {
-            <span
-              (click)="selectRating(star)"
-              [class.filled]="star <= reviewForm.get('rating')?.value"
-              class="star clickable">★
-            </span>
-          }
-        </div>
-        @if (reviewForm.get('rating')?.errors?.['required'] && reviewForm.get('rating')?.touched) {
-          <div class="error-message">
-            Veuillez donner une note
-          </div>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Initiales *</label>
-        <input type="text" formControlName="authorInitials" maxlength="3" placeholder="Ex: A.B.">
-        @if (reviewForm.get('authorInitials')?.errors?.['required'] && reviewForm.get('authorInitials')?.touched) {
-          <div class="error-message">
-            Les initiales sont requises
-          </div>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Produit acheté *</label>
-        <input type="text" formControlName="productName" placeholder="Nom du produit">
-        @if (reviewForm.get('productName')?.errors?.['required'] && reviewForm.get('productName')?.touched) {
-        <div class="error-message">
-          Le nom du produit est requis
-        </div>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Votre commentaire *</label>
-        <textarea formControlName="comment" rows="4" placeholder="Partagez votre expérience d'achat"></textarea>
-        @if (reviewForm.get('comment')?.errors?.['required'] && reviewForm.get('comment')?.touched) {
-          <div class="error-message">
-            Un commentaire est requis
-          </div>
-        }
-      </div>
-
-      <div class="form-group checkbox">
-        <label>
-          <input type="checkbox" formControlName="consent">
-          J'accepte que mon avis soit publié sur ce site *
-        </label>
-        @if (reviewForm.get('consent')?.errors?.['required'] && reviewForm.get('consent')?.touched) {
-          <div class="error-message">
-            Vous devez accepter la publication de votre avis
-          </div>
-        }
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" [disabled]="!reviewForm.valid || isSubmitting" class="btn-submit">
-          {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer mon avis' }}
-        </button>
-      </div>
-
-      @if (submitSuccess) {
-        <div class="success-message">
-          Merci ! Votre avis a été envoyé avec succès.
-        </div>
-      }
-    </form>
-  </div>
-}
-
 <div class="reviews-container">
   <div class="current-reviews">
 
     <div class="ratings-summary">
       <div class="average-rating">
-        <h2>Avis clients vérifiés</h2>
-        <span class="big-rating">{{ averageRating.toFixed(1) }}</span>
-        <div class="stars">
-          @for (star of [1,2,3,4,5]; track $index) {
-            <span
-              [class.filled]="star <= averageRating"
-              class="star">★
-            </span>
-          }
+        <h2 class="rating-title">Notre réputation</h2>
+        <h3 class="rating-subtitle">Avis clients vérifiés</h3>
+        <p class="rating-description">
+          Découvrez ce que notre communauté pense de nos services et de nos produits. Chaque avis est vérifié pour garantir son authenticité.
+        </p>
+
+        <div class="rating-stats">
+          <span class="big-rating">{{ averageRating.toFixed(1) }}</span>
+          <div class="rating-details">
+            <div class="stars">
+              @for (star of [1,2,3,4,5]; track $index) {
+                <span
+                  [class.filled]="star <= averageRating"
+                  class="star">★
+                </span>
+              }
+            </div>
+            <span class="total-count">Basé sur {{ reviews.length }} avis</span>
+          </div>
         </div>
-        <span class="total-count">{{ reviews.length }} avis</span>
+
+        <div class="rating-highlights">
+          <div class="highlight-item">
+            <i class="fas fa-check-circle"></i>
+            <span>100% des avis sont vérifiés</span>
+          </div>
+          <div class="highlight-item">
+            <i class="fas fa-star"></i>
+            <span>{{ getPositiveReviewsPercentage() }}% d'avis positifs</span>
+          </div>
+        </div>
+
+        <div class="review-cta">
+          <p class="review-prompt">Vous avez acheté chez nous ? Partagez votre expérience !</p>
+          <app-review-form></app-review-form>
+        </div>
       </div>
     </div>
 
