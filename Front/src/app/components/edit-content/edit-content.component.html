@@ -1,6 +1,15 @@
-<button (click)="isLoggedIn ? logout() : showLoginModal = true" class="edit-button">
-  {{ isLoggedIn ? 'Déconnexion' : 'Éditer le contenu' }}
-</button>
+@if (isLoggedIn) {
+  <div class="button-group">
+    <button class="logout-button" (click)="logout()">
+      <i class="fas fa-sign-out-alt"></i>
+    </button>
+    <button class="edit-button" (click)="isEditMode()">
+      <i class="fas fa-edit"></i>
+    </button>
+  </div>
+} @else {
+  <div class="admin-trigger" (click)="handleAdminClick()" aria-hidden="true"></div>
+}
 
 @if (showLoginModal) {
   <div class="modal-overlay" (click)="closeModals($event)">

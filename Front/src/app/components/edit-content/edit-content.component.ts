@@ -1,9 +1,9 @@
-import { Component, Input, Output, EventEmitter, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { environment } from '../../environments/environment';
 import { forkJoin } from 'rxjs';
+import { environment } from '../../environments/environment';
 import { AuthService } from '../../services/auth.service';
 
 @Component({
@@ -24,6 +24,8 @@ export class EditContentComponent implements OnInit {
   editMode = false;
   showLoginModal = false;
   isLoggedIn = false;
+  private clickTimer: any;
+  private clickCount = 0;
 
   private readonly BASE_URL = environment.apiUrl;
 
@@ -33,8 +35,8 @@ export class EditContentComponent implements OnInit {
   ) {}
 
   ngOnInit() {
+    this.isLoggedIn = this.authService.isAuthenticated();
     this.loadContent();
-    this.isLoggedIn = !!localStorage.getItem('authToken');
   }
 
   loadContent() {
@@ -59,6 +61,10 @@ export class EditContentComponent implements OnInit {
     this.password = '';
   }
 
+  isEditMode(): void {
+    this.editMode = !this.editMode;
+  }
+
   enableEdit(): void {
     if (!this.email || !this.password) {
       alert('Veuillez remplir tous les champs');
@@ -71,9 +77,6 @@ export class EditContentComponent implements OnInit {
         this.editMode = true;
         this.showLoginModal = false;
         this.resetForm();
-        if (this.authService.token) {
-          localStorage.setItem('authToken', this.authService.token);
-        }
       },
       error: (error) => this.handleError(error)
     });
@@ -82,7 +85,7 @@ export class EditContentComponent implements OnInit {
   logout(): void {
     this.authService.logout();
     this.isLoggedIn = false;
-    localStorage.removeItem('authToken');
+    this.editMode = false;
   }
 
   saveAll(): void {
@@ -110,6 +113,19 @@ export class EditContentComponent implements OnInit {
       this.authService.logout();
     } else {
       alert('Erreur : ' + (error.error?.error || 'Erreur inconnue'));
+    }
+  }
+
+  handleAdminClick(): void {
+    clearTimeout(this.clickTimer);
+    this.clickCount++;
+    this.clickTimer = setTimeout(() => {
+      this.clickCount = 0;
+    }, 2000);
+
+    if (this.clickCount === 3) {
+      this.showLoginModal = true;
+      this.clickCount = 0;
     }
   }
 }
