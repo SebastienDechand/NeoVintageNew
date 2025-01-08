@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { forkJoin } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../../services/auth.service';
@@ -11,7 +11,7 @@ import { AuthService } from '../../services/auth.service';
   templateUrl: './edit-content.component.html',
   styleUrls: ['./edit-content.component.scss'],
   standalone: true,
-  imports: [CommonModule, FormsModule]
+  imports: [CommonModule, FormsModule, ReactiveFormsModule]
 })
 export class EditContentComponent implements OnInit {
   @Input() photos: any[] = [];
@@ -19,11 +19,10 @@ export class EditContentComponent implements OnInit {
   @Output() photosChange = new EventEmitter<any[]>();
   @Output() creatorsChange = new EventEmitter<any[]>();
 
-  email = '';
-  password = '';
   editMode = false;
   showLoginModal = false;
   isLoggedIn = false;
+  loginForm: FormGroup;
   private clickTimer: any;
   private clickCount = 0;
 
@@ -31,8 +30,14 @@ export class EditContentComponent implements OnInit {
 
   constructor(
     private http: HttpClient,
-    private authService: AuthService
-  ) {}
+    private authService: AuthService,
+    private fb: FormBuilder
+  ) {
+    this.loginForm = this.fb.group({
+      email: ['', Validators.required],
+      password: ['', Validators.required]
+    });
+  }
 
   ngOnInit() {
     this.isLoggedIn = this.authService.isAuthenticated();
@@ -56,22 +61,15 @@ export class EditContentComponent implements OnInit {
     }
   }
 
-  resetForm(): void {
-    this.email = '';
-    this.password = '';
-  }
-
   isEditMode(): void {
     this.editMode = !this.editMode;
   }
 
   enableEdit(): void {
-    if (!this.email || !this.password) {
-      alert('Veuillez remplir tous les champs');
-      return;
-    }
+      const email = this.loginForm.get('email')?.value;
+      const password = this.loginForm.get('password')?.value;
 
-    this.authService.login({ email: this.email, password: this.password }).subscribe({
+      this.authService.login({ email, password }).subscribe({
       next: () => {
         this.isLoggedIn = true;
         this.editMode = true;
@@ -80,6 +78,10 @@ export class EditContentComponent implements OnInit {
       },
       error: (error) => this.handleError(error)
     });
+  }
+
+  resetForm(): void {
+    this.loginForm.reset();
   }
 
   logout(): void {

@@ -14,25 +14,43 @@
 @if (showLoginModal) {
   <div class="modal-overlay" (click)="closeModals($event)">
     <div class="modal-content">
-      <div class="login-container">
+      <form  [formGroup]="loginForm" (ngSubmit)="enableEdit()" class="login-container">
         <h3>Connexion Admin</h3>
-        <input
-          type="email"
-          [(ngModel)]="email"
-          placeholder="Email"
-          autocomplete="email"
-        />
-        <input
-          type="password"
-          [(ngModel)]="password"
-          placeholder="Mot de passe"
-          autocomplete="current-password"
-        />
-        <div class="modal-buttons">
-          <button (click)="enableEdit()">Se connecter</button>
-          <button (click)="showLoginModal = false">Annuler</button>
+
+        <div class="form-group">
+          <label>Email</label>
+          <input type="email" formControlName="email" placeholder="Email" autocomplete="email">
+          @if (loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched) {
+            <div class="error-message">
+              L'adresse email est requise
+            </div>
+          }
+          @if (loginForm.get('email')?.errors?.['email'] && loginForm.get('email')?.touched) {
+            <div class="error-message">
+              L'adresse email n'est pas valide
+            </div>
+          }
         </div>
-      </div>
+
+        <div class="form-group">
+          <label>Mot de passe</label>
+          <input type="password" formControlName="password" placeholder="Mot de passe" autocomplete="current-password">
+          @if (loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched) {
+            <div class="error-message">
+              Le mot de passe est requis
+            </div>
+          }
+        </div>
+
+        <div class="modal-buttons">
+          <button type="submit" [disabled]="!loginForm.valid || isLoggedIn" class="btn-submit">
+            {{ isLoggedIn ? 'Envoi en cours...' : 'Se connecter' }}
+          </button>
+          <button (click)="showLoginModal = false" class="btn-submit">Annuler</button>
+        </div>
+
+
+      </form>
     </div>
   </div>
 }
