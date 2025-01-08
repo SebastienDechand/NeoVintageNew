@@ -1,0 +1,76 @@
+<nav class="navbar">
+  <div class="navbar__menu" [class.active]="isMenuOpen">
+    <ul class="navbar__menu-list">
+      <li class="navbar__menu-item">
+        <a
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          (click)="scrollTo('banner')"
+        >
+          Accueil
+        </a
+        >
+      </li>
+      <li class="navbar__menu-item">
+        <a
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          (click)="scrollTo('about')"
+        >
+          À propos</a
+        >
+      </li>
+      <li class="navbar__menu-item">
+        <a
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          (click)="scrollTo('services')"
+        >
+          Nos Services
+        </a>
+      </li>
+      <li class="navbar__menu-item">
+        <a
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          (click)="scrollTo('photos')"
+        >
+          Friperie en ligne</a
+        >
+      </li>
+      <li class="navbar__menu-item">
+        <a
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          (click)="scrollTo('creators')"
+        >
+          Créateurs du mois
+        </a>
+      </li>
+      <li class="navbar__menu-item">
+        <a
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          (click)="scrollTo('custom-shopping')"
+        >
+          Shopping personnalisé
+        </a>
+      </li>
+      <li class="navbar__menu-item">
+        <a
+          (click)="closeMenu()"
+          class="navbar__menu-link"
+          (click)="scrollTo('reviews')"
+        >
+          Avis clients
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <div class="navbar__hamburger" (click)="toggleMenu()">
+    <span class="navbar__hamburger-bar"></span>
+    <span class="navbar__hamburger-bar"></span>
+    <span class="navbar__hamburger-bar"></span>
+  </div>
+</nav>
