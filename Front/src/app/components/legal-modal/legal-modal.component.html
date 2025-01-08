@@ -1,0 +1,27 @@
+<div *ngIf="isOpen">
+  <div class="modal-backdrop" (click)="closeModal()"></div>
+  <div class="modal-container" role="dialog" aria-modal="true">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h2>{{getModalTitle()}}</h2>
+        <button class="modal-close" (click)="closeModal()">
+          <span>✕</span>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <ng-container [ngSwitch]="currentDocument">
+          <app-legal-mentions *ngSwitchCase="'legal-mentions'"></app-legal-mentions>
+          <app-privacy-policy *ngSwitchCase="'privacy-policy'"></app-privacy-policy>
+          <app-cookies-policy *ngSwitchCase="'cookies-policy'"></app-cookies-policy>
+        </ng-container>
+      </div>
+
+      <div class="modal-footer">
+        <button class="modal-button" (click)="closeModal()">
+          Fermer
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,26 @@
+.privacy-policy {
+  section {
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-family: var(--font-heading);
+  }
+
+  div {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

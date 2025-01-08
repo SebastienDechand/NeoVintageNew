@@ -1,0 +1,39 @@
+.legal-mentions {
+  section {
+    margin-bottom: 2rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-family: var(--font-heading);
+  }
+
+  p {
+    margin-bottom: 1.5rem;
+    line-height: 1.6;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    span {
+      margin-left: 25px;
+      font-style: italic;
+    }
+  }
+
+  a {
+    color: var(--neo-pink);
+    text-decoration: none;
+
+    &:hover {
+      color: var(--neo-fuchsia);
+      text-decoration: underline;
+    }
+  }
+}

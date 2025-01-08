@@ -26,12 +26,33 @@
         </div>
       </div>
     </div>
-    <div class="footer-legal">
+    <!-- <div class="footer-legal">
       <div class="legal-links">
         <a href="/politique-confidentialite">Politique de confidentialité</a>
         <a href="/politique-cookies">Politique des cookies</a>
         <a href="/mentions-legales">Mentions légales</a>
       </div>
+    </div> -->
+
+    <div class="footer-legal">
+      <div class="legal-links">
+        <a href="#"
+           (click)="openModal($event, 'privacy-policy')"
+           class="hover:underline">
+          Politique de confidentialité
+        </a>
+        <a href="#"
+           (click)="openModal($event, 'cookies-policy')"
+           class="hover:underline">
+          Politique des cookies
+        </a>
+        <a href="#"
+           (click)="openModal($event, 'legal-mentions')"
+           class="hover:underline">
+          Mentions légales
+        </a>
+      </div>
     </div>
   </div>
+  <app-legal-modal></app-legal-modal>
 </section>

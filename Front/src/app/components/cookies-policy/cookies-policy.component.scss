@@ -1,0 +1,49 @@
+.cookies-policy {
+  section {
+    margin-bottom: 2rem;
+  }
+
+  h3 {
+    color: var(--text-primary);
+    margin-bottom: 1rem;
+    font-family: var(--font-heading);
+  }
+
+  h4 {
+    color: var(--neo-pink);
+    margin-bottom: 0.5rem;
+    font-family: var(--font-heading);
+  }
+
+  div {
+    margin-bottom: 1rem;
+    line-height: 1.6;
+  }
+
+  .cookie-types {
+    display: grid;
+    gap: 1.5rem;
+    margin-top: 1rem;
+
+    @media (min-width: 768px) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .cookie-type {
+    background: var(--background-tertiary);
+    padding: 1rem;
+    border-radius: 0.5rem;
+    border: 1px solid var(--neo-peach);
+  }
+
+  ul {
+    list-style: disc;
+    margin-left: 1.5rem;
+    margin-top: 0.5rem;
+
+    li {
+      margin-bottom: 0.5rem;
+    }
+  }
+}

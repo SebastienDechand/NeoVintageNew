@@ -1,0 +1,208 @@
+$modal-bg: var(--background-primary);
+$modal-overlay: rgba(0, 0, 0, 0.3);
+$modal-border: var(--neo-peach);
+
+$primary-color: var(--neo-pink);
+$primary-hover: var(--neo-fuchsia);
+
+$spacing-sm: 0.5rem;
+$spacing-md: 1rem;
+$spacing-lg: 1.5rem;
+
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+@mixin fixed-fullscreen {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+@mixin button-base {
+  border: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+  font-family: var(--font-body);
+
+  &:focus {
+    outline: none;
+    box-shadow: 0 0 0 2px rgba($primary-color, 0.5);
+  }
+}
+
+.modal {
+  &-backdrop {
+    @include fixed-fullscreen;
+    background-color: $modal-overlay;
+    z-index: 49;
+    overflow: hidden;
+  }
+
+  &-container {
+    @include fixed-fullscreen;
+    @include flex-center;
+    padding: $spacing-md;
+    z-index: 50;
+    overflow: hidden;
+  }
+
+  &-content {
+    background-color: $modal-bg;
+    border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    max-width: 56rem;
+    width: 100%;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    margin: $spacing-md;
+    border: 1px solid var(--neo-peach);
+  }
+
+  &-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: $spacing-lg;
+    background: var(--gradient-primary);
+    border-radius: 1rem 1rem 0 0;
+    overflow: visible;
+
+    h2 {
+      font-family: var(--font-heading);
+      font-size: 1.75rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      margin: 0;
+    }
+  }
+
+  &-close {
+    @include button-base;
+    @include flex-center;
+    width: 2.5rem;
+    height: 2.5rem;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--text-secondary);
+    overflow: hidden;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.2);
+    }
+
+    span {
+      font-size: 1.5rem;
+      line-height: 1;
+      color: var(--text-secondary);
+      overflow: hidden;
+    }
+  }
+
+  &-body {
+    padding: $spacing-lg;
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: calc(90vh - 10rem);
+
+    &::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+      background: var(--background-tertiary);
+      border-radius: 4px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: var(--neo-peach);
+      border-radius: 4px;
+
+      &:hover {
+        background: var(--neo-pink);
+      }
+    }
+
+    h3 {
+      font-family: var(--font-heading);
+      color: var(--text-primary);
+      margin-bottom: 1rem;
+    }
+
+    p {
+      font-family: var(--font-body);
+      color: var(--text-tertiary);
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+  }
+
+  &-footer {
+    padding: $spacing-lg;
+    border-top: 1px solid var(--neo-peach);
+    display: flex;
+    justify-content: flex-end;
+    background-color: var(--background-primary);
+    border-radius: 0 0 1rem 1rem;
+    overflow: hidden;
+  }
+
+  &-button {
+    @include button-base;
+    padding: $spacing-sm $spacing-lg;
+    background-color: var(--button-color);
+    color: var(--text-secondary);
+    border-radius: 2rem;
+    font-weight: 500;
+    min-width: 120px;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    overflow: hidden;
+
+    &:hover {
+      background-color: var(--button-color-hover);
+    }
+  }
+}
+
+// Animations
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes modalFadeOut {
+  from {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.modal-content {
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+.modal-backdrop {
+  animation: modalFadeIn 0.2s ease-out;
+}
