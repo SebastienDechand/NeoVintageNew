@@ -55,7 +55,6 @@
   padding: 0;
   box-sizing: border-box;
   font-family: var(--font-body);
-  color: var(--text-primary);
   overflow-x: hidden;
 }
 
@@ -67,6 +66,10 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   letter-spacing: 1px;
   font-weight: 300;
+}
+
+a {
+  color: inherit;
 }
 
 .text-decorative {

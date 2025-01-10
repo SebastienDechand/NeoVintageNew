@@ -29,7 +29,6 @@
     flex-direction: column;
     gap: 1rem;
     padding: 2rem;
-    width: 100%;
     width: 350px;
 
     .form-group {
@@ -217,6 +216,83 @@
       border: 1px solid var(--text-secondary);
       border-radius: 4px;
       width: 100%;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .modal-content {
+    padding: 20px;
+    width: 90%;
+
+    .login-container {
+      margin: auto;
+      width: 100%;
+
+      .form-group {
+        width: 100%;
+
+        input {
+          width: 100%;
+        }
+      }
+
+      .modal-buttons {
+        flex-direction: column;
+        gap: 1rem;
+        margin-top: 1rem;
+
+        .button-submit {
+          width: 80%;
+        }
+      }
+    }
+  }
+
+  .button-group {
+    gap: 10px;
+    bottom: 10px;
+    right: 10px;
+
+    .logout-button,
+    .edit-button {
+      width: 30px;
+      height: 30px;
+
+      i {
+        font-size: 14px;
+      }
+    }
+  }
+
+  .admin-trigger {
+    width: 50px;
+    height: 50px;
+  }
+
+  .modal-buttons {
+    gap: 20px;
+    margin-top: 10px;
+
+    button {
+      padding: 8px 16px;
+      font-size: 14px;
+    }
+  }
+
+  .edit-mode {
+    h2 {
+      font-size: 30px;
+    }
+    h3 {
+      font-size: 16px;
+    }
+    .content-edit {
+      width: 100%;
+      padding: 10px;
+      label {
+        min-width: 80px;
+      }
     }
   }
 }

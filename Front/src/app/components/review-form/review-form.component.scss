@@ -19,7 +19,6 @@
 }
 
 .review-form-container {
-  width: 600px;
   margin: 20px auto;
   padding: 20px;
   background-color: var(--text-secondary);
@@ -127,5 +126,30 @@
         }
       }
     }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .review-form-container {
+    width: 80%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .review-form-container {
+    width: 90%;
+    .review-form {
+      .form-group.checkbox {
+        label {
+          font-size: 0.8rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .review-form-container {
+    width: 100%;
   }
 }

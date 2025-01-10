@@ -102,3 +102,90 @@
     }
   }
 }
+
+@media screen and (max-width: 1200px) {
+  .footer-container {
+    padding: 4rem 1rem;
+
+    .footer-content {
+      .footer-main {
+        gap: 4rem;
+
+        .footer-text-container {
+          .footer-title {
+            font-size: 1.6rem;
+          }
+
+          .footer-text {
+            font-size: 1rem;
+            .footer-text-link {
+              font-size: 24px;
+            }
+          }
+
+          .social-media-container {
+            gap: 2rem;
+
+            .social-media-link {
+              .social-media-icon {
+                width: 60px;
+                height: 60px;
+              }
+            }
+          }
+        }
+      }
+
+      .footer-legal {
+        .legal-links {
+          gap: 1rem;
+        }
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .footer-container {
+    padding: 4rem 1rem;
+
+    .footer-content {
+      .footer-main {
+        flex-direction: column;
+        gap: 4rem;
+
+        .footer-text-container {
+          .footer-title {
+            font-size: 1.4rem;
+          }
+
+          .footer-text {
+            font-size: 0.9rem;
+            .footer-text-link {
+              font-size: 20px;
+            }
+          }
+
+          .social-media-container {
+            gap: 1rem;
+
+            .social-media-link {
+              .social-media-icon {
+                width: 50px;
+                height: 50px;
+              }
+            }
+          }
+        }
+      }
+
+      .footer-legal {
+        .legal-links {
+          flex-direction: column;
+          align-items: center;
+          gap: 0.5rem;
+        }
+      }
+    }
+  }
+}

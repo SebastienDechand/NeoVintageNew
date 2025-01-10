@@ -51,6 +51,25 @@
   }
 }
 
+@media screen and (max-width: 1024px) {
+  .card {
+    height: 200px;
+    width: 300px;
+    i {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+    .card-title {
+      font-size: 1.1rem;
+      margin-bottom: 10px;
+    }
+    .card-description {
+      font-size: 0.8rem;
+    }
+  }
+
+}
+
 @media screen and (max-width: 768px) {
   .card {
     display: none;

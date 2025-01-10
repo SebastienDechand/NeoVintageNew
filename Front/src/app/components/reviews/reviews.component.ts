@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostListener, OnInit } from '@angular/core';
 import { Feedback } from '../../models/feedback.model';
 import { FeedbackService } from '../../services/feedback.service';
 import { ReviewFormComponent } from "../review-form/review-form.component";
@@ -13,9 +13,11 @@ import { ReviewFormComponent } from "../review-form/review-form.component";
 })
 export class ReviewsComponent implements OnInit {
   reviews: Feedback[] = [];
+  expandedState: { [key: number]: boolean } = {};
   currentStartIndex = 0;
-  maxDisplayed = 5;
+  maxDisplayed = 4;
   averageRating = 0;
+  selectedReview: Feedback | null = null;
 
   constructor(private feedbackService: FeedbackService) {}
 
@@ -41,6 +43,26 @@ export class ReviewsComponent implements OnInit {
       },
       error: (error) => console.error('Erreur lors du chargement des statistiques:', error)
     });
+
+    this.updateMaxDisplayed();
+  }
+
+  @HostListener('window:resize', ['$event'])
+  onResize() {
+    this.updateMaxDisplayed();
+  }
+
+  private updateMaxDisplayed() {
+    const width = window.innerWidth;
+    if (width >= 1440) {
+      this.maxDisplayed = 4;
+    } else if (width >= 1024) {
+      this.maxDisplayed = 3;
+    } else if (width >= 768) {
+      this.maxDisplayed = 2;
+    } else {
+      this.maxDisplayed = 1;
+    }
   }
 
   next() {
@@ -66,4 +88,21 @@ export class ReviewsComponent implements OnInit {
     const positiveReviews = this.reviews.filter(review => review.rating >= 4).length;
     return Math.round((positiveReviews / this.reviews.length) * 100);
   }
+
+  toggleReview(index: number) {
+    this.expandedState[index] = !this.expandedState[index];
+  }
+
+  isExpanded(index: number): boolean {
+    return this.expandedState[index] || false;
+  }
+
+  openModal(review: Feedback) {
+    this.selectedReview = review;
+  }
+
+  closeModal() {
+    this.selectedReview = null;
+  }
 }
+

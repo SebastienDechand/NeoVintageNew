@@ -44,13 +44,13 @@
 
     <div class="reviews-carousel">
       <button (click)="previous()" [disabled]="currentStartIndex === 0" class="carousel-button">
-        ◀
+        <span class="button-icon">◀</span>
       </button>
 
       <div class="reviews-list">
         @for (review of visibleReviews; track $index) {
           <div class="review-card">
-            <div>
+            <div class="review-content">
               <div class="review-header">
                 <span class="author">{{ review.authorInitials }}</span>
                 <div class="rating-stars">
@@ -66,7 +66,12 @@
               <div class="product-name">
                 Article : {{ review.productName }}
               </div>
-              <p class="review-comment">{{ review.comment }}</p>
+              @if (review.comment.length > 100) {
+                <p class="review-comment">{{ review.comment | slice: 0:100 }}...</p>
+                <button (click)="openModal(review)" class="read-more">Lire la suite</button>
+              } @else {
+                <p class="review-comment">{{ review.comment }}</p>
+              }
             </div>
             @if (review.verified) {
               <div class="verified-badge">
@@ -77,7 +82,7 @@
       </div>
 
       <button (click)="next()" [disabled]="currentStartIndex + maxDisplayed >= reviews.length" class="carousel-button">
-        ▶
+        <span class="button-icon">▶</span>
       </button>
     </div>
 
@@ -88,3 +93,29 @@
 
   </div>
 </div>
+
+@if (selectedReview) {
+  <div class="modal-overlay" (click)="closeModal()">
+    <div class="modal-content" (click)="$event.stopPropagation()">
+      <button class="close-modal" (click)="closeModal()">×</button>
+      <h2>{{ selectedReview.productName }}</h2>
+      <div class="review-rating">
+        <div class="rating-stars">
+          @for (star of [1,2,3,4,5]; track $index) {
+            <span
+              [class.filled]="star <= selectedReview.rating"
+              class="star">★
+            </span>
+          }
+        </div>
+      </div>
+      <p class="review-comment">{{ selectedReview.comment }}</p>
+      <div class="review-author">
+        <span>{{ selectedReview.authorInitials }}</span>
+      </div>
+      <div class="review-date">
+        <span>{{ selectedReview.date | date: 'dd/MM/yyyy' }}</span>
+      </div>
+    </div>
+  </div>
+}

@@ -21,3 +21,39 @@
     margin-bottom: 25px;
   }
 }
+
+@media screen and (max-width: 1740px) {
+  .card {
+    width: 300px;
+    .card-image {
+      width: 300px;
+    }
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .card {
+    width: 240px;
+    .card-image {
+      width: 240px;
+    }
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .card {
+    width: 400px;
+    .card-image {
+      width: 400px;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    width: 300px;
+    .card-image {
+      width: 300px;
+    }
+  }
+}

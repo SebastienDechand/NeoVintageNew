@@ -79,3 +79,29 @@
   }
 }
 
+@media screen and (max-width: 1440px) {
+  .creators-container {
+    padding: 80px 0;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .creators-container {
+    width: 80%;
+    padding: 60px 0;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .creators-container {
+    width: 90%;
+    padding: 40px 0;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .creators-container {
+    width: 100%;
+    padding: 50px 20px;
+  }
+}
