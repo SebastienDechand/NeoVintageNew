@@ -2,15 +2,17 @@
   border-radius: 16px;
   padding: 20px;
   max-width: 400px;
-  height: 250px;
+  max-height: 250px;
   transition: transform 0.3s ease;
   background: var(--gradient-secondary);
+  overflow: hidden;
 
   i {
     margin-bottom: 20px;
     font-size: 36px;
     color: var(--text-secondary);
     text-align: left;
+    overflow: hidden;
   }
 
   .card-title {
@@ -25,5 +27,58 @@
     font-size: 1rem;
     color: var(--text-secondary);
     line-height: 1.4;
+  }
+}
+
+.round {
+  display: none;
+}
+
+@media screen and (max-width: 1440px) {
+  .card {
+    height: 220px;
+    i {
+      font-size: 32px;
+      margin-bottom: 15px;
+    }
+    .card-title {
+      font-size: 1.25rem;
+      margin-bottom: 15px;
+    }
+    .card-description {
+      font-size: 0.9rem;
+    }
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .card {
+    display: none;
+  }
+  .round {
+    display: flex;
+    flex-direction: column;
+    .round-icon {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: var(--gradient-secondary);
+      margin: 0 auto;
+      i {
+        font-size: 36px;
+        color: var(--text-secondary);
+      }
+    }
+    .round-title {
+      font-size: 1.5rem;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin: 20px 0;
+      text-align: center;
+      color: var(--text-primary);
+    }
   }
 }

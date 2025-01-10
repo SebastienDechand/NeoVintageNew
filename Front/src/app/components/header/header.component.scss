@@ -20,7 +20,7 @@
       position: relative;
       top: -100px;
       .banner-title {
-        font-size: 3.5rem;
+        font-size: 3rem;
         margin-bottom: 1rem;
         color: var(--text-secondary);
       }
@@ -40,4 +40,98 @@
   top: -50px;
   z-index: 10;
   gap: 100px;
+}
+
+@media screen and (max-width: 1600px) {
+  .banner-container {
+    .banner-content {
+      .banner-text-container {
+        .banner-title {
+          font-size: 2.5rem;
+        }
+      }
+    }
+  }
+  .card-container {
+    gap: 75px;
+    padding: 20px;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  .banner-container {
+    .banner-img {
+      object-position: center 40%;
+    }
+    .banner-content {
+      left: 35%;
+      .banner-logo {
+        width: 400px;
+      }
+      .banner-text-container {
+        .banner-title {
+          font-size: 2.5rem;
+          width: fit-content;
+        }
+        .banner-text {
+          font-size: 1rem;
+        }
+      }
+    }
+  }
+  .card-container {
+    gap: 50px;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  .card-container {
+    padding: 10px;
+  }
+
+}
+
+@media screen and (max-width: 768px) {
+  .banner-container {
+    .banner-content {
+      left: 50%;
+      .banner-logo {
+        width: 300px;
+      }
+      .banner-text-container {
+        top: -50px;
+        .banner-title {
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+  .card-container {
+    gap: 50px;
+  }
+}
+
+@media screen and (max-width: 425px) {
+  .banner-container {
+    .banner-content {
+      top: 70%;
+      .banner-logo {
+        width: 200px;
+      }
+      .banner-text-container {
+
+        .banner-title {
+          width: 300px;
+          font-size: 1.5rem;
+          text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+        .banner-text {
+          text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+        }
+      }
+    }
+  }
+  .card-container {
+    gap: 25px;
+  }
 }
