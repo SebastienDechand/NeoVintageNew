@@ -3,70 +3,17 @@
     <ul class="navbar__menu-list">
       <li class="navbar__menu-item">
         <img class="navbar__menu-item-logo" src="assets/images/logo.png" alt="Logo" />
-      <li class="navbar__menu-item">
-        <a
-          (click)="closeMenu()"
-          class="navbar__menu-link"
-          (click)="scrollTo('banner')"
-        >
-          Accueil
-        </a
-        >
       </li>
-      <li class="navbar__menu-item">
-        <a
-          (click)="closeMenu()"
-          class="navbar__menu-link"
-          (click)="scrollTo('about')"
-        >
-          À propos</a
-        >
-      </li>
-      <li class="navbar__menu-item">
-        <a
-          (click)="closeMenu()"
-          class="navbar__menu-link"
-          (click)="scrollTo('services')"
-        >
-          Nos Services
-        </a>
-      </li>
-      <li class="navbar__menu-item">
-        <a
-          (click)="closeMenu()"
-          class="navbar__menu-link"
-          (click)="scrollTo('photos')"
-        >
-          Friperie en ligne</a
-        >
-      </li>
-      <li class="navbar__menu-item">
-        <a
-          (click)="closeMenu()"
-          class="navbar__menu-link"
-          (click)="scrollTo('creators')"
-        >
-          Créateurs du mois
-        </a>
-      </li>
-      <li class="navbar__menu-item">
-        <a
-          (click)="closeMenu()"
-          class="navbar__menu-link"
-          (click)="scrollTo('custom-shopping')"
-        >
-          Shopping personnalisé
-        </a>
-      </li>
-      <li class="navbar__menu-item">
-        <a
-          (click)="closeMenu()"
-          class="navbar__menu-link"
-          (click)="scrollTo('reviews')"
-        >
-          Avis clients
-        </a>
-      </li>
+      @for (section of sections; track $index) {
+        <li class="navbar__menu-item">
+          <a
+            (click)="handleMenuAction(section.id)"
+            class="navbar__menu-link"
+          >
+            {{ section.label }}
+          </a>
+        </li>
+      }
     </ul>
   </div>
 

@@ -12,6 +12,15 @@ import { RouterModule } from '@angular/router';
 })
 export class BurgerMenuComponent {
   isMenuOpen = false;
+  sections = [
+    { id: 'banner', label: 'Accueil' },
+    { id: 'about', label: 'À propos' },
+    { id: 'services', label: 'Nos Services' },
+    { id: 'photos', label: 'Friperie en ligne' },
+    { id: 'creators', label: 'Créateurs du mois' },
+    { id: 'custom-shopping', label: 'Shopping personnalisé' },
+    { id: 'reviews', label: 'Avis clients' },
+  ];
 
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
@@ -19,6 +28,11 @@ export class BurgerMenuComponent {
 
   closeMenu(): void {
     this.isMenuOpen = false;
+  }
+
+  handleMenuAction(sectionId: string): void {
+    this.scrollTo(sectionId);
+    this.closeMenu();
   }
 
   scrollTo(sectionId: string): void {

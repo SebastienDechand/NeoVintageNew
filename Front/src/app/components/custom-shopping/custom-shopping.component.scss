@@ -19,6 +19,12 @@
     gap: 20px;
     width: 70%;
 
+    .price-text {
+      font-size: 14px;
+      color: var(--text-stars);
+      text-align: center;
+    }
+
     .custom-shopping-title {
       font-size: 20px;
       color: var(--neo-orange);

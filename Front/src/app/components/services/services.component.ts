@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { CardsServicesComponent } from "../cards-services/cards-services.component";
+import { link } from 'fs';
 
 @Component({
   selector: 'app-services',
@@ -13,16 +14,19 @@ export class ServicesComponent {
       image: 'assets/images/friperie.png',
       title: 'Friperie en ligne',
       description: 'Découvrez une sélection de vêtements vintage.',
+      link: 'photos'
     },
     {
       image: 'assets/images/creators.png',
       title: 'Créateurs',
       description: 'Découvrez des créations uniques et artisanales.',
+      link: 'creators'
     },
     {
       image: 'assets/images/cart.png',
       title: 'Panier personnalisé',
       description: 'Composez votre propre sélection.',
+      link: 'custom-shopping'
     }
   ];
 }

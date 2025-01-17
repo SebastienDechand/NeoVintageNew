@@ -2,6 +2,7 @@
   border-radius: 8px;
   text-align: center;
   transition: transform 0.3s ease;
+  height: 550px;
 
   .card-image {
     width: 400px;
@@ -19,6 +20,21 @@
     font-size: 1rem;
     color: var(--text-secondary);
     margin-bottom: 25px;
+  }
+
+  .card-link {
+    background-color: var(--text-primary);
+    color: var(--text-secondary);
+    padding: 10px 20px;
+    border-radius: 4px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background-color: var(--text-secondary);
+      color: var(--text-primary);
+    }
   }
 }
 
