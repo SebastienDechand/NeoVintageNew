@@ -10,7 +10,7 @@
 
   <div class="creators-grid">
     <div *ngFor="let creator of creators" class="creator-card">
-      <img [src]="creator.image" [alt]="creator.title" />
+      <img [src]="creator.image" [alt]="creator.title" loading="lazy"/>
       <div class="creator-info">
         <h3>{{creator.title}}</h3>
         <p>{{creator.subtitle}}</p>

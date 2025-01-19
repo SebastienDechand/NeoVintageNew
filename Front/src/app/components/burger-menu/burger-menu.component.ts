@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import e from 'express';
 
 @Component({
   selector: 'app-burger-menu',
@@ -30,7 +31,8 @@ export class BurgerMenuComponent {
     this.isMenuOpen = false;
   }
 
-  handleMenuAction(sectionId: string): void {
+  handleMenuAction(event: Event, sectionId: string): void {
+    event.preventDefault();
     this.scrollTo(sectionId);
     this.closeMenu();
   }

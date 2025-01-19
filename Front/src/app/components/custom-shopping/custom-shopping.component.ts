@@ -9,8 +9,29 @@ import { CarouselComponent } from "../carousel/carousel.component";
 })
 export class CustomShoppingComponent {
   public slides = [
-    { src: 'assets/images/moodboard1.jpg' },
-    { src: 'assets/images/moodboard2.jpg' },
-    { src: 'assets/images/moodboard3.jpeg' }
+    {
+      src: 'assets/images/moodboard1-1920w.webp',
+      srcset: `
+        assets/images/moodboard1-480w.webp 480w,
+        assets/images/moodboard1-768w.webp 768w,
+        assets/images/moodboard1-1920w.webp 1920w
+      `,
+    },
+    {
+      src: 'assets/images/moodboard2-1920w.webp',
+      srcset: `
+        assets/images/moodboard2-480w.webp 480w,
+        assets/images/moodboard2-768w.webp 768w,
+        assets/images/moodboard2-1920w.webp 1920w
+      `,
+    },
+    {
+      src: 'assets/images/moodboard3-1920w.webp',
+      srcset: `
+        assets/images/moodboard3-480w.webp 480w,
+        assets/images/moodboard3-768w.webp 768w,
+        assets/images/moodboard3-1920w.webp 1920w
+      `,
+    }
   ];
 }

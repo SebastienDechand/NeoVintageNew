@@ -11,22 +11,37 @@ import { link } from 'fs';
 export class ServicesComponent {
   services = [
     {
-      image: 'assets/images/friperie.png',
+      image: 'assets/images/friperie-1920w.webp',
+      srcset: `
+        assets/images/friperie-480w.webp 480w,
+        assets/images/friperie-768w.webp 768w,
+        assets/images/friperie-1920w.webp 1920w
+      `,
       title: 'Friperie en ligne',
       description: 'Découvrez une sélection de vêtements vintage.',
-      link: 'photos'
+      link: 'photos',
     },
     {
-      image: 'assets/images/creators.png',
+      image: 'assets/images/creators-1920w.webp',
+      srcset: `
+        assets/images/creators-480w.webp 480w,
+        assets/images/creators-768w.webp 768w,
+        assets/images/creators-1920w.webp 1920w
+      `,
       title: 'Créateurs',
       description: 'Découvrez des créations uniques et artisanales.',
-      link: 'creators'
+      link: 'creators',
     },
     {
-      image: 'assets/images/cart.png',
+      image: 'assets/images/cart-1920w.webp',
+      srcset: `
+        assets/images/cart-480w.webp 480w,
+        assets/images/cart-768w.webp 768w,
+        assets/images/cart-1920w.webp 1920w
+      `,
       title: 'Panier personnalisé',
       description: 'Composez votre propre sélection.',
-      link: 'custom-shopping'
-    }
+      link: 'custom-shopping',
+    },
   ];
 }

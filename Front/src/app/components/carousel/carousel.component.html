@@ -4,17 +4,21 @@
       @if ($index === currentSlide) {
         <img
           [src]="slide.src"
+          [srcset]="slide.srcset"
+          sizes="(max-width: 768px) 100vw, 50vw"
           class="slide"
           @carouselAnimation
+          alt="Exemple de moodboard"
+          loading="lazy"
         />
       }
     </ng-container>
   }
 
-  <button class="control prev" (click)="onPreviousClick()">
+  <button class="control prev" (click)="onPreviousClick()" type="button" aria-label="Précédent">
     <span class="arrow left"></span>
   </button>
-  <button class="control next" (click)="onNextClick()">
+  <button class="control next" (click)="onNextClick()" type="button" aria-label="Suivant">
     <span class="arrow right"></span>
   </button>
 </div>

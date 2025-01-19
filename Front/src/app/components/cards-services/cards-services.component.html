@@ -1,6 +1,19 @@
 <div class="card">
-  <img [src]="image" alt="{{ title }}" class="card-image" />
+  <img
+    [src]="image"
+    [srcset]="srcset"
+    alt="{{ title }}"
+    class="card-image"
+    sizes="(max-width: 768px) 100vw, 50vw"
+    loading="lazy"
+  />
   <h3 class="card-title">{{ title }}</h3>
   <p class="card-description">{{ description }}</p>
-  <a class="card-link" (click)="scrollTo(link)">Voir plus</a>
+  <a
+    class="card-link"
+    (click)="handleLinkClick($event, link)"
+    href="#{{ link }}"
+  >
+    Voir plus
+  </a>
 </div>

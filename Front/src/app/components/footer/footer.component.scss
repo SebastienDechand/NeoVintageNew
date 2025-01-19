@@ -4,10 +4,6 @@
   background: var(--gradient-secondary);
   position: relative;
 
-  * {
-    overflow: visible;
-  }
-
   .footer-content {
     max-width: 1200px;
     margin: 0 auto;
@@ -58,6 +54,7 @@
           margin: 1rem auto 0;
           flex-wrap: wrap;
           justify-content: center;
+          overflow: visible;
 
           .social-media-link {
             text-decoration: none;

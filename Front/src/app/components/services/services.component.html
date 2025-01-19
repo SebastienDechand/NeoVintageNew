@@ -6,6 +6,7 @@
     @for (service of services; track $index) {
       <app-cards-services
         [image]="service.image"
+        [srcset]="service.srcset"
         [title]="service.title"
         [description]="service.description"
         [link]="service.link"

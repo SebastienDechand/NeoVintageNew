@@ -2,13 +2,14 @@
   <div class="navbar__menu" [class.active]="isMenuOpen">
     <ul class="navbar__menu-list">
       <li class="navbar__menu-item">
-        <img class="navbar__menu-item-logo" src="assets/images/logo.png" alt="Logo" />
+        <img class="navbar__menu-item-logo" src="assets/images/logo-480w.webp" alt="Logo" />
       </li>
       @for (section of sections; track $index) {
         <li class="navbar__menu-item">
           <a
-            (click)="handleMenuAction(section.id)"
+            (click)="handleMenuAction($event, section.id)"
             class="navbar__menu-link"
+            href="#{{ section.id }}"
           >
             {{ section.label }}
           </a>

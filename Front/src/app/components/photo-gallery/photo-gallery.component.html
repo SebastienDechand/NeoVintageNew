@@ -48,7 +48,8 @@
       <img
         [@crossFadeZoom]="selectedPhoto?.url"
         [src]="selectedPhoto?.url"
-        [alt]="selectedPhoto?.title" />
+        [alt]="selectedPhoto?.title"
+        loading="lazy"/>
       <p>{{ selectedPhoto?.title }}</p>
     </div>
 
@@ -60,7 +61,8 @@
         <img
           [@crossFadeZoomInv]="photo.url"
           [src]="photo.url"
-          [alt]="photo.title" />
+          [alt]="photo.title"
+          loading="lazy"/>
       </div>
     </div>
   </div>
