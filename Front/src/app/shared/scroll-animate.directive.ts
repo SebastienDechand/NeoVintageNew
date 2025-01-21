@@ -1,4 +1,5 @@
-import { Directive, ElementRef, Renderer2, Input } from '@angular/core';
+import { Directive, ElementRef, Renderer2, Inject, PLATFORM_ID, Input } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Directive({
   selector: '[appScrollAnimate]'
@@ -6,25 +7,38 @@ import { Directive, ElementRef, Renderer2, Input } from '@angular/core';
 export class ScrollAnimateDirective {
   @Input() animationClass: string = 'animate-fade-in';
 
-  private observer: IntersectionObserver;
+  private observer: IntersectionObserver | undefined;
 
-  constructor(private el: ElementRef, private renderer: Renderer2) {
-    this.observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          this.renderer.addClass(this.el.nativeElement, this.animationClass);
-          this.observer.unobserve(this.el.nativeElement);
-        }
-      },
-      { threshold: 0.1 }
-    );
-  }
+  constructor(
+    private el: ElementRef,
+    private renderer: Renderer2,
+    @Inject(PLATFORM_ID) private platformId: Object
+  ) {}
 
   ngAfterViewInit() {
-    this.observer.observe(this.el.nativeElement);
+    if (!isPlatformBrowser(this.platformId)) {
+      this.renderer.addClass(this.el.nativeElement, this.animationClass);
+      return;
+    }
+
+    if (typeof IntersectionObserver !== 'undefined') {
+      this.observer = new IntersectionObserver(
+        ([entry]) => {
+          if (entry.isIntersecting) {
+            this.renderer.addClass(this.el.nativeElement, this.animationClass);
+            this.observer?.disconnect();
+          }
+        },
+        { threshold: 0.1 }
+      );
+
+      this.observer.observe(this.el.nativeElement);
+    } else {
+      this.renderer.addClass(this.el.nativeElement, this.animationClass);
+    }
   }
 
   ngOnDestroy() {
-    this.observer.disconnect();
+    this.observer?.disconnect();
   }
 }

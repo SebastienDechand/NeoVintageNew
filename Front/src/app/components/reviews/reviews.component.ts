@@ -1,5 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, OnInit } from '@angular/core';
+import { Component, HostListener, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { Feedback } from '../../models/feedback.model';
 import { FeedbackService } from '../../services/feedback.service';
 import { ReviewFormComponent } from "../review-form/review-form.component";
@@ -18,8 +19,14 @@ export class ReviewsComponent implements OnInit {
   maxDisplayed = 4;
   averageRating = 0;
   selectedReview: Feedback | null = null;
+  private isBrowser: boolean;
 
-  constructor(private feedbackService: FeedbackService) {}
+  constructor(
+    private feedbackService: FeedbackService,
+    @Inject(PLATFORM_ID) private platformId: Object // Injection du PLATFORM_ID pour détecter client/serveur
+  ) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
 
   get visibleReviews(): Feedback[] {
     return this.reviews.slice(
@@ -44,24 +51,31 @@ export class ReviewsComponent implements OnInit {
       error: (error) => console.error('Erreur lors du chargement des statistiques:', error)
     });
 
-    this.updateMaxDisplayed();
+    // Mise à jour du nombre maximum d'éléments affichés
+    if (this.isBrowser) {
+      this.updateMaxDisplayed();
+    }
   }
 
   @HostListener('window:resize', ['$event'])
   onResize() {
-    this.updateMaxDisplayed();
+    if (this.isBrowser) {
+      this.updateMaxDisplayed();
+    }
   }
 
   private updateMaxDisplayed() {
-    const width = window.innerWidth;
-    if (width >= 1440) {
-      this.maxDisplayed = 4;
-    } else if (width >= 1024) {
-      this.maxDisplayed = 3;
-    } else if (width >= 768) {
-      this.maxDisplayed = 2;
-    } else {
-      this.maxDisplayed = 1;
+    if (this.isBrowser) {
+      const width = window.innerWidth;
+      if (width >= 1440) {
+        this.maxDisplayed = 4;
+      } else if (width >= 1024) {
+        this.maxDisplayed = 3;
+      } else if (width >= 768) {
+        this.maxDisplayed = 2;
+      } else {
+        this.maxDisplayed = 1;
+      }
     }
   }
 
@@ -105,4 +119,3 @@ export class ReviewsComponent implements OnInit {
     this.selectedReview = null;
   }
 }
-
