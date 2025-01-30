@@ -4,18 +4,21 @@
   height: 85vh;
   overflow-y: hidden;
   .banner-img {
-    width: 135vw;
-    height: 85vh;
+    width: 100%;
+    height: 100%;
     object-fit: cover;
-    object-position: right 40%;
+    object-position: center 70%;
   }
   .banner-content {
     position: absolute;
     top: 50%;
-    left: 30%;
+    left: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
     z-index: 1;
+    background: rgba(0, 0, 0, 0.4);
+    width: 100%;
+    height: 100%;
     .banner-text-container {
       position: relative;
       top: -100px;
@@ -24,7 +27,7 @@
         margin-bottom: 1rem;
         display: flex;
         margin: auto;
-        width: 80%;
+        width: 50%;
         color: var(--text-secondary);
       }
     }
@@ -57,29 +60,21 @@
 }
 
 @media screen and (max-width: 1440px) {
-  .banner-container {
-    .banner-img {
-      object-position: center 40%;
-    }
-    .banner-content {
-      left: 35%;
-      .banner-logo {
-        width: 400px;
-      }
-      .banner-text-container {
-        .banner-title {
-          font-size: 2.5rem;
-          width: fit-content;
-        }
-      }
-    }
-  }
   .card-container {
     gap: 50px;
   }
 }
 
 @media screen and (max-width: 1024px) {
+  .banner-container {
+    .banner-content {
+      .banner-text-container {
+        .banner-title {
+          width: 80%;
+        }
+      }
+    }
+  }
   .card-container {
     padding: 10px;
     gap: 25px;
@@ -89,9 +84,8 @@
 @media screen and (max-width: 768px) {
   .banner-container {
     .banner-content {
-      left: 50%;
       .banner-logo {
-        width: 300px;
+        width: 350px;
       }
       .banner-text-container {
         top: -50px;
@@ -106,14 +100,12 @@
 @media screen and (max-width: 425px) {
   .banner-container {
     .banner-content {
-      top: 70%;
       .banner-logo {
-        width: 200px;
+        width: 300px;
       }
       .banner-text-container {
-
         .banner-title {
-          width: 300px;
+          width: 90%;
           font-size: 1.5rem;
           text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
         }

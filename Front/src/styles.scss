@@ -1,7 +1,7 @@
 :root {
   /* Couleurs principales de la palette Neo Vintage */
   --neo-peach: rgb(246, 180, 167);
-  --neo-pink: #F16C82;
+  --neo-pink: #f16c82;
   --neo-orange: rgb(255, 87, 51);
   --neo-fuchsia: #ff3e89;
   --neo-yellow: #ffd700;
@@ -23,31 +23,39 @@
 
   /* Variables additionnelles */
   --accent-color: var(--neo-fuchsia);
-  --gradient-primary: linear-gradient(180deg, var(--neo-pink), var(--neo-peach));
-  --gradient-secondary: linear-gradient(35deg, var(--neo-orange), var(--neo-fuchsia));
+  --gradient-primary: linear-gradient(
+    180deg,
+    var(--neo-pink),
+    var(--neo-peach)
+  );
+  --gradient-secondary: linear-gradient(
+    35deg,
+    var(--neo-orange),
+    var(--neo-fuchsia)
+  );
 
   /* Polices de caractères */
-  --font-heading: 'Gliker', sans-serif;
-  --font-body: 'OpenSans', cursive;
-  --font-decorative: 'Retrograde', sans-serif;
+  --font-heading: "Gliker", sans-serif;
+  --font-body: "OpenSans", cursive;
+  --font-decorative: "Retrograde", sans-serif;
 }
 
 @font-face {
-  font-family: 'Gliker';
-  src: url('/assets/fonts/Gliker.woff2') format('woff2'),
-       url('/assets/fonts/Gliker.woff') format('woff');
+  font-family: "Gliker";
+  src: url("/assets/fonts/Gliker.woff2") format("woff2"),
+    url("/assets/fonts/Gliker.woff") format("woff");
 }
 
 @font-face {
-  font-family: 'OpenSans';
-  src: url('/assets/fonts/OpenSans.woff2') format('woff2'),
-       url('/assets/fonts/OpenSans.woff') format('woff');
+  font-family: "OpenSans";
+  src: url("/assets/fonts/OpenSans.woff2") format("woff2"),
+    url("/assets/fonts/OpenSans.woff") format("woff");
 }
 
 @font-face {
-  font-family: 'Retrograde';
-  src: url('/assets/fonts/Retrograde.woff2') format('woff2'),
-       url('/assets/fonts/Retrograde.woff') format('woff');
+  font-family: "Retrograde";
+  src: url("/assets/fonts/Retrograde.woff2") format("woff2"),
+    url("/assets/fonts/Retrograde.woff") format("woff");
 }
 
 * {
@@ -62,7 +70,12 @@ body {
   background-color: var(--background-primary);
 }
 
-h1, h2, h3, h4, h5, h6 {
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   font-family: var(--font-heading);
   letter-spacing: 1px;
   font-weight: 300;
@@ -95,19 +108,19 @@ i {
 }
 
 /* Animation fade-in */
-.animate-fade-in {
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.8s ease-out forwards;
-}
+// .animate-fade-in {
+//   opacity: 0;
+//   transform: translateY(20px);
+//   animation: fadeIn 0.5s ease forwards;
+// }
 
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
+// @keyframes fadeIn {
+//   from {
+//     opacity: 0;
+//     transform: translateY(20px);
+//   }
+//   to {
+//     opacity: 1;
+//     transform: translateY(0);
+//   }
+// }

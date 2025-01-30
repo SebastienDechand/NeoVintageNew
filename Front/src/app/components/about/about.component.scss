@@ -11,12 +11,9 @@
       margin: auto;
       width: 70%;
       max-height: 80%;
-      border-top-left-radius:50%;
-      border-bottom-left-radius: 10%;
-      border-top-right-radius: 50%;
-      border-bottom-right-radius: 10%;
-      border-radius: 100%;
+      border-radius: 5%;
       object-fit: cover;
+      object-position: right 50%;
     }
   }
 
@@ -89,10 +86,6 @@
   .about-container {
     .about-image {
       align-items: center;
-      img {
-        height: 500px;
-        max-width: 500px;
-      }
     }
 
     .about-content {
@@ -128,7 +121,7 @@
       margin-bottom: 50px;
       img {
         height: 400px;
-        max-width: 400px;
+        object-position: right 10%;
       }
     }
 
@@ -164,7 +157,6 @@
     .about-image {
       img {
         height: 300px;
-        max-width: 300px;
       }
     }
 
@@ -191,7 +183,6 @@
     .about-image {
       img {
         height: 300px;
-        width: 300px;
       }
     }
 
