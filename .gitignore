@@ -1,0 +1,16 @@
+# Environment secrets
+.env
+.env.*
+!.env.example
+
+# Node dependencies
+node_modules/
+
+# Build outputs
+dist/
+build/
+out-tsc/
+
+# OS
+.DS_Store
+Thumbs.db
