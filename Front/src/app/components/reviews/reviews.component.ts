@@ -44,12 +44,14 @@ export class ReviewsComponent implements OnInit {
       error: (error) => console.error('Erreur lors du chargement des avis :', error),
     });
 
-    this.feedbackService.getFeedbackStats().subscribe({
-      next: (stats) => {
-        this.averageRating = stats.averageRating;
-      },
-      error: (error) => console.error('Erreur lors du chargement des statistiques:', error)
-    });
+    if (this.isBrowser) {
+      this.feedbackService.getFeedbackStats().subscribe({
+        next: (stats) => {
+          this.averageRating = stats.averageRating;
+        },
+        error: (error) => console.error('Erreur lors du chargement des statistiques:', error)
+      });
+    }
 
     // Mise à jour du nombre maximum d'éléments affichés
     if (this.isBrowser) {

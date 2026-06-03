@@ -1,4 +1,5 @@
-import { Injectable } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
@@ -10,9 +11,12 @@ import { AdminCredentials, AdminResponse } from '../models/admin.model'
 })
 export class AuthService {
   private readonly API_URL = `${environment.apiUrl}/auth`;
-  private tokenSubject = new BehaviorSubject<string | null>(localStorage.getItem('token'));
+  private tokenSubject: BehaviorSubject<string | null>;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: object) {
+    const token = isPlatformBrowser(this.platformId) ? localStorage.getItem('token') : null;
+    this.tokenSubject = new BehaviorSubject<string | null>(token);
+  }
 
   get token(): string | null {
     return this.tokenSubject.value;
@@ -21,14 +25,18 @@ export class AuthService {
   login(credentials: AdminCredentials): Observable<AdminResponse> {
     return this.http.post<AdminResponse>(`${this.API_URL}/login`, credentials).pipe(
       tap(response => {
-        localStorage.setItem('token', response.token);
+        if (isPlatformBrowser(this.platformId)) {
+          localStorage.setItem('token', response.token);
+        }
         this.tokenSubject.next(response.token);
       })
     );
   }
 
   logout(): void {
-    localStorage.removeItem('token');
+    if (isPlatformBrowser(this.platformId)) {
+      localStorage.removeItem('token');
+    }
     this.tokenSubject.next(null);
   }
 

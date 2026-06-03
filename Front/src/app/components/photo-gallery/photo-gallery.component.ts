@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { EditContentComponent } from '../edit-content/edit-content.component';
@@ -50,12 +50,14 @@ export class PhotoGalleryComponent implements OnInit {
   selectedPhoto: any;
   currentIndex = 0;
 
-  private readonly API_URL = `${environment.apiUrl}/photos` || process.env['API_URL_PHOTOS'] || '';
+  private readonly API_URL = `${environment.apiUrl}/photos`;
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: object) {}
 
   ngOnInit(): void {
-    this.loadPhotos();
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadPhotos();
+    }
   }
 
   loadPhotos(): void {

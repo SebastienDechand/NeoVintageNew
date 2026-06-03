@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser, CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule } from '@angular/common';
 import { environment } from '../../environments/environment';
 import { EditContentComponent } from '../edit-content/edit-content.component';
 
@@ -13,12 +13,14 @@ import { EditContentComponent } from '../edit-content/edit-content.component';
 })
 export class CreatorsGalleryComponent implements OnInit {
  creators: any[] = [];
- private readonly API_URL = `${environment.apiUrl}/creators` || process.env['API_URL_CREATORS'] || '';
+ private readonly API_URL = `${environment.apiUrl}/creators`;
 
- constructor(private http: HttpClient) {}
+ constructor(private http: HttpClient, @Inject(PLATFORM_ID) private platformId: object) {}
 
  ngOnInit(): void {
-   this.loadCreators();
+   if (isPlatformBrowser(this.platformId)) {
+     this.loadCreators();
+   }
  }
 
  loadCreators(): void {

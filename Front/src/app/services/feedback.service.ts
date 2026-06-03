@@ -1,7 +1,8 @@
-import { Injectable, inject } from '@angular/core';
+import { Inject, Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
+import { tap } from 'rxjs/operators';
 import { Feedback, FeedbackStats } from '../models/feedback.model';
 import { environment } from '../environments/environment';
 
@@ -15,10 +16,11 @@ export class FeedbackService {
   private feedbacksSubject = new BehaviorSubject<Feedback[]>([]);
   feedbacks$ = this.feedbacksSubject.asObservable();
 
-  constructor() {
-    this.loadAllFeedbacks();
+  constructor(@Inject(PLATFORM_ID) private platformId: object) {
+    if (isPlatformBrowser(this.platformId)) {
+      this.loadAllFeedbacks();
+    }
   }
-
 
   loadAllFeedbacks(): void {
     const timestamp = new Date().getTime();
@@ -31,7 +33,6 @@ export class FeedbackService {
       },
     });
   }
-
 
   getFeedbackStats(): Observable<FeedbackStats> {
     return this.http.get<FeedbackStats>(`${this.apiUrl}/stats`);
