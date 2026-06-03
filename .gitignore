@@ -14,3 +14,6 @@ out-tsc/
 # OS
 .DS_Store
 Thumbs.db
+
+# Plan
+docs
