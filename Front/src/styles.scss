@@ -1,42 +1,44 @@
 :root {
-  /* Couleurs principales de la palette Neo Vintage */
-  --neo-peach: rgb(246, 180, 167);
-  --neo-pink: #f16c82;
-  --neo-orange: rgb(255, 87, 51);
-  --neo-fuchsia: #ff3e89;
-  --neo-yellow: #ffd700;
+  /* Palette Rose Doré Raffiné */
+  --neo-rose:       #C8506A;
+  --neo-peach:      #E8A89C;
+  --neo-plum:       #3D1F2A;
+  --neo-gold:       #C4A05A;
 
-  /* Couleurs de texte */
-  --text-primary: #000000;
-  --text-secondary: #ffffff;
-  --text-tertiary: #333333;
-  --text-stars: #838383;
+  /* Aliases — évite de casser les composants existants */
+  --neo-pink:       var(--neo-rose);
+  --neo-orange:     var(--neo-rose);
+  --neo-fuchsia:    var(--neo-rose);
+  --neo-yellow:     var(--neo-gold);
 
-  /* Couleurs de fond */
-  --background-primary: #f8f9fa;
+  /* Backgrounds */
+  --background-primary:   #FDF8F5;
   --background-secondary: var(--neo-peach);
-  --background-tertiary: #f0f0f0;
+  --background-tertiary:  #F0E8E4;
 
-  /* Couleurs des boutons */
-  --button-color: var(--neo-pink);
-  --button-color-hover: var(--neo-fuchsia);
+  /* Text */
+  --text-primary:   #3D1F2A;
+  --text-secondary: #ffffff;
+  --text-tertiary:  #5C3D47;
+  --text-stars:     #9E7A84;
 
-  /* Variables additionnelles */
-  --accent-color: var(--neo-fuchsia);
-  --gradient-primary: linear-gradient(
-    180deg,
-    var(--neo-pink),
-    var(--neo-peach)
-  );
-  --gradient-secondary: linear-gradient(
-    35deg,
-    var(--neo-orange),
-    var(--neo-fuchsia)
-  );
+  /* Buttons */
+  --button-color:       var(--neo-rose);
+  --button-color-hover: #A83A55;
 
-  /* Polices de caractères */
-  --font-heading: "Gliker", sans-serif;
-  --font-body: "OpenSans", cursive;
+  /* Accent */
+  --accent-color: var(--neo-rose);
+
+  /* Gradients */
+  --gradient-primary:   linear-gradient(180deg, var(--neo-rose), var(--neo-peach));
+  --gradient-secondary: linear-gradient(35deg, #B8405A, var(--neo-rose));
+
+  /* Accessibilité */
+  --focus-ring: 0 0 0 3px rgba(200, 80, 106, 0.4);
+
+  /* Fonts — inchangées */
+  --font-heading:    "Gliker", sans-serif;
+  --font-body:       "OpenSans", cursive;
   --font-decorative: "Retrograde", sans-serif;
 }
 
@@ -108,19 +110,18 @@ i {
 }
 
 /* Animation fade-in */
-// .animate-fade-in {
-//   opacity: 0;
-//   transform: translateY(20px);
-//   animation: fadeIn 0.5s ease forwards;
-// }
+.animate-fade-in {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: fadeIn 0.55s ease forwards;
+}
 
-// @keyframes fadeIn {
-//   from {
-//     opacity: 0;
-//     transform: translateY(20px);
-//   }
-//   to {
-//     opacity: 1;
-//     transform: translateY(0);
-//   }
-// }
+@keyframes fadeIn {
+  to { opacity: 1; transform: translateY(0); }
+}
+
+:focus-visible {
+  outline: none;
+  box-shadow: var(--focus-ring);
+  border-radius: 3px;
+}
