@@ -68,7 +68,7 @@
               </div>
               @if (review.comment.length > 100) {
                 <p class="review-comment">{{ review.comment | slice: 0:100 }}...</p>
-                <button (click)="openModal(review)" class="read-more">Lire la suite</button>
+                <button (click)="openModal(review)" class="read-more" [attr.aria-label]="'Lire l' + '\'avis de ' + review.authorInitials">Lire la suite</button>
               } @else {
                 <p class="review-comment">{{ review.comment }}</p>
               }
@@ -97,7 +97,7 @@
 @if (selectedReview) {
   <div class="modal-overlay" (click)="closeModal()">
     <div class="modal-content" (click)="$event.stopPropagation()">
-      <button class="close-modal" (click)="closeModal()">×</button>
+      <button class="close-modal" (click)="closeModal()" aria-label="Fermer la fenêtre">×</button>
       <h2>{{ selectedReview.productName }}</h2>
       <div class="review-rating">
         <div class="rating-stars">
