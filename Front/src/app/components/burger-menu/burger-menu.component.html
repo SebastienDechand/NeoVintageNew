@@ -31,20 +31,32 @@
     id="main-nav-menu"
     class="navbar__menu"
     [class.active]="isMenuOpen"
+    (click)="closeMenu()"
   >
-    <ul class="navbar__menu-list">
-      @for (section of sections; track section.id) {
-        <li class="navbar__menu-item">
-          <a
-            (click)="handleMenuAction($event, section.id)"
-            class="navbar__menu-link"
-            [class.navbar__menu-link--active]="activeSection === section.id"
-            href="#{{ section.id }}"
-          >
-            {{ section.label }}
-          </a>
-        </li>
-      }
-    </ul>
+    <div class="navbar__menu-card" (click)="$event.stopPropagation()">
+      <button
+        type="button"
+        class="navbar__menu-close"
+        (click)="closeMenu()"
+        aria-label="Fermer le menu"
+      >
+        ✕
+      </button>
+
+      <ul class="navbar__menu-list">
+        @for (section of sections; track section.id) {
+          <li class="navbar__menu-item">
+            <a
+              (click)="handleMenuAction($event, section.id)"
+              class="navbar__menu-link"
+              [class.navbar__menu-link--active]="activeSection === section.id"
+              href="#{{ section.id }}"
+            >
+              {{ section.label }}
+            </a>
+          </li>
+        }
+      </ul>
+    </div>
   </div>
 </nav>

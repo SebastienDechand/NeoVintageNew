@@ -55,7 +55,7 @@ export class BurgerMenuComponent implements AfterViewInit, OnDestroy {
   toggleMenu(): void {
     this.isMenuOpen = !this.isMenuOpen;
     if (this.isMenuOpen) {
-      queueMicrotask(() => this.focusFirstLink());
+      setTimeout(() => this.focusFirstLink());
     }
   }
 
@@ -87,10 +87,10 @@ export class BurgerMenuComponent implements AfterViewInit, OnDestroy {
   }
 
   private focusFirstLink(): void {
-    const firstLink = this.menuPanelRef?.nativeElement.querySelector<HTMLElement>(
-      '.navbar__menu-link'
+    const target = this.menuPanelRef?.nativeElement.querySelector<HTMLElement>(
+      '.navbar__menu-close, .navbar__menu-link'
     );
-    firstLink?.focus();
+    target?.focus();
   }
 
   private observeSections(): void {

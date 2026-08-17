@@ -6,8 +6,10 @@
   justify-content: space-between;
   width: 100%;
   padding: 12px 40px;
-  background-color: var(--text-secondary);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+  background-color: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px) saturate(160%);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06);
   z-index: 100;
 
   &__brand {
@@ -61,11 +63,21 @@
   }
 
   &__menu {
+    &-card {
+      /* No visual box on desktop - the card treatment only applies inside
+         the mobile media query below. */
+      display: contents;
+    }
+
+    &-close {
+      display: none;
+    }
+
     &-list {
       display: flex;
       align-items: center;
       list-style: none;
-      gap: 1.75rem;
+      gap: 0.25rem;
     }
 
     &-item {
@@ -79,18 +91,18 @@
       font-weight: 600;
       color: var(--text-primary);
       cursor: pointer;
-      padding: 6px 2px;
-      border-bottom: 2px solid transparent;
-      transition: color 0.2s, border-color 0.2s;
+      padding: 8px 16px;
+      border-radius: 999px;
+      transition: color 0.2s, background-color 0.2s;
 
       &:hover,
       &:focus-visible {
-        color: var(--neo-orange);
+        background-color: rgba(255, 87, 51, 0.1);
       }
 
       &--active {
         color: var(--neo-orange);
-        border-bottom-color: var(--neo-orange);
+        background-color: rgba(255, 87, 51, 0.12);
       }
     }
   }
@@ -104,35 +116,91 @@
     }
 
     &__menu {
+      /* `.navbar`'s backdrop-filter makes it a containing block for fixed
+         descendants, so top/right/bottom/left would resolve against its
+         own (collapsed) box instead of the viewport - size with vw/vh
+         instead, which stay viewport-relative regardless. */
       position: fixed;
-      inset: 0;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
       display: flex;
-      flex-direction: column;
       align-items: center;
       justify-content: center;
-      background-color: var(--neo-orange);
-      transform: translateX(100%);
+      padding: 24px;
+      background-color: rgba(20, 10, 10, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
       visibility: hidden;
-      transition: transform 0.3s ease-in-out, visibility 0s linear 0.3s;
+      transition: opacity 0.25s ease, visibility 0s linear 0.25s;
       z-index: 1000;
 
       &.active {
-        transform: translateX(0);
+        opacity: 1;
         visibility: visible;
         transition-delay: 0s;
+
+        .navbar__menu-card {
+          transform: scale(1);
+        }
+      }
+
+      &-card {
+        position: relative;
+        display: block;
+        width: min(360px, 100%);
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 48px 40px;
+        border-radius: 28px;
+        background: var(--gradient-secondary);
+        box-shadow: 0 24px 60px rgba(0, 0, 0, 0.35);
+        transform: scale(0.94);
+        transition: transform 0.25s ease;
+      }
+
+      &-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.35);
+        color: var(--text-primary);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover,
+        &:focus-visible {
+          background-color: rgba(255, 255, 255, 0.55);
+        }
       }
 
       &-list {
         flex-direction: column;
-        gap: 2.5rem;
+        gap: 1.75rem;
       }
 
       &-link {
-        font-size: 1.5rem;
+        font-size: 1.25rem;
+
+        &:hover,
+        &:focus-visible {
+          background-color: rgba(255, 255, 255, 0.25);
+        }
 
         &--active {
           color: var(--text-primary);
-          border-bottom-color: var(--text-primary);
+          background-color: rgba(255, 255, 255, 0.35);
         }
       }
     }
