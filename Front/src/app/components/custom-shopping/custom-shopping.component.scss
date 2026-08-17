@@ -10,6 +10,9 @@
     display: block;
     height: 600px;
     width: 30%;
+    border-radius: var(--radius-arch);
+    border: 3px solid var(--neo-ink);
+    overflow: hidden;
   }
 
   .custom-shopping-content {
@@ -45,8 +48,13 @@
       font-size: 16px;
       color: var(--text-tertiary);
       line-height: 1.4;
-      margin-bottom: 30px;
+      margin-bottom: 10px;
       text-align: left;
+    }
+
+    .custom-shopping-cta {
+      align-self: flex-start;
+      margin-bottom: 30px;
     }
 
     .custom-shopping-cards {

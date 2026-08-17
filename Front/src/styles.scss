@@ -75,6 +75,10 @@
   font-family: var(--font-body);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: var(--background-primary);
 }
@@ -94,8 +98,8 @@ a {
   color: inherit;
 }
 
-i {
-  overflow: hidden;
+[id] {
+  scroll-margin-top: 80px;
 }
 
 .text-decorative {

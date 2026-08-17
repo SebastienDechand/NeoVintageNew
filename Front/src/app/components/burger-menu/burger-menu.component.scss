@@ -114,10 +114,9 @@
     }
 
     &__menu {
-      /* `.navbar`'s backdrop-filter makes it a containing block for fixed
-         descendants, so top/right/bottom/left would resolve against its
-         own (collapsed) box instead of the viewport - size with vw/vh
-         instead, which stay viewport-relative regardless. */
+      /* Sized with vw/vh instead of top/right/bottom/left: 0 so the
+         overlay reliably covers the full viewport regardless of the
+         navbar's own (small, sticky) box. */
       position: fixed;
       top: 0;
       left: 0;
