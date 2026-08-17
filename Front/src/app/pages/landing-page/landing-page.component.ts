@@ -5,7 +5,6 @@ import { CustomShoppingComponent } from "../../components/custom-shopping/custom
 import { PhotoGalleryComponent } from "../../components/photo-gallery/photo-gallery.component";
 import { ReviewsComponent } from "../../components/reviews/reviews.component";
 import { ServicesComponent } from "../../components/services/services.component";
-import { SeparateComponent } from "../../components/separate/separate.component";
 import { ScrollAnimateDirective } from '../../shared/scroll-animate.directive';
 
 @Component({
@@ -17,7 +16,6 @@ import { ScrollAnimateDirective } from '../../shared/scroll-animate.directive';
     CreatorsGalleryComponent,
     CustomShoppingComponent,
     ReviewsComponent,
-    SeparateComponent,
     ScrollAnimateDirective
   ],
   templateUrl: './landing-page.component.html',
