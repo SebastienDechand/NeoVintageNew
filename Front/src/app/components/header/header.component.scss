@@ -1,96 +1,129 @@
-.banner-container {
+.hero-container {
   position: relative;
   width: 100%;
-  height: 85vh;
-  overflow-y: hidden;
-  .banner-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center 70%;
+  padding: 90px 20px 60px;
+  text-align: center;
+  background: var(--neo-cream);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .hero-badge {
+    display: inline-block;
+    font-family: var(--font-decorative);
+    font-size: 12px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: var(--neo-fuchsia);
+    border: 1.5px solid var(--neo-fuchsia);
+    border-radius: var(--radius-pill);
+    padding: 4px 16px;
+    margin-bottom: 16px;
   }
-  .banner-content {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    text-align: center;
-    z-index: 1;
-    background: rgba(0, 0, 0, 0.4);
+
+  .hero-title {
+    font-size: 3.5rem;
+    line-height: 1.1;
+    max-width: 900px;
+
+    .hero-title-accent {
+      color: var(--neo-orange);
+    }
+  }
+
+  .hero-subtitle {
+    font-family: var(--font-decorative);
+    font-style: italic;
+    font-size: 1.5rem;
+    color: var(--neo-fuchsia);
+    margin: 10px 0 30px;
+  }
+
+  .hero-cta {
+    margin-bottom: 60px;
+  }
+
+  .hero-polaroids {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+    gap: 24px;
     width: 100%;
-    height: 100%;
-    .banner-text-container {
-      position: relative;
-      top: -100px;
-      .banner-title {
-        font-size: 3rem;
-        margin-bottom: 1rem;
-        display: flex;
-        margin: auto;
-        width: 50%;
-        color: var(--text-secondary);
+    max-width: 900px;
+
+    .hero-polaroid {
+      width: 220px;
+      height: 280px;
+      object-fit: cover;
+      background: #ffffff;
+      border: 3px solid var(--neo-ink);
+      border-radius: 10px;
+      padding: 10px 10px 24px;
+      box-shadow: 6px 6px 0 rgba(43, 43, 43, 0.15);
+
+      &--1 {
+        transform: rotate(-4deg);
+      }
+      &--2 {
+        transform: rotate(2deg);
+        width: 240px;
+        height: 300px;
+      }
+      &--3 {
+        transform: rotate(-2deg);
       }
     }
   }
 }
+
 .card-container {
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
-  position: relative;
-  top: -50px;
-  z-index: 10;
-  gap: 100px;
-}
-
-@media screen and (max-width: 1600px) {
-  .banner-container {
-    .banner-content {
-      .banner-text-container {
-        .banner-title {
-          font-size: 2.5rem;
-        }
-      }
-    }
-  }
-  .card-container {
-    gap: 75px;
-    padding: 20px;
-  }
-}
-
-@media screen and (max-width: 1440px) {
-  .card-container {
-    gap: 50px;
-  }
+  gap: 40px;
+  padding: 0 20px 100px;
 }
 
 @media screen and (max-width: 1024px) {
-  .banner-container {
-    .banner-content {
-      .banner-text-container {
-        .banner-title {
-          width: 80%;
+  .hero-container {
+    .hero-title {
+      font-size: 2.5rem;
+    }
+    .hero-polaroids {
+      .hero-polaroid {
+        width: 160px;
+        height: 210px;
+        &--2 {
+          width: 175px;
+          height: 225px;
         }
       }
     }
   }
   .card-container {
-    padding: 10px;
-    gap: 25px;
+    gap: 24px;
+    padding: 0 20px 60px;
   }
 }
 
 @media screen and (max-width: 768px) {
-  .banner-container {
-    .banner-content {
-      .banner-logo {
-        width: 350px;
-      }
-      .banner-text-container {
-        top: -50px;
-        .banner-title {
-          font-size: 2rem;
+  .hero-container {
+    padding: 70px 16px 40px;
+    .hero-title {
+      font-size: 2rem;
+    }
+    .hero-subtitle {
+      font-size: 1.2rem;
+    }
+    .hero-polaroids {
+      flex-wrap: wrap;
+      gap: 16px;
+      .hero-polaroid {
+        width: 130px;
+        height: 170px;
+        &--2 {
+          width: 140px;
+          height: 180px;
         }
       }
     }
@@ -98,21 +131,12 @@
 }
 
 @media screen and (max-width: 425px) {
-  .banner-container {
-    .banner-content {
-      .banner-logo {
-        width: 300px;
-      }
-      .banner-text-container {
-        .banner-title {
-          width: 90%;
-          font-size: 1.5rem;
-          text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
-        }
-      }
+  .hero-container {
+    .hero-title {
+      font-size: 1.6rem;
     }
   }
   .card-container {
-    gap: 25px;
+    gap: 20px;
   }
 }

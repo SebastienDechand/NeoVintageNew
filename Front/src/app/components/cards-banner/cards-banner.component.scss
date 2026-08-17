@@ -1,73 +1,24 @@
 .card {
-  border-radius: 16px;
-  padding: 20px;
-  max-width: 400px;
-  max-height: 250px;
+  width: 300px;
+  padding: 24px;
+  text-align: left;
   transition: transform 0.3s ease;
-  background: var(--gradient-secondary);
-  overflow: hidden;
-
-  i {
-    margin-bottom: 20px;
-    font-size: 36px;
-    color: var(--text-secondary);
-    text-align: left;
-    overflow: hidden;
-  }
 
   .card-title {
-    font-size: 1.5rem;
-    font-weight: 500;
-    letter-spacing: 1px;
-    margin-bottom: 20px;
-    color: var(--text-secondary);
+    font-size: 1.3rem;
+    margin: 4px 0 10px;
+    color: var(--text-primary);
   }
 
   .card-description {
-    font-size: 1rem;
-    color: var(--text-secondary);
+    font-size: 0.95rem;
+    color: var(--text-tertiary);
     line-height: 1.4;
   }
 }
 
 .round {
   display: none;
-}
-
-@media screen and (max-width: 1440px) {
-  .card {
-    height: 220px;
-    i {
-      font-size: 32px;
-      margin-bottom: 15px;
-    }
-    .card-title {
-      font-size: 1.25rem;
-      margin-bottom: 15px;
-    }
-    .card-description {
-      font-size: 0.9rem;
-    }
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  .card {
-    height: 200px;
-    width: 300px;
-    i {
-      font-size: 28px;
-      margin-bottom: 10px;
-    }
-    .card-title {
-      font-size: 1.1rem;
-      margin-bottom: 10px;
-    }
-    .card-description {
-      font-size: 0.8rem;
-    }
-  }
-
 }
 
 @media screen and (max-width: 768px) {
@@ -77,25 +28,26 @@
   .round {
     display: flex;
     flex-direction: column;
+    align-items: center;
     .round-icon {
       display: flex;
       justify-content: center;
       align-items: center;
-      width: 100px;
-      height: 100px;
+      width: 70px;
+      height: 70px;
       border-radius: 50%;
       background: var(--gradient-secondary);
       margin: 0 auto;
-      i {
-        font-size: 36px;
+
+      svg {
+        width: 32px;
+        height: 32px;
         color: var(--text-secondary);
       }
     }
     .round-title {
-      font-size: 1.5rem;
-      font-weight: 500;
-      letter-spacing: 1px;
-      margin: 20px 0;
+      font-size: 1.2rem;
+      margin: 12px 0 0;
       text-align: center;
       color: var(--text-primary);
     }
