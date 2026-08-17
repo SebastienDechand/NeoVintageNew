@@ -5,13 +5,14 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { forkJoin } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../../services/auth.service';
+import { LucideLogOut, LucideSquarePen } from '@lucide/angular';
 
 @Component({
   selector: 'app-edit-content',
   templateUrl: './edit-content.component.html',
   styleUrls: ['./edit-content.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule]
+  imports: [FormsModule, ReactiveFormsModule, LucideLogOut, LucideSquarePen]
 })
 export class EditContentComponent implements OnInit {
   @Input() photos: any[] = [];
