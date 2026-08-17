@@ -50,7 +50,7 @@ export class PhotoGalleryComponent implements OnInit {
   selectedPhoto: any;
   currentIndex = 0;
 
-  private readonly API_URL = `${environment.apiUrl}/photos` || process.env['API_URL_PHOTOS'] || '';
+  private readonly API_URL = `${environment.apiUrl}/photos`;
 
   constructor(
     private http: HttpClient,

@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CardsServicesComponent } from "../cards-services/cards-services.component";
-import { link } from 'fs';
 
 @Component({
   selector: 'app-services',

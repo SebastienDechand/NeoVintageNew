@@ -1,14 +1,44 @@
 <nav class="navbar">
-  <div class="navbar__menu" [class.active]="isMenuOpen">
+  <a
+    href="#banner"
+    class="navbar__brand"
+    (click)="handleMenuAction($event, 'banner')"
+  >
+    <img
+      class="navbar__brand-logo"
+      src="assets/images/logo-480w.webp"
+      alt="NeoVintage"
+    />
+  </a>
+
+  <button
+    #toggleButton
+    type="button"
+    class="navbar__hamburger"
+    [class.active]="isMenuOpen"
+    (click)="toggleMenu()"
+    [attr.aria-expanded]="isMenuOpen"
+    aria-controls="main-nav-menu"
+    [attr.aria-label]="isMenuOpen ? 'Fermer le menu' : 'Ouvrir le menu'"
+  >
+    <span class="navbar__hamburger-bar"></span>
+    <span class="navbar__hamburger-bar"></span>
+    <span class="navbar__hamburger-bar"></span>
+  </button>
+
+  <div
+    #menuPanel
+    id="main-nav-menu"
+    class="navbar__menu"
+    [class.active]="isMenuOpen"
+  >
     <ul class="navbar__menu-list">
-      <li class="navbar__menu-item">
-        <img class="navbar__menu-item-logo" src="assets/images/logo-480w.webp" alt="Logo" />
-      </li>
-      @for (section of sections; track $index) {
+      @for (section of sections; track section.id) {
         <li class="navbar__menu-item">
           <a
             (click)="handleMenuAction($event, section.id)"
             class="navbar__menu-link"
+            [class.navbar__menu-link--active]="activeSection === section.id"
             href="#{{ section.id }}"
           >
             {{ section.label }}
@@ -16,11 +46,5 @@
         </li>
       }
     </ul>
-  </div>
-
-  <div class="navbar__hamburger" (click)="toggleMenu()">
-    <span class="navbar__hamburger-bar"></span>
-    <span class="navbar__hamburger-bar"></span>
-    <span class="navbar__hamburger-bar"></span>
   </div>
 </nav>
