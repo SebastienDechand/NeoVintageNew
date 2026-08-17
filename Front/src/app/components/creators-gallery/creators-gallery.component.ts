@@ -1,13 +1,13 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { environment } from '../../environments/environment';
 import { EditContentComponent } from '../edit-content/edit-content.component';
 
 @Component({
  selector: 'app-creators-gallery',
  standalone: true,
- imports: [CommonModule, EditContentComponent],
+ imports: [EditContentComponent],
  templateUrl: './creators-gallery.component.html',
  styleUrls: ['./creators-gallery.component.scss']
 })

@@ -1,4 +1,4 @@
-import { CommonModule } from '@angular/common';
+
 import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import e from 'express';
@@ -6,7 +6,7 @@ import e from 'express';
 @Component({
   selector: 'app-burger-menu',
   standalone: true,
-  imports: [CommonModule, RouterModule],
+  imports: [RouterModule],
   templateUrl: './burger-menu.component.html',
   styleUrl: './burger-menu.component.scss',
 

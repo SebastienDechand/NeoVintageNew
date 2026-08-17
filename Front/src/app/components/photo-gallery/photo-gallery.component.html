@@ -50,25 +50,26 @@
         [src]="selectedPhoto?.url"
         [alt]="selectedPhoto?.title"
         loading="lazy"/>
-      <p>{{ selectedPhoto?.title }}</p>
-    </div>
+        <p>{{ selectedPhoto?.title }}</p>
+      </div>
 
-    <div class="thumbnails">
-      <div
-        *ngFor="let photo of getThumbnails()"
-        class="thumbnail"
-        (click)="selectPhoto(photo)">
-        <img
-          [@crossFadeZoomInv]="photo.url"
-          [src]="photo.url"
-          [alt]="photo.title"
-          loading="lazy"/>
+      <div class="thumbnails">
+        @for (photo of getThumbnails(); track photo) {
+          <div
+            class="thumbnail"
+            (click)="selectPhoto(photo)">
+            <img
+              [@crossFadeZoomInv]="photo.url"
+              [src]="photo.url"
+              [alt]="photo.title"
+              loading="lazy"/>
+            </div>
+          }
+        </div>
       </div>
     </div>
-  </div>
-</div>
 
-<app-edit-content
-  [photos]="photos"
-  (photosChange)="loadPhotos()"
-></app-edit-content>
+    <app-edit-content
+      [photos]="photos"
+      (photosChange)="loadPhotos()"
+    ></app-edit-content>

@@ -1,5 +1,5 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import { Subscription } from 'rxjs';
 import { LegalMentionsComponent } from '../legal-mentions/legal-mentions.component';
 import { LegalDocumentType } from '../../models/legal-modal.model';
@@ -11,11 +11,10 @@ import { PrivacyPolicyComponent } from '../privacy-policy/privacy-policy.compone
   selector: 'app-legal-modal',
   standalone: true,
   imports: [
-    CommonModule,
     LegalMentionsComponent,
     PrivacyPolicyComponent,
     CookiesPolicyComponent
-  ],
+],
   templateUrl: './legal-modal.component.html',
   styleUrls: ['./legal-modal.component.scss']
 })

@@ -59,7 +59,7 @@ export class ReviewsComponent implements OnInit {
     this.updateMaxDisplayed();
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     if (this.isBrowser) {
       this.updateMaxDisplayed();

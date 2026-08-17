@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, PLATFORM_ID } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { isPlatformBrowser } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { environment } from '../../environments/environment';
 import { EditContentComponent } from '../edit-content/edit-content.component';
@@ -11,7 +11,7 @@ import { provideAnimations } from '@angular/platform-browser/animations';
   selector: 'app-photo-gallery',
   templateUrl: './photo-gallery.component.html',
   styleUrls: ['./photo-gallery.component.scss'],
-  imports: [CommonModule, FormsModule, EditContentComponent],
+  imports: [FormsModule, EditContentComponent],
   standalone: true,
   providers: [provideAnimations()],
   animations: [

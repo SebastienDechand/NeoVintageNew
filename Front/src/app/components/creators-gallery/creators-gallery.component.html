@@ -9,16 +9,18 @@
   </div>
 
   <div class="creators-grid">
-    <div *ngFor="let creator of creators" class="creator-card">
-      <img [src]="creator.image" [alt]="creator.title" loading="lazy"/>
-      <div class="creator-info">
-        <h3>{{creator.title}}</h3>
-        <p>{{creator.subtitle}}</p>
-        <a [href]="creator.url" target="_blank" rel="noopener noreferrer">
-          Découvrir la boutique
-        </a>
+    @for (creator of creators; track creator) {
+      <div class="creator-card">
+        <img [src]="creator.image" [alt]="creator.title" loading="lazy"/>
+        <div class="creator-info">
+          <h3>{{creator.title}}</h3>
+          <p>{{creator.subtitle}}</p>
+          <a [href]="creator.url" target="_blank" rel="noopener noreferrer">
+            Découvrir la boutique
+          </a>
+        </div>
       </div>
-    </div>
+    }
   </div>
 </div>
 
