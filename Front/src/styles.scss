@@ -5,6 +5,8 @@
   --neo-orange: rgb(255, 87, 51);
   --neo-fuchsia: #ff3e89;
   --neo-yellow: #ffd700;
+  --neo-cream: #fdf3e7;
+  --neo-ink: #2b2b2b;
 
   /* Couleurs de texte */
   --text-primary: #000000;
@@ -13,7 +15,7 @@
   --text-stars: #838383;
 
   /* Couleurs de fond */
-  --background-primary: #f8f9fa;
+  --background-primary: var(--neo-cream);
   --background-secondary: var(--neo-peach);
   --background-tertiary: #f0f0f0;
 
@@ -33,6 +35,14 @@
     var(--neo-orange),
     var(--neo-fuchsia)
   );
+
+  /* Ombres et rayons "sticker" (rétro-pop) */
+  --shadow-sticker-fuchsia: 5px 5px 0 var(--neo-fuchsia);
+  --shadow-sticker-orange: 5px 5px 0 var(--neo-orange);
+  --shadow-sticker-yellow: 5px 5px 0 var(--neo-yellow);
+  --radius-card: 14px;
+  --radius-pill: 999px;
+  --radius-arch: 60px 60px 14px 14px;
 
   /* Polices de caractères */
   --font-heading: "Gliker", sans-serif;
@@ -104,6 +114,67 @@ i {
   padding: 10px;
   background-color: #d4edda;
   border-radius: 4px;
+}
+
+.card-sticker {
+  background: #ffffff;
+  border: 2.5px solid var(--neo-ink);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-sticker-fuchsia);
+}
+
+.card-sticker--orange {
+  box-shadow: var(--shadow-sticker-orange);
+}
+
+.card-sticker--yellow {
+  box-shadow: var(--shadow-sticker-yellow);
+}
+
+.icon-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--gradient-secondary);
+  color: var(--text-secondary);
+  margin-bottom: 12px;
+
+  svg {
+    width: 20px;
+    height: 20px;
+  }
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 28px;
+  border-radius: var(--radius-pill);
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+
+  &:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.pill--gradient {
+  background: var(--gradient-secondary);
+  color: var(--text-secondary);
+}
+
+.pill--light {
+  background: #ffffff;
+  color: var(--neo-fuchsia);
 }
 
 /* Animation fade-in */
