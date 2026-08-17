@@ -4,6 +4,7 @@
   display: flex;
   gap: 100px;
   width: 85%;
+  background: var(--neo-cream);
 
   .carousel-container {
     display: block;
@@ -25,9 +26,12 @@
       text-align: center;
     }
 
-    .custom-shopping-title {
-      font-size: 20px;
-      color: var(--neo-orange);
+    .custom-shopping-kicker {
+      display: block;
+      font-family: var(--font-decorative);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--neo-fuchsia);
       text-align: left;
     }
 
@@ -51,8 +55,6 @@
       justify-content: center;
 
       .custom-shopping-card {
-        background: var(--gradient-secondary);
-        border-radius: 8px;
         padding: 30px;
         flex: 1;
         max-width: 300px;
@@ -61,22 +63,15 @@
         align-items: center;
         text-align: center;
 
-        i {
-          color: var(--text-secondary);
-          margin-bottom: 20px;
-          font-size: 40px;
-          overflow: hidden;
-        }
-
         h4 {
           font-size: 18px;
-          color: var(--text-secondary);
+          color: var(--text-primary);
           margin-bottom: 10px;
         }
 
         p {
-          font-size: 17px;
-          color: var(--text-secondary);
+          font-size: 16px;
+          color: var(--text-tertiary);
           line-height: 1.4;
         }
       }
@@ -91,9 +86,6 @@
       .custom-shopping-cards {
         .custom-shopping-card {
           padding: 20px;
-          i {
-            font-size: 30px;
-          }
           h4 {
             font-size: 16px;
           }

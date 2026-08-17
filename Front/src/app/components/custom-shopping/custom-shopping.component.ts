@@ -1,9 +1,10 @@
 import { Component } from '@angular/core';
 import { CarouselComponent } from "../carousel/carousel.component";
+import { LucideShoppingCart, LucidePackagePlus } from '@lucide/angular';
 
 @Component({
   selector: 'app-custom-shopping',
-  imports: [CarouselComponent],
+  imports: [CarouselComponent, LucideShoppingCart, LucidePackagePlus],
   templateUrl: './custom-shopping.component.html',
   styleUrl: './custom-shopping.component.scss'
 })
