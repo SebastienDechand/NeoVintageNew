@@ -60,7 +60,7 @@ Patterns réutilisables (classes globales ou mixins SCSS) :
 Structure et accessibilité conservées telles quelles (sticky, pilules, modal mobile). Habillage seulement :
 
 - Fond crème opaque (fin du glassmorphism translucide), trait noir fin en bas de barre
-- État actif : pilule au dégradé orange→fuchsia, texte blanc
+- État actif : pilule teintée orange 12% (`rgba(255, 87, 51, 0.12)`), texte orange
 - Modal mobile : carte sticker (bordure noire, ombre décalée)
 
 ## Hero (`header` + `cards-banner`)
@@ -68,7 +68,7 @@ Structure et accessibilité conservées telles quelles (sticky, pilules, modal m
 Restructuration complète du template :
 
 - La grande photo bannière plein écran disparaît
-- Titre central : « La mode responsable à portée de toutes et tous » — Gliker en majeure partie, mot-clé (« responsable ») en dégradé texte, sous-titre en Retrograde italique fuchsia
+- Titre central : « LA MODE RESPONSABLE à portée de toutes et tous » — Gliker en majeure partie, mot-clé (« RESPONSABLE ») en `--neo-orange` plein, sous-titre en Retrograde italique fuchsia
 - Badge sticker au-dessus du titre (« Friperie · Seconde main » ou équivalent)
 - CTA principal en pilule dégradé
 - Sous le titre : rangée de 3 photos existantes (`banner1`, `friperie`, `creators`…) en polaroïds — cadre blanc, bordure noire, rotations légères alternées (-2° / +1.5° / -1°), empilées verticalement sur mobile
