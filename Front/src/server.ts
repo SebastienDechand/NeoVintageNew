@@ -10,7 +10,9 @@ const browserDistFolder = resolve(serverDistFolder, '../browser');
 const indexHtml = join(serverDistFolder, 'index.server.html');
 
 const app = express();
-const commonEngine = new CommonEngine();
+const commonEngine = new CommonEngine({
+  allowedHosts: ['neo-vintage.fr', 'www.neo-vintage.fr', 'localhost'],
+});
 
 /**
  * Example Express Rest API endpoints can be defined here.
@@ -28,7 +30,7 @@ const commonEngine = new CommonEngine();
  * Serve static files from /browser
  */
 app.get(
-  '**',
+  '/{*splat}',
   express.static(browserDistFolder, {
     maxAge: '1y',
     index: 'index.html'
@@ -38,7 +40,7 @@ app.get(
 /**
  * Handle all other requests by rendering the Angular application.
  */
-app.get('**', (req, res, next) => {
+app.get('/{*splat}', (req, res, next) => {
   const { protocol, originalUrl, baseUrl, headers } = req;
 
   commonEngine
