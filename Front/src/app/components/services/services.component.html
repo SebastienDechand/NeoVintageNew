@@ -1,6 +1,6 @@
 <section class="services-container" id="services">
-  <h2 class="services-title">Services Proposés</h2>
-  <h3 class="services-subtitle">Découvrez nos services les plus demandés</h3>
+  <span class="services-kicker">Services Proposés</span>
+  <h2 class="services-subtitle">Découvrez nos services les plus demandés</h2>
   <p class="services-text">Explorez une friperie unique, découvrez le talent de créateurs passionnés, et composez votre panier personnalisé pour une expérience shopping sur mesure.</p>
   <div class="services-content">
     @for (service of services; track $index) {
@@ -10,6 +10,7 @@
         [title]="service.title"
         [description]="service.description"
         [link]="service.link"
+        [accent]="service.accent"
       ></app-cards-services>
     }
   </div>

@@ -12,6 +12,7 @@ export class CardsServicesComponent {
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() link: string = '';
+  @Input() accent: 'fuchsia' | 'orange' | 'yellow' = 'fuchsia';
 
   handleLinkClick(event: Event, sectionId: string): void {
     event.preventDefault();

@@ -1,14 +1,14 @@
 .services-container {
-  background: var(--gradient-secondary);
+  background: var(--neo-cream);
   padding: 120px;
 
-  .services-title {
+  .services-kicker {
+    display: block;
     text-align: center;
-    font-size: 20px;
-    color: var(--text-secondary);
-    text-transform: uppercase;
-    font-weight: 700;
-    letter-spacing: 1px;
+    font-family: var(--font-decorative);
+    font-style: italic;
+    font-size: 18px;
+    color: var(--neo-fuchsia);
     padding-bottom: 10px;
   }
   .services-subtitle {
@@ -16,15 +16,15 @@
     font-size: 40px;
     font-weight: 800;
     line-height: 1.4;
-    color: var(--text-secondary);
-    margin: 0 auto ;
+    color: var(--text-primary);
+    margin: 0 auto;
     padding-bottom: 10px;
   }
   .services-text {
     width: 50%;
     text-align: center;
     font-size: 16px;
-    color: var(--text-secondary);
+    color: var(--text-tertiary);
     margin: 0 auto 25px;
   }
   .services-content {
@@ -65,7 +65,7 @@
 @media screen and (max-width: 768px) {
   .services-container {
     padding: 40px;
-    .services-title {
+    .services-kicker {
       font-size: 16px;
     }
     .services-subtitle {
@@ -80,7 +80,7 @@
 @media screen and (max-width: 480px) {
   .services-container {
     padding: 20px;
-    .services-title {
+    .services-kicker {
       font-size: 14px;
     }
     .services-subtitle {
