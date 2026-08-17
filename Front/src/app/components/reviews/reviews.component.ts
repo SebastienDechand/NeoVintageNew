@@ -36,6 +36,10 @@ export class ReviewsComponent implements OnInit {
   }
 
   ngOnInit() {
+    if (!this.isBrowser) {
+      return;
+    }
+
     this.feedbackService.feedbacks$.subscribe({
       next: (feedbacks) => {
         this.reviews = feedbacks;
@@ -52,9 +56,7 @@ export class ReviewsComponent implements OnInit {
     });
 
     // Mise à jour du nombre maximum d'éléments affichés
-    if (this.isBrowser) {
-      this.updateMaxDisplayed();
-    }
+    this.updateMaxDisplayed();
   }
 
   @HostListener('window:resize', ['$event'])

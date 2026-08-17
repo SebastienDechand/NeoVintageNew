@@ -1,4 +1,5 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, PLATFORM_ID, inject } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { map, tap } from 'rxjs/operators';
@@ -11,12 +12,16 @@ import { environment } from '../environments/environment';
 export class FeedbackService {
   private http = inject(HttpClient);
   private apiUrl = `${environment.apiUrl}/feedbacks`;
+  private isBrowser = isPlatformBrowser(inject(PLATFORM_ID));
 
   private feedbacksSubject = new BehaviorSubject<Feedback[]>([]);
   feedbacks$ = this.feedbacksSubject.asObservable();
 
   constructor() {
-    this.loadAllFeedbacks();
+    // Chargement client uniquement : évite de coupler le build (prerendering) à la disponibilité du backend.
+    if (this.isBrowser) {
+      this.loadAllFeedbacks();
+    }
   }
 
 

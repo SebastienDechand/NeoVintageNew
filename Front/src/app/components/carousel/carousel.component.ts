@@ -1,5 +1,6 @@
 import { trigger, transition, style, animate } from '@angular/animations';
-import { Component, Input, OnInit, OnDestroy } from '@angular/core';
+import { Component, Inject, Input, OnInit, OnDestroy, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 
 @Component({
   selector: 'app-carousel',
@@ -23,6 +24,11 @@ export class CarouselComponent implements OnInit, OnDestroy {
 
   currentSlide = 0;
   private autoplayInterval: any;
+  private isBrowser: boolean;
+
+  constructor(@Inject(PLATFORM_ID) platformId: Object) {
+    this.isBrowser = isPlatformBrowser(platformId);
+  }
 
   ngOnInit() {
     this.startAutoplay();
@@ -33,6 +39,9 @@ export class CarouselComponent implements OnInit, OnDestroy {
   }
 
   startAutoplay() {
+    if (!this.isBrowser) {
+      return;
+    }
     this.autoplayInterval = setInterval(() => {
       this.onNextClick();
     }, 3000);
