@@ -1,6 +1,7 @@
 .about-container {
   padding: 70px 0 120px 0;
   display: flex;
+  background: var(--neo-cream);
 
   .about-image {
     width: 50%;
@@ -9,11 +10,13 @@
 
     img {
       margin: auto;
-      width: 70%;
+      width: 65%;
       max-height: 80%;
-      border-radius: 5%;
+      border-radius: var(--radius-arch);
+      border: 3px solid var(--neo-ink);
       object-fit: cover;
       object-position: right 50%;
+      transform: rotate(-2deg);
     }
   }
 
@@ -23,10 +26,13 @@
     flex-direction: column;
     justify-content: center;
 
-    .about-title {
-      font-size: 20px;
-      padding-bottom: 10px;
-      color: var(--neo-orange);
+    .about-kicker {
+      display: block;
+      font-family: var(--font-decorative);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--neo-fuchsia);
+      padding-bottom: 6px;
       text-align: left;
     }
 
@@ -53,28 +59,18 @@
       width: 70%;
 
       .about-card {
-        background: var(--gradient-secondary);
-        border-radius: 8px;
-        padding: 30px;
+        padding: 24px;
         width: 100%;
 
         h4 {
           font-size: 18px;
           margin-bottom: 10px;
-          color: var(--text-secondary);
-          display: flex;
-          i {
-            display: flex;
-            align-items: center;
-            color: var(--text-secondary);
-            margin-right: 10px;
-          }
+          color: var(--text-primary);
         }
 
         p {
-          margin-left: 24px;
-          font-size: 17px;
-          color: var(--text-secondary);
+          font-size: 16px;
+          color: var(--text-tertiary);
           line-height: 1.4;
         }
       }
@@ -129,6 +125,11 @@
       width: 100%;
       padding: 0;
       align-items: center;
+
+      .about-kicker,
+      .about-subtitle {
+        text-align: center;
+      }
 
       .about-text {
         width: 80%;
