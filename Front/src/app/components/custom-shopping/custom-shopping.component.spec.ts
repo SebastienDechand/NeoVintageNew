@@ -1,5 +1,4 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { CustomShoppingComponent } from './custom-shopping.component';
 
@@ -9,8 +8,7 @@ describe('CustomShoppingComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [CustomShoppingComponent],
-      providers: [provideAnimations()]
+      imports: [CustomShoppingComponent]
     })
     .compileComponents();
 
