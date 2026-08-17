@@ -1,33 +1,36 @@
 .reviews-container {
-  width: 80%;
+  width: 100%;
   margin: 0 auto;
-  padding: 120px 0 60px;
+  padding: 120px 40px 60px;
+  background: var(--gradient-secondary);
 
   .current-reviews {
 
     .ratings-summary {
-      background-color: var(--background-primary);
       border-radius: 15px;
 
       .average-rating {
         text-align: center;
 
-        .rating-title {
-          color: var(--neo-orange);
-          font-size: 20px;
-          text-transform: uppercase;
+        .rating-kicker {
+          display: block;
+          font-family: var(--font-decorative);
+          font-style: italic;
+          color: #ffffff;
+          font-size: 18px;
           letter-spacing: 1px;
           margin-bottom: 10px;
-          display: block;
         }
 
         .rating-subtitle {
           font-size: 40px;
           padding-bottom: 10px;
+          color: #ffffff;
         }
 
         .rating-description {
-          color: var(--text-tertiary);
+          color: #ffffff;
+          opacity: 0.9;
           max-width: 600px;
           margin: 0 auto 30px;
           line-height: 1.6;
@@ -43,7 +46,7 @@
           .big-rating {
             font-size: 3.5rem;
             font-weight: bold;
-            color: var(--neo-orange);
+            color: #ffffff;
           }
 
           .rating-details {
@@ -58,7 +61,7 @@
 
               .star {
                 font-size: 1.5rem;
-                color: var(--background-tertiary);
+                color: rgba(255, 255, 255, 0.4);
 
                 &.filled {
                   color: var(--neo-yellow);
@@ -67,7 +70,8 @@
             }
 
             .total-count {
-              color: var(--text-tertiary);
+              color: #ffffff;
+              opacity: 0.9;
               font-size: 0.9rem;
             }
           }
@@ -84,13 +88,14 @@
             align-items: center;
             gap: 10px;
 
-            i {
-              color: var(--neo-orange);
-              font-size: 1.2rem;
+            svg {
+              width: 20px;
+              height: 20px;
+              color: #ffffff;
             }
 
             span {
-              color: var(--text-tertiary);
+              color: #ffffff;
             }
           }
         }
@@ -98,11 +103,11 @@
         .review-cta {
           margin: 40px auto 20px;
           padding-top: 30px;
-          border-top: 1px solid var(--background-tertiary);
+          border-top: 1px solid rgba(255, 255, 255, 0.3);
           width: 50%;
 
           .review-prompt {
-            color: var(--text-tertiary);
+            color: #ffffff;
             margin-bottom: 20px;
             font-size: 1.1rem;
           }
@@ -115,16 +120,16 @@
       gap: 10px;
 
       .carousel-button {
-        width: 80px;
-        background: var(--neo-orange);
-        color: var(--text-secondary);
-        border: none;
+        width: 60px;
+        height: 60px;
+        background: #ffffff;
+        color: var(--neo-orange);
+        border: 2.5px solid var(--neo-ink);
         border-radius: 50%;
         cursor: pointer;
         font-size: 18px;
         padding: 10px;
         transition: all 0.3s;
-        opacity: 0.8;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -132,23 +137,20 @@
           visibility: hidden;
         }
         &:hover:not(:disabled) {
-          opacity: 1;
+          transform: translateY(-2px);
         }
       }
 
       .reviews-list {
         display: flex;
         justify-content: center;
-        gap: 15px;
+        gap: 20px;
         overflow: hidden;
         flex-wrap: wrap;
 
         .review-card {
           flex: 1;
           max-width: calc(100% / 4 - 20px);
-          background-color: var(--text-secondary);
-          border: 1px solid var(--background-tertiary);
-          border-radius: 8px;
           padding: 20px;
           margin: 0;
           display: flex;
@@ -230,10 +232,11 @@
     }
 
     .legal-notice {
-      margin: 30px 0;
+      margin: 30px 0 0;
       border-radius: 8px;
       font-size: 0.9em;
-      color: var(--text-tertiary);
+      color: #ffffff;
+      opacity: 0.85;
       text-align: center;
     }
   }
@@ -251,12 +254,12 @@
   justify-content: center;
   z-index: 1000;
   .modal-content {
-    background: var(--background-primary);
+    background: var(--neo-cream);
+    border: 3px solid var(--neo-ink);
     border-radius: 10px;
     padding: 20px;
     width: 90%;
     max-width: 500px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     position: relative;
     .close-modal {
       position: absolute;
@@ -295,14 +298,14 @@
 
 @media screen and (max-width: 1440px) {
   .reviews-container {
-    padding: 80px 0;
+    padding: 80px 20px;
     .current-reviews {
       .reviews-carousel {
         .reviews-list {
-          gap: 10px;
+          gap: 15px;
           .review-card {
             height: 350px;
-            max-width: calc(100% / 3 - 20px);
+            max-width: calc(100% / 3 - 15px);
           }
         }
       }
@@ -319,15 +322,15 @@
 
 @media screen and (max-width: 1024px) {
   .reviews-container {
-    width: 80%;
-    padding: 60px 0;
+    width: 100%;
+    padding: 60px 20px;
     .current-reviews {
       .reviews-carousel {
         .reviews-list {
-          gap: 10px;
+          gap: 15px;
           .review-card {
             height: 350px;
-            max-width: calc(100% / 2 - 20px);
+            max-width: calc(100% / 2 - 15px);
           }
         }
       }
@@ -344,16 +347,16 @@
 
 @media screen and (max-width: 768px) {
   .reviews-container {
-    width: 90%;
-    padding: 40px 0;
+    padding: 40px 20px;
     .current-reviews {
       .reviews-carousel {
         .carousel-button {
-          width: 50px;
+          width: 44px;
+          height: 44px;
           font-size: 16px;
         }
         .reviews-list {
-          gap: 10px;
+          gap: 15px;
           .review-card {
             height: 350px;
             max-width: calc(100% / 1);
@@ -373,12 +376,12 @@
 
 @media screen and (max-width: 480px) {
   .reviews-container {
-    width: 100%;
     padding: 50px 20px;
     .current-reviews {
       .reviews-carousel {
         .carousel-button {
-          width: 80px;
+          width: 44px;
+          height: 44px;
           font-size: 16px;
         }
       }
