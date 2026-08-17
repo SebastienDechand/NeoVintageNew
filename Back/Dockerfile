@@ -1,4 +1,4 @@
-FROM node:18-alpine
+FROM node:22-alpine
 
 # Crée et définit le répertoire de travail dans le conteneur
 WORKDIR /app/Back
