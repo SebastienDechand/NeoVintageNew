@@ -1,7 +1,7 @@
 <div class="creators-container" id="creators">
   <div class="creators-content">
-    <h2 class="creators-title">Les créateurs et créatrices du mois</h2>
-    <h3 class="creators-subtitle">Découvrez des créations uniques et artisanales.</h3>
+    <span class="creators-kicker">Les créateurs et créatrices du mois</span>
+    <h2 class="creators-subtitle">Découvrez des créations uniques et artisanales.</h2>
     <p class="creators-text">
       Nous mettons en lumière des créateurs, artisans et artistes locaux, en proposant leurs œuvres et créations.
       Soutenez le savoir-faire et la créativité tout en découvrant des pièces uniques et originales.
@@ -9,13 +9,13 @@
   </div>
 
   <div class="creators-grid">
-    @for (creator of creators; track creator) {
-      <div class="creator-card">
+    @for (creator of creators; track creator; let i = $index) {
+      <div class="creator-card card-sticker" [class.card-sticker--orange]="i % 3 === 1" [class.card-sticker--yellow]="i % 3 === 2">
         <img [src]="creator.image" [alt]="creator.title" loading="lazy"/>
         <div class="creator-info">
           <h3>{{creator.title}}</h3>
           <p>{{creator.subtitle}}</p>
-          <a [href]="creator.url" target="_blank" rel="noopener noreferrer">
+          <a [href]="creator.url" target="_blank" rel="noopener noreferrer" class="pill pill--gradient">
             Découvrir la boutique
           </a>
         </div>
