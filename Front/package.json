@@ -10,6 +10,9 @@
     "serve:ssr:NeoVintageNew": "node dist/neo-vintage-new/server/server.mjs"
   },
   "private": true,
+  "engines": {
+    "node": "22.x"
+  },
   "dependencies": {
     "@angular/animations": "^21.2.20",
     "@angular/common": "^21.2.20",

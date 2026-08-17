@@ -65,3 +65,9 @@ if (isMainModule(import.meta.url)) {
     console.log(`Node Express server listening on http://localhost:${port}`);
   });
 }
+
+/**
+ * Exported for use by serverless platforms (e.g. Vercel's api/index.mjs),
+ * which import this Express app and invoke it directly as a request handler.
+ */
+export default app;
