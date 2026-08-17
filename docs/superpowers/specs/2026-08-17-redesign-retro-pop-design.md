@@ -23,6 +23,22 @@ Deux contraintes non négociables :
 | Rythme de page | Fond crème calme + 2 bandes dégradé « moments forts » |
 | Bandes dégradé | Galerie photos et Avis clients |
 | Style de cartes | Option A : sticker/BD (fond blanc, bordure noire, ombre décalée colorée) |
+| Icônes | FontAwesome remplacé par `@lucide/angular` (traits fins, cohérent avec le style rétro-pop épuré) |
+
+## Icônes : migration FontAwesome → Lucide
+
+FontAwesome (`@fortawesome/fontawesome-free`) est retiré du projet et remplacé par `@lucide/angular`. Choix motivé par le user : traits fins et géométriques, plus cohérent avec la direction rétro-pop épurée que les icônes FontAwesome pleines.
+
+- Retrait de `@fortawesome/fontawesome-free` de `Front/package.json` et de la ligne `node_modules/@fortawesome/fontawesome-free/css/all.min.css` dans `Front/angular.json` (`architect.build.options.styles`)
+- Ajout de `@lucide/angular`
+- Icônes utilisées, importées individuellement par composant (tree-shaking) :
+  - `header.component.ts` (cartes bannière) : `fa-solid fa-leaf` → `LucideLeaf`, `fa-solid fa-recycle` → `LucideRecycle`, `fa-solid fa-heart` → `LucideHeart`
+  - `about.component.html` (3 cartes atouts) : `fa-solid fa-check` → `LucideCheck`
+  - `custom-shopping.component.html` : `fa-solid fa-cart-shopping` (paniers 20€/40€) → `LucideShoppingCart`, `fa-solid fa-cart-plus` (panier 60€) → `LucidePackagePlus`
+  - `photo-gallery.component.html` : `fa-solid fa-store` → `LucideStore`
+  - `reviews.component.html` : `fas fa-check-circle` → `LucideCircleCheck`, `fas fa-star` reste une étoile Unicode `★` (déjà utilisée pour la notation, pas une icône FontAwesome à proprement parler — inchangé)
+  - `edit-content.component.html` (admin, hors périmètre visuel du redesign mais dépend de la lib retirée) : `fas fa-sign-out-alt` → `LucideLogOut`, `fas fa-edit` → `LucideSquarePen`
+- `cards-banner` (icône passée en `@Input`) et `cards-services` : l'`@Input() icon: string` bascule d'une classe CSS FontAwesome vers un nom d'icône Lucide (ex. `'leaf'`), rendu via le binding dynamique `[lucideIcon]` sur un `<svg>`. Les icônes utilisées dynamiquement sont enregistrées une fois via `provideLucideIcons(...)` dans `app.config.ts`.
 
 ## Fondations (`Front/src/styles.scss`)
 
@@ -115,12 +131,13 @@ Les `app-separate` actuels sont supprimés de `landing-page.component.html` (le 
 
 ## Ordre d'implémentation suggéré
 
-1. Fondations `styles.scss` (tokens + patterns)
-2. Hero (header + cards-banner) — donne le ton
-3. Nav réchauffée
-4. À propos, Services
-5. Bande galerie photos
-6. Créateurs, Shopping personnalisé
-7. Bande avis + formulaire
-8. Footer + suppression des séparateurs
-9. Passe responsive + contraste + vérification SSR/build
+1. Migration icônes FontAwesome → Lucide (préalable technique, indépendant du visuel)
+2. Fondations `styles.scss` (tokens + patterns)
+3. Hero (header + cards-banner) — donne le ton
+4. Nav réchauffée
+5. À propos, Services
+6. Bande galerie photos
+7. Créateurs, Shopping personnalisé
+8. Bande avis + formulaire
+9. Footer + suppression des séparateurs
+10. Passe responsive + contraste + vérification SSR/build
