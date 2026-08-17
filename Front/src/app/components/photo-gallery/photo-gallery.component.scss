@@ -3,7 +3,8 @@
   gap: 50px;
   justify-content: center;
   align-items: center;
-  padding: 120px 0;
+  padding: 120px 40px;
+  background: var(--gradient-secondary);
 
   .gallery-content {
     width: 40%;
@@ -11,21 +12,26 @@
     flex-direction: column;
     justify-content: center;
     margin-bottom: 10px;
-    .gallery-title {
-      font-size: 20px;
+    .gallery-kicker {
+      display: block;
+      font-family: var(--font-decorative);
+      font-style: italic;
+      font-size: 18px;
       padding-bottom: 10px;
-      color: var(--neo-orange);
+      color: #ffffff;
       text-align-last: left;
     }
     .gallery-subtitle {
       font-size: 40px;
       padding-bottom: 10px;
       text-align-last: left;
+      color: #ffffff;
     }
     .gallery-text {
       font-size: 16px;
       text-align-last: left;
-      color: var(--text-tertiary);
+      color: #ffffff;
+      opacity: 0.9;
       margin-bottom: 30px;
       line-height: 1.4;
     }
@@ -55,6 +61,7 @@
               font-family: 'OpenSans', sans-serif;
               font-weight: 700;
               letter-spacing: 0;
+              color: #ffffff;
             }
 
             .rating-display {
@@ -67,6 +74,7 @@
               .rating {
                 font-size: 24px;
                 font-weight: bold;
+                color: #ffffff;
               }
 
               .stars {
@@ -74,16 +82,12 @@
 
                 .star {
                   font-size: 18px;
-                  color: var(--text-stars);
-
-                  &.filled {
-                    color: var(--neo-yellow);
-                  }
                 }
               }
 
               .total-reviews {
-                color: var(--text-tertiary);
+                color: #ffffff;
+                opacity: 0.85;
               }
             }
           }
@@ -91,34 +95,15 @@
 
         .vinted-link {
           width: 50%;
-          display: inline-block;
-          padding: 12px 20px;
-          background: var(--gradient-secondary);
-          color: var(--text-secondary);
-          text-decoration: none;
-          font-size: 16px;
-          font-weight: bold;
-          border-radius: 8px;
           position: relative;
-          transition: all 0.3s ease;
-          text-align: center;
-          overflow: visible;
           margin: auto;
-
-          &:hover {
-            background: var(--gradient-primary);
-          }
-
-          &:active {
-            transform: scale(0.95);
-          }
 
           .new-badge {
             position: absolute;
-            top: -5px;
-            right: -5px;
-            background-color: var(--text-primary);
-            color: var(--text-secondary);
+            top: -10px;
+            right: -10px;
+            background-color: var(--neo-ink);
+            color: #ffffff;
             font-size: 10px;
             font-weight: bold;
             padding: 4px 8px;
@@ -142,28 +127,32 @@
       }
 
       .gallery-card {
-        background: var(--gradient-secondary);
-        border-radius: 8px;
+        background: #ffffff;
+        border: 2.5px solid var(--neo-ink);
+        border-radius: var(--radius-card);
+        box-shadow: var(--shadow-sticker-yellow);
         padding: 30px;
         width: 100%;
 
         h4 {
           font-size: 18px;
           margin-bottom: 10px;
-          color: var(--text-secondary);
+          color: var(--text-primary);
           display: flex;
-          i {
-            display: flex;
-            align-items: center;
-            color: var(--text-secondary);
-            margin-right: 10px;
+          align-items: center;
+          gap: 10px;
+
+          svg {
+            width: 22px;
+            height: 22px;
+            color: var(--neo-orange);
           }
         }
 
         p {
-          margin-left: 24px;
-          font-size: 17px;
-          color: var(--text-secondary);
+          margin-left: 32px;
+          font-size: 16px;
+          color: var(--text-tertiary);
           line-height: 1.4;
         }
       }
@@ -177,7 +166,8 @@
     gap: 50px;
     justify-content: center;
     align-items: center;
-    background: var(--gradient-secondary);
+    background: #ffffff;
+    border: 3px solid var(--neo-ink);
     border-radius: 20px;
 
     .main-photo {
@@ -190,14 +180,12 @@
         width: 400px;
         height: 400px;
         object-fit: contain;
-        filter: drop-shadow(0 0 10px var(--text-secondary))
-                drop-shadow(0 0 30px var(--text-secondary))
       }
       animation: crossFade 0.4s ease-out;
 
       p {
         font-size: 16px;
-        color: var(--text-secondary);
+        color: var(--text-primary);
         margin-top: 10px;
         font-style: italic;
         font-weight: 600;
@@ -221,11 +209,9 @@
         height: 120px;
         width: 120px;
         transition: transform 0.3s ease, box-shadow 0.3s ease;
-        border-radius: 20%;
+        border-radius: 12px;
+        border: 2px solid var(--neo-ink);
         overflow: hidden;
-        box-shadow:
-          0 0 10px var(--text-secondary),
-          0 0 15px var(--text-secondary);
 
         &:hover {
           transform: scale(1.1);
@@ -255,7 +241,7 @@
 
 @media screen and (max-width: 1440px) {
   .gallery-container {
-    padding: 80px 0;
+    padding: 80px 20px;
     .gallery-images {
       height: 400px;
       overflow: hidden;
@@ -342,7 +328,7 @@
 
 @media screen and (max-width: 1024px) {
   .gallery-container {
-    padding: 60px 0;
+    padding: 60px 20px;
     flex-direction: column;
     .gallery-content {
       width: 80%;
@@ -398,7 +384,7 @@
 
 @media screen and (max-width: 768px) {
   .gallery-container {
-    padding: 40px 0;
+    padding: 40px 20px;
     .gallery-images {
       flex-direction: column;
       justify-content: space-between;
@@ -408,8 +394,6 @@
         height: 350px;
         flex-direction: column-reverse;
         img {
-          filter: drop-shadow(0 0 10px var(--text-secondary))
-                  drop-shadow(0 0 5px var(--text-secondary));
           width: 300px;
           height: 300px;
         }
@@ -424,11 +408,6 @@
         width: 100%;
         height: 150px;
         gap: 10%;
-        .thumbnail {
-          box-shadow:
-          0 0 10px var(--text-secondary),
-          0 0 12px var(--text-secondary);
-        }
       }
     }
   }
