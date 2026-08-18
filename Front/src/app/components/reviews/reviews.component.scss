@@ -120,24 +120,43 @@
       gap: 10px;
 
       .carousel-button {
-        width: 60px;
-        height: 60px;
+        flex-shrink: 0;
+        width: 52px;
+        height: 52px;
         background: #ffffff;
-        color: var(--neo-orange);
+        color: var(--neo-ink);
         border: 2.5px solid var(--neo-ink);
         border-radius: 50%;
+        box-shadow: 4px 4px 0 rgba(43, 43, 43, 0.18);
         cursor: pointer;
-        font-size: 18px;
-        padding: 10px;
-        transition: all 0.3s;
+        padding: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        &:disabled {
-          visibility: hidden;
+        transition: transform 0.2s ease, background 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+
+        svg {
+          width: 22px;
+          height: 22px;
         }
-        &:hover:not(:disabled) {
+
+        &:disabled {
+          opacity: 0.35;
+          cursor: not-allowed;
+          box-shadow: none;
+        }
+
+        &:hover:not(:disabled),
+        &:focus-visible:not(:disabled) {
+          background: var(--neo-ink);
+          color: #ffffff;
+          border-color: var(--neo-ink);
           transform: translateY(-2px);
+        }
+
+        &:active:not(:disabled) {
+          transform: translateY(0);
+          box-shadow: 2px 2px 0 rgba(43, 43, 43, 0.18);
         }
       }
 
@@ -353,7 +372,11 @@
         .carousel-button {
           width: 44px;
           height: 44px;
-          font-size: 16px;
+
+          svg {
+            width: 18px;
+            height: 18px;
+          }
         }
         .reviews-list {
           gap: 15px;
@@ -382,7 +405,11 @@
         .carousel-button {
           width: 44px;
           height: 44px;
-          font-size: 16px;
+
+          svg {
+            width: 18px;
+            height: 18px;
+          }
         }
       }
       .legal-notice {

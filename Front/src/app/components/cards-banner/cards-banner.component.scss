@@ -1,14 +1,65 @@
 .card {
+  position: relative;
   width: 300px;
+  min-height: 280px;
   flex-shrink: 0;
-  padding: 24px;
+  padding: 40px 26px 26px;
   text-align: left;
   transition: transform 0.3s ease;
 
+  .card-tab {
+    position: absolute;
+    top: -18px;
+    left: 22px;
+    width: 44px;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--neo-fuchsia);
+    border: 2.5px solid var(--neo-ink);
+    border-radius: 8px;
+
+    svg {
+      width: 20px;
+      height: 20px;
+      color: #ffffff;
+    }
+
+    &--orange {
+      background: var(--neo-orange);
+    }
+
+    &--yellow {
+      background: var(--neo-yellow);
+
+      svg {
+        color: var(--neo-ink);
+      }
+    }
+  }
+
   .card-title {
     font-size: 1.3rem;
-    margin: 4px 0 10px;
+    margin: 4px 0 0;
     color: var(--text-primary);
+  }
+
+  .card-rule {
+    display: block;
+    width: 32px;
+    height: 3px;
+    margin: 10px 0 14px;
+    background: var(--neo-fuchsia);
+    border-radius: 2px;
+
+    &--orange {
+      background: var(--neo-orange);
+    }
+
+    &--yellow {
+      background: var(--neo-yellow);
+    }
   }
 
   .card-description {
@@ -30,6 +81,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    cursor: pointer;
+    width: 100%;
+    max-width: 320px;
+    padding: 24px 20px;
+    transition: transform 0.15s ease;
+
+    &:active {
+      transform: scale(0.97);
+    }
+
     .round-icon {
       display: flex;
       justify-content: center;
@@ -46,11 +107,55 @@
         color: var(--text-secondary);
       }
     }
+
     .round-title {
       font-size: 1.2rem;
-      margin: 12px 0 0;
+      margin-top: 14px;
       text-align: center;
       color: var(--text-primary);
+    }
+
+    .round-hint {
+      display: inline-block;
+      font-weight: 700;
+      font-size: 0.75rem;
+      letter-spacing: 0.4px;
+      color: var(--neo-fuchsia);
+      background: rgba(255, 62, 137, 0.1);
+      border-radius: var(--radius-pill);
+      padding: 4px 12px;
+      margin-top: 10px;
+      opacity: 1;
+      transition: opacity 0.2s ease;
+    }
+
+    .round-description-wrapper {
+      display: grid;
+      grid-template-rows: 0fr;
+      width: 100%;
+      transition: grid-template-rows 0.3s ease;
+    }
+
+    .round-description-inner {
+      overflow: hidden;
+      min-height: 0;
+    }
+
+    .round-description {
+      font-size: 0.9rem;
+      color: var(--text-tertiary);
+      line-height: 1.4;
+      text-align: center;
+      margin: 10px auto 0;
+    }
+
+    &--expanded {
+      .round-hint {
+        opacity: 0;
+      }
+      .round-description-wrapper {
+        grid-template-rows: 1fr;
+      }
     }
   }
 }

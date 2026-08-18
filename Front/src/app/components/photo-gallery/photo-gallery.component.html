@@ -3,23 +3,31 @@
     <span class="gallery-kicker">Pièces mises à l'honneur</span>
     <h2 class="gallery-subtitle">Friperie en ligne</h2>
     <p class="gallery-text">
-      Découvrez une sélection unique de vêtements et accessoires de seconde main, choisis avec soin pour allier style, qualité et écoresponsabilité.
-      Une manière simple et accessible de consommer autrement, depuis chez vous !
+      Découvrez une sélection unique de vêtements et accessoires de seconde
+      main, choisis avec soin pour allier style, qualité et écoresponsabilité.
+      Une manière simple et accessible de consommer autrement, depuis chez vous
+      !
     </p>
 
     <div class="gallery-cards">
       <div class="gallery-card card-sticker card-sticker--yellow">
-        <h4>
+        <h3>
           <svg lucideStore></svg>
           Visitez notre boutique Vinted
-        </h4>
+        </h3>
         <p>
-          Découvrez encore plus d'articles exclusifs sur notre page Vinted. Une collection variée pour compléter votre style avec des pièces uniques.
+          Découvrez encore plus d'articles exclusifs sur notre page Vinted. Une
+          collection variée pour compléter votre style avec des pièces uniques.
         </p>
       </div>
 
       <div class="gallery-vinted">
-        <a href="https://www.vinted.fr/member/11729892" target="_blank" rel="noopener noreferrer" class="pill pill--light vinted-link">
+        <a
+          href="https://www.vinted.fr/member/11729892"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pill pill--light vinted-link"
+        >
           <span class="new-badge">Nouveau</span>
           Accéder à la boutique Vinted
         </a>
@@ -30,46 +38,45 @@
             <div class="rating-display">
               <span class="rating">5.0</span>
               <div class="stars">
-                @for (star of [1,2,3,4,5]; track $index) {
+                @for (star of [1, 2, 3, 4, 5]; track $index) {
                   <span class="star">⭐</span>
                 }
               </div>
-              <span class="total-reviews">1591 avis vérifiés (707 évaluations membres, 884 automatiques)</span>
+              <span class="total-reviews">1591 avis vérifiés</span>
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
-  <div class="gallery-images">
-    <div class="main-photo">
+  <div class="gallery-viewer">
+    <div class="viewer-main">
       <img
         [@crossFadeZoom]="selectedPhoto?.url"
         [src]="selectedPhoto?.url"
         [alt]="selectedPhoto?.title"
-        loading="lazy"/>
-        <p>{{ selectedPhoto?.title }}</p>
-      </div>
-
-      <div class="thumbnails">
-        @for (photo of getThumbnails(); track photo) {
-          <div
-            class="thumbnail"
-            (click)="selectPhoto(photo)">
-            <img
-              [@crossFadeZoomInv]="photo.url"
-              [src]="photo.url"
-              [alt]="photo.title"
-              loading="lazy"/>
-            </div>
-          }
-        </div>
-      </div>
+        loading="lazy"
+      />
     </div>
+    <p class="viewer-caption">{{ selectedPhoto?.title }}</p>
 
-    <app-edit-content
-      [photos]="photos"
-      (photosChange)="loadPhotos()"
-    ></app-edit-content>
+    <div class="viewer-thumbs">
+      @for (photo of getThumbnails(); track photo) {
+        <button type="button" class="viewer-thumb" (click)="selectPhoto(photo)">
+          <img
+            [@crossFadeZoomInv]="photo.url"
+            [src]="photo.url"
+            [alt]="photo.title"
+            loading="lazy"
+          />
+        </button>
+      }
+    </div>
+  </div>
+</div>
+
+<app-edit-content
+  [photos]="photos"
+  (photosChange)="loadPhotos()"
+></app-edit-content>

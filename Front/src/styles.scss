@@ -40,6 +40,7 @@
   --shadow-sticker-fuchsia: 5px 5px 0 var(--neo-fuchsia);
   --shadow-sticker-orange: 5px 5px 0 var(--neo-orange);
   --shadow-sticker-yellow: 5px 5px 0 var(--neo-yellow);
+  --shadow-sticker-ink: 5px 5px 0 var(--neo-ink);
   --radius-card: 14px;
   --radius-pill: 999px;
   --radius-arch: 60px 60px 14px 14px;
@@ -133,6 +134,10 @@ a {
 
 .card-sticker--yellow {
   box-shadow: var(--shadow-sticker-yellow);
+}
+
+.card-sticker--ink {
+  box-shadow: var(--shadow-sticker-ink);
 }
 
 .icon-badge {

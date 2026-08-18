@@ -44,12 +44,12 @@
 
     <div class="reviews-carousel">
       <button (click)="previous()" [disabled]="currentStartIndex === 0" class="carousel-button">
-        <span class="button-icon">◀</span>
+        <svg lucideChevronLeft></svg>
       </button>
 
       <div class="reviews-list">
         @for (review of visibleReviews; track $index) {
-          <div class="review-card card-sticker" [class.card-sticker--orange]="$index % 3 === 1" [class.card-sticker--yellow]="$index % 3 === 2">
+          <div class="review-card card-sticker" [class.card-sticker--ink]="$index % 2 === 0" [class.card-sticker--yellow]="$index % 2 === 1">
             <div class="review-content">
               <div class="review-header">
                 <span class="author">{{ review.authorInitials }}</span>
@@ -82,7 +82,7 @@
       </div>
 
       <button (click)="next()" [disabled]="currentStartIndex + maxDisplayed >= reviews.length" class="carousel-button">
-        <span class="button-icon">▶</span>
+        <svg lucideChevronRight></svg>
       </button>
     </div>
 

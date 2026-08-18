@@ -3,16 +3,43 @@
   [class.card-sticker--orange]="accent === 'orange'"
   [class.card-sticker--yellow]="accent === 'yellow'"
 >
-  <div class="icon-badge">
+  <div
+    class="card-tab"
+    [class.card-tab--orange]="accent === 'orange'"
+    [class.card-tab--yellow]="accent === 'yellow'"
+  >
     <svg [lucideIcon]="icon"></svg>
   </div>
-  <h2 class="card-title">{{ title }}</h2>
+  <h3 class="card-title">{{ title }}</h3>
+  <span
+    class="card-rule"
+    [class.card-rule--orange]="accent === 'orange'"
+    [class.card-rule--yellow]="accent === 'yellow'"
+  ></span>
   <p class="card-description">{{ description }}</p>
 </div>
 
-<div class="round">
+<div
+  class="round card-sticker"
+  [class.card-sticker--orange]="accent === 'orange'"
+  [class.card-sticker--yellow]="accent === 'yellow'"
+  [class.round--expanded]="expanded"
+  (click)="toggle()"
+  (keydown.enter)="toggle()"
+  (keydown.space)="toggle()"
+  role="button"
+  tabindex="0"
+  [attr.aria-expanded]="expanded"
+>
   <div class="round-icon">
     <svg [lucideIcon]="icon"></svg>
   </div>
-  <h2 class="round-title">{{ title }}</h2>
+  <h3 class="round-title">{{ title }}</h3>
+  <span class="round-hint">Toucher pour en savoir plus</span>
+
+  <div class="round-description-wrapper">
+    <div class="round-description-inner">
+      <p class="round-description">{{ description }}</p>
+    </div>
+  </div>
 </div>

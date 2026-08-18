@@ -4,14 +4,14 @@ import { isPlatformBrowser } from '@angular/common';
 import { Feedback } from '../../models/feedback.model';
 import { FeedbackService } from '../../services/feedback.service';
 import { ReviewFormComponent } from "../review-form/review-form.component";
-import { LucideCircleCheck, LucideStar } from '@lucide/angular';
+import { LucideCircleCheck, LucideStar, LucideChevronLeft, LucideChevronRight } from '@lucide/angular';
 
 @Component({
   selector: 'app-reviews',
   templateUrl: './reviews.component.html',
   styleUrls: ['./reviews.component.scss'],
   standalone: true,
-  imports: [CommonModule, ReviewFormComponent, LucideCircleCheck, LucideStar]
+  imports: [CommonModule, ReviewFormComponent, LucideCircleCheck, LucideStar, LucideChevronLeft, LucideChevronRight]
 })
 export class ReviewsComponent implements OnInit {
   reviews: Feedback[] = [];

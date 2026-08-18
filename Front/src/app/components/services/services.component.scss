@@ -14,7 +14,6 @@
   .services-subtitle {
     text-align: center;
     font-size: 40px;
-    font-weight: 800;
     line-height: 1.4;
     color: var(--text-primary);
     margin: 0 auto;
@@ -55,7 +54,7 @@
       width: 80%;
     }
     .services-content {
-      gap: 5%;
+      gap: 40px;
       flex-direction: column;
       align-items: center;
     }
