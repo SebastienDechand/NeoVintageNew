@@ -1,4 +1,6 @@
 .card {
+  width: 400px;
+  flex-shrink: 0;
   text-align: center;
   transition: transform 0.3s ease;
   height: 550px;
