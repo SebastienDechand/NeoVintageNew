@@ -23,6 +23,7 @@
 ## Task 1: Remove FontAwesome, install @lucide/angular, register dynamic icons
 
 **Files:**
+
 - Modify: `Front/package.json`
 - Modify: `Front/angular.json:38`
 - Modify: `Front/src/app/app.config.ts`
@@ -30,11 +31,13 @@
 - Modify: `Front/src/app/components/edit-content/edit-content.component.html`
 
 **Interfaces:**
+
 - Produces: `provideLucideIcons(LucideLeaf, LucideRecycle, LucideHeart)` registered in `appConfig.providers` — Task 4 (hero) depends on these three icons being registered for the dynamic `[lucideIcon]` binding on `app-cards-banner`.
 
 - [ ] **Step 1: Uninstall FontAwesome and install @lucide/angular**
 
 Run from `Front/`:
+
 ```bash
 npm uninstall @fortawesome/fontawesome-free
 npm install @lucide/angular
@@ -55,13 +58,21 @@ In `Front/angular.json`, inside `architect.build.options.styles`, remove the Fon
 Modify `Front/src/app/app.config.ts` to:
 
 ```typescript
-import { ApplicationConfig, provideZoneChangeDetection } from '@angular/core';
-import { provideRouter } from '@angular/router';
-import { routes } from './app.routes';
-import { provideClientHydration, withEventReplay } from '@angular/platform-browser';
-import { provideHttpClient, withFetch } from '@angular/common/http';
-import { provideAnimations } from '@angular/platform-browser/animations';
-import { provideLucideIcons, LucideLeaf, LucideRecycle, LucideHeart } from '@lucide/angular';
+import { ApplicationConfig, provideZoneChangeDetection } from "@angular/core";
+import { provideRouter } from "@angular/router";
+import { routes } from "./app.routes";
+import {
+  provideClientHydration,
+  withEventReplay,
+} from "@angular/platform-browser";
+import { provideHttpClient, withFetch } from "@angular/common/http";
+import { provideAnimations } from "@angular/platform-browser/animations";
+import {
+  provideLucideIcons,
+  LucideLeaf,
+  LucideRecycle,
+  LucideHeart,
+} from "@lucide/angular";
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -70,8 +81,8 @@ export const appConfig: ApplicationConfig = {
     provideClientHydration(withEventReplay()),
     provideHttpClient(withFetch()),
     provideAnimations(),
-    provideLucideIcons(LucideLeaf, LucideRecycle, LucideHeart)
-  ]
+    provideLucideIcons(LucideLeaf, LucideRecycle, LucideHeart),
+  ],
 };
 ```
 
@@ -107,16 +118,20 @@ In `Front/src/app/components/edit-content/edit-content.component.html`, replace 
 
 ```html
 @if (isLoggedIn) {
-  <div class="button-group">
-    <button class="logout-button" (click)="logout()">
-      <svg lucideLogOut></svg>
-    </button>
-    <button class="edit-button" (click)="isEditMode()">
-      <svg lucideSquarePen></svg>
-    </button>
-  </div>
+<div class="button-group">
+  <button class="logout-button" (click)="logout()">
+    <svg lucideLogOut></svg>
+  </button>
+  <button class="edit-button" (click)="isEditMode()">
+    <svg lucideSquarePen></svg>
+  </button>
+</div>
 } @else {
-  <div class="admin-trigger" (click)="handleAdminClick()" aria-hidden="true"></div>
+<div
+  class="admin-trigger"
+  (click)="handleAdminClick()"
+  aria-hidden="true"
+></div>
 }
 ```
 
@@ -125,9 +140,11 @@ In `Front/src/app/components/edit-content/edit-content.component.html`, replace 
 - [ ] **Step 5: Verify no FontAwesome references remain in this task's scope**
 
 Run:
+
 ```bash
 grep -rn "fa-solid\|fas fa-\|far fa-\|fab fa-\|fortawesome" Front/src/app/components/edit-content Front/src/app/app.config.ts Front/angular.json Front/package.json
 ```
+
 Expected: no matches (the rest of the codebase still has FontAwesome references at this point — that's expected, they're fixed in later tasks).
 
 - [ ] **Step 6: Build and test**
@@ -137,6 +154,7 @@ cd Front
 npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 ```
+
 Expected: build succeeds; existing `edit-content.component.spec.ts` "should create" test still passes.
 
 - [ ] **Step 7: Commit**
@@ -151,9 +169,11 @@ git commit -m "chore(front): replace FontAwesome with @lucide/angular"
 ## Task 2: Foundational design tokens and reusable classes
 
 **Files:**
+
 - Modify: `Front/src/styles.scss`
 
 **Interfaces:**
+
 - Produces: CSS custom properties `--neo-cream`, `--neo-ink`, `--shadow-sticker-fuchsia`, `--shadow-sticker-orange`, `--shadow-sticker-yellow`, `--radius-card`, `--radius-pill`, `--radius-arch` (global, consumed by every later task). Global classes `.card-sticker`, `.card-sticker--orange`, `.card-sticker--yellow`, `.icon-badge`, `.pill`, `.pill--gradient`, `.pill--light` (consumed by Tasks 5, 7-11).
 
 - [ ] **Step 1: Add new tokens to `:root` and repoint `--background-primary`**
@@ -263,7 +283,9 @@ At the end of `Front/src/styles.scss` (after the existing `.success-message` rul
   text-decoration: none;
   cursor: pointer;
   border: none;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
 
   &:hover {
     transform: translateY(-2px);
@@ -287,6 +309,7 @@ At the end of `Front/src/styles.scss` (after the existing `.success-message` rul
 cd Front
 npm run build
 ```
+
 Expected: build succeeds with no SCSS errors. The site will look unchanged at this point (new tokens/classes aren't consumed by any template yet) except that the page background is now cream instead of `#f8f9fa` — confirm this with `npm start` and a quick look at any page.
 
 - [ ] **Step 4: Commit**
@@ -301,6 +324,7 @@ git commit -m "style(front): add retro-pop design tokens and sticker/pill utilit
 ## Task 3: Nav re-skin
 
 **Files:**
+
 - Modify: `Front/src/app/components/burger-menu/burger-menu.component.scss`
 
 No HTML/TS changes — the nav's structure and accessibility behavior (from the earlier redesign commits) are kept as-is; only the color/material treatment changes from glassmorphism to the cream/ink rétro-pop look.
@@ -328,20 +352,20 @@ In `Front/src/app/components/burger-menu/burger-menu.component.scss`, replace li
 Replace the `&-card` rule inside the `@media (max-width: 1024px)` block:
 
 ```scss
-      &-card {
-        position: relative;
-        display: block;
-        width: min(360px, 100%);
-        max-height: 80vh;
-        overflow-y: auto;
-        padding: 48px 40px;
-        border-radius: 24px;
-        background: var(--gradient-secondary);
-        border: 3px solid var(--neo-ink);
-        box-shadow: 8px 8px 0 var(--neo-ink);
-        transform: scale(0.94);
-        transition: transform 0.25s ease;
-      }
+&-card {
+  position: relative;
+  display: block;
+  width: min(360px, 100%);
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 48px 40px;
+  border-radius: 24px;
+  background: var(--gradient-secondary);
+  border: 3px solid var(--neo-ink);
+  box-shadow: 8px 8px 0 var(--neo-ink);
+  transform: scale(0.94);
+  transition: transform 0.25s ease;
+}
 ```
 
 (The rest of the file — hamburger button, menu list, active states, mobile overlay scrim — is unchanged.)
@@ -353,6 +377,7 @@ cd Front
 npm run build
 npm start
 ```
+
 Open the dev server, confirm: nav bar is cream with a black bottom border (not translucent), the active link pill and hover states still read clearly on cream, and on a narrow viewport (<1024px) the mobile menu card shows a black border and offset black shadow instead of a soft drop shadow.
 
 - [ ] **Step 3: Commit**
@@ -367,6 +392,7 @@ git commit -m "style(front): re-skin nav from glassmorphism to retro-pop cream/i
 ## Task 4: Hero restructure (header + cards-banner)
 
 **Files:**
+
 - Modify: `Front/src/app/components/header/header.component.html`
 - Modify: `Front/src/app/components/header/header.component.scss`
 - Modify: `Front/src/app/components/header/header.component.ts`
@@ -375,26 +401,27 @@ git commit -m "style(front): re-skin nav from glassmorphism to retro-pop cream/i
 - Modify: `Front/src/app/components/cards-banner/cards-banner.component.ts`
 
 **Interfaces:**
+
 - Consumes: `provideLucideIcons(LucideLeaf, LucideRecycle, LucideHeart)` from Task 1; `.card-sticker`, `.card-sticker--orange`, `.card-sticker--yellow`, `.icon-badge`, `.pill`, `.pill--gradient` from Task 2.
 - Produces: `CardsBannerComponent` gains `@Input() accent: 'fuchsia' | 'orange' | 'yellow' = 'fuchsia'` and its existing `@Input() icon: string` now holds a kebab-case Lucide icon name (e.g. `'leaf'`) instead of a FontAwesome class string.
 
 - [ ] **Step 1: Replace `cards-banner.component.ts`**
 
 ```typescript
-import { Component, Input } from '@angular/core';
-import { LucideDynamicIcon } from '@lucide/angular';
+import { Component, Input } from "@angular/core";
+import { LucideDynamicIcon } from "@lucide/angular";
 
 @Component({
-  selector: 'app-cards-banner',
+  selector: "app-cards-banner",
   imports: [LucideDynamicIcon],
-  templateUrl: './cards-banner.component.html',
-  styleUrl: './cards-banner.component.scss'
+  templateUrl: "./cards-banner.component.html",
+  styleUrl: "./cards-banner.component.scss",
 })
 export class CardsBannerComponent {
-  @Input() icon: string = '';
-  @Input() title: string = '';
-  @Input() description: string = '';
-  @Input() accent: 'fuchsia' | 'orange' | 'yellow' = 'fuchsia';
+  @Input() icon: string = "";
+  @Input() title: string = "";
+  @Input() description: string = "";
+  @Input() accent: "fuchsia" | "orange" | "yellow" = "fuchsia";
 }
 ```
 
@@ -484,38 +511,38 @@ export class CardsBannerComponent {
 - [ ] **Step 4: Replace `header.component.ts`**
 
 ```typescript
-import { Component } from '@angular/core';
-import { CardsBannerComponent } from '../cards-banner/cards-banner.component';
+import { Component } from "@angular/core";
+import { CardsBannerComponent } from "../cards-banner/cards-banner.component";
 
 @Component({
-  selector: 'app-header',
+  selector: "app-header",
   imports: [CardsBannerComponent],
-  templateUrl: './header.component.html',
-  styleUrl: './header.component.scss'
+  templateUrl: "./header.component.html",
+  styleUrl: "./header.component.scss",
 })
 export class HeaderComponent {
   cards = [
     {
-      icon: 'leaf',
-      accent: 'fuchsia' as const,
-      title: 'Mode Responsable',
+      icon: "leaf",
+      accent: "fuchsia" as const,
+      title: "Mode Responsable",
       description:
-        'Nos vêtements et accessoires de seconde main sont sélectionnés avec soin pour réduire l\'impact environnemental et sensibiliser à la fast fashion.'
+        "Nos vêtements et accessoires de seconde main sont sélectionnés avec soin pour réduire l'impact environnemental et sensibiliser à la fast fashion.",
     },
     {
-      icon: 'recycle',
-      accent: 'orange' as const,
-      title: 'Économie Circulaire',
+      icon: "recycle",
+      accent: "orange" as const,
+      title: "Économie Circulaire",
       description:
-        'Donnez une nouvelle vie à des vêtements et accessoires uniques. Ensemble, promouvons une économie durable qui encourage le réemploi et valorise le partage.'
+        "Donnez une nouvelle vie à des vêtements et accessoires uniques. Ensemble, promouvons une économie durable qui encourage le réemploi et valorise le partage.",
     },
     {
-      icon: 'heart',
-      accent: 'yellow' as const,
-      title: 'Confiance et Solidarité',
+      icon: "heart",
+      accent: "yellow" as const,
+      title: "Confiance et Solidarité",
       description:
-        'Neo Vintage est plus qu\'une boutique. C\'est un espace chaleureux, où chacun peut s\'exprimer, échanger et retrouver confiance en soi grâce à la mode.'
-    }
+        "Neo Vintage est plus qu'une boutique. C'est un espace chaleureux, où chacun peut s'exprimer, échanger et retrouver confiance en soi grâce à la mode.",
+    },
   ];
 }
 ```
@@ -531,12 +558,29 @@ export class HeaderComponent {
   </h1>
   <p class="hero-subtitle">à portée de toutes et tous</p>
 
-  <a class="pill pill--gradient hero-cta" href="#about">Découvrir la boutique</a>
+  <a class="pill pill--gradient hero-cta" href="#about"
+    >Découvrir la boutique</a
+  >
 
   <div class="hero-polaroids">
-    <img src="assets/images/friperie-1920w.webp" alt="Vêtements de la friperie Neo Vintage" class="hero-polaroid hero-polaroid--1" loading="lazy" />
-    <img src="assets/images/banner1.webp" alt="Une femme avec un chapeau et un poncho coloré regarde l'objectif" class="hero-polaroid hero-polaroid--2" loading="lazy" />
-    <img src="assets/images/creators-1920w.webp" alt="Créations artisanales mises en avant par Neo Vintage" class="hero-polaroid hero-polaroid--3" loading="lazy" />
+    <img
+      src="assets/images/friperie-1920w.webp"
+      alt="Vêtements de la friperie Neo Vintage"
+      class="hero-polaroid hero-polaroid--1"
+      loading="lazy"
+    />
+    <img
+      src="assets/images/banner1.webp"
+      alt="Une femme avec un chapeau et un poncho coloré regarde l'objectif"
+      class="hero-polaroid hero-polaroid--2"
+      loading="lazy"
+    />
+    <img
+      src="assets/images/creators-1920w.webp"
+      alt="Créations artisanales mises en avant par Neo Vintage"
+      class="hero-polaroid hero-polaroid--3"
+      loading="lazy"
+    />
   </div>
 </section>
 
@@ -708,6 +752,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm in the browser: the hero shows the badge, centered title with the orange word, italic fuchsia subtitle, gradient pill CTA, and three rotated polaroid photos; below it the three sticker cards (fuchsia/orange/yellow shadows) render with the leaf/recycle/heart icons. Check the `<768px` breakpoint shows the compact round-icon layout instead of the full cards.
 
 - [ ] **Step 8: Commit**
@@ -722,28 +767,28 @@ git commit -m "feat(front): rebuild hero as retro-pop polaroid layout with stick
 ## Task 5: About section restructure
 
 **Files:**
+
 - Modify: `Front/src/app/components/about/about.component.html`
 - Modify: `Front/src/app/components/about/about.component.scss`
 - Modify: `Front/src/app/components/about/about.component.ts`
 
 **Interfaces:**
+
 - Consumes: `.card-sticker`, `.card-sticker--orange`, `.card-sticker--yellow`, `.icon-badge` from Task 2.
 
 - [ ] **Step 1: Replace `about.component.ts`**
 
 ```typescript
-import { Component } from '@angular/core';
-import { LucideCheck } from '@lucide/angular';
+import { Component } from "@angular/core";
+import { LucideCheck } from "@lucide/angular";
 
 @Component({
-  selector: 'app-about',
+  selector: "app-about",
   imports: [LucideCheck],
-  templateUrl: './about.component.html',
-  styleUrl: './about.component.scss'
+  templateUrl: "./about.component.html",
+  styleUrl: "./about.component.scss",
 })
-export class AboutComponent {
-
-}
+export class AboutComponent {}
 ```
 
 - [ ] **Step 2: Replace `about.component.html`**
@@ -1035,6 +1080,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm: the about photo is inside a rotated, black-bordered arch frame; the three atout cards render as white sticker cards with alternating fuchsia/orange/yellow shadows and a check icon badge.
 
 - [ ] **Step 5: Commit**
@@ -1049,6 +1095,7 @@ git commit -m "style(front): restyle About section with arch photo frame and sti
 ## Task 6: Services + cards-services restructure
 
 **Files:**
+
 - Modify: `Front/src/app/components/services/services.component.html`
 - Modify: `Front/src/app/components/services/services.component.scss`
 - Modify: `Front/src/app/components/services/services.component.ts`
@@ -1057,58 +1104,59 @@ git commit -m "style(front): restyle About section with arch photo frame and sti
 - Modify: `Front/src/app/components/cards-services/cards-services.component.ts`
 
 **Interfaces:**
+
 - Consumes: `.card-sticker`, `.card-sticker--orange`, `.card-sticker--yellow`, `.pill`, `.pill--gradient` from Task 2.
 - Produces: `CardsServicesComponent` gains `@Input() accent: 'fuchsia' | 'orange' | 'yellow' = 'fuchsia'`.
 
 - [ ] **Step 1: Replace `services.component.ts`**
 
 ```typescript
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { CardsServicesComponent } from "../cards-services/cards-services.component";
 
 @Component({
-  selector: 'app-services',
+  selector: "app-services",
   imports: [CardsServicesComponent],
-  templateUrl: './services.component.html',
-  styleUrl: './services.component.scss'
+  templateUrl: "./services.component.html",
+  styleUrl: "./services.component.scss",
 })
 export class ServicesComponent {
   services = [
     {
-      image: 'assets/images/friperie-1920w.webp',
+      image: "assets/images/friperie-1920w.webp",
       srcset: `
         assets/images/friperie-480w.webp 480w,
         assets/images/friperie-768w.webp 768w,
         assets/images/friperie-1920w.webp 1920w
       `,
-      title: 'Friperie en ligne',
-      description: 'Découvrez une sélection de vêtements vintage.',
-      link: 'photos',
-      accent: 'fuchsia' as const,
+      title: "Friperie en ligne",
+      description: "Découvrez une sélection de vêtements vintage.",
+      link: "photos",
+      accent: "fuchsia" as const,
     },
     {
-      image: 'assets/images/creators-1920w.webp',
+      image: "assets/images/creators-1920w.webp",
       srcset: `
         assets/images/creators-480w.webp 480w,
         assets/images/creators-768w.webp 768w,
         assets/images/creators-1920w.webp 1920w
       `,
-      title: 'Créateurs',
-      description: 'Découvrez des créations uniques et artisanales.',
-      link: 'creators',
-      accent: 'orange' as const,
+      title: "Créateurs",
+      description: "Découvrez des créations uniques et artisanales.",
+      link: "creators",
+      accent: "orange" as const,
     },
     {
-      image: 'assets/images/cart-1920w.webp',
+      image: "assets/images/cart-1920w.webp",
       srcset: `
         assets/images/cart-480w.webp 480w,
         assets/images/cart-768w.webp 768w,
         assets/images/cart-1920w.webp 1920w
       `,
-      title: 'Panier personnalisé',
-      description: 'Composez votre propre sélection.',
-      link: 'custom-shopping',
-      accent: 'yellow' as const,
+      title: "Panier personnalisé",
+      description: "Composez votre propre sélection.",
+      link: "custom-shopping",
+      accent: "yellow" as const,
     },
   ];
 }
@@ -1120,17 +1168,21 @@ export class ServicesComponent {
 <section class="services-container" id="services">
   <span class="services-kicker">Services Proposés</span>
   <h2 class="services-subtitle">Découvrez nos services les plus demandés</h2>
-  <p class="services-text">Explorez une friperie unique, découvrez le talent de créateurs passionnés, et composez votre panier personnalisé pour une expérience shopping sur mesure.</p>
+  <p class="services-text">
+    Explorez une friperie unique, découvrez le talent de créateurs passionnés,
+    et composez votre panier personnalisé pour une expérience shopping sur
+    mesure.
+  </p>
   <div class="services-content">
     @for (service of services; track $index) {
-      <app-cards-services
-        [image]="service.image"
-        [srcset]="service.srcset"
-        [title]="service.title"
-        [description]="service.description"
-        [link]="service.link"
-        [accent]="service.accent"
-      ></app-cards-services>
+    <app-cards-services
+      [image]="service.image"
+      [srcset]="service.srcset"
+      [title]="service.title"
+      [description]="service.description"
+      [link]="service.link"
+      [accent]="service.accent"
+    ></app-cards-services>
     }
   </div>
 </section>
@@ -1234,21 +1286,21 @@ export class ServicesComponent {
 - [ ] **Step 4: Replace `cards-services.component.ts`**
 
 ```typescript
-import { Component, Input } from '@angular/core';
+import { Component, Input } from "@angular/core";
 
 @Component({
-  selector: 'app-cards-services',
+  selector: "app-cards-services",
   imports: [],
-  templateUrl: './cards-services.component.html',
-  styleUrl: './cards-services.component.scss'
+  templateUrl: "./cards-services.component.html",
+  styleUrl: "./cards-services.component.scss",
 })
 export class CardsServicesComponent {
-  @Input() image: string = '';
-  @Input() srcset: string = '';
-  @Input() title: string = '';
-  @Input() description: string = '';
-  @Input() link: string = '';
-  @Input() accent: 'fuchsia' | 'orange' | 'yellow' = 'fuchsia';
+  @Input() image: string = "";
+  @Input() srcset: string = "";
+  @Input() title: string = "";
+  @Input() description: string = "";
+  @Input() link: string = "";
+  @Input() accent: "fuchsia" | "orange" | "yellow" = "fuchsia";
 
   handleLinkClick(event: Event, sectionId: string): void {
     event.preventDefault();
@@ -1258,7 +1310,7 @@ export class CardsServicesComponent {
   scrollTo(sectionId: string): void {
     const element = document.getElementById(sectionId);
     if (element) {
-      element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
     }
   }
 }
@@ -1379,6 +1431,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm: services section is on cream (no longer full gradient), the three service cards are white sticker cards with alternating shadow colors and a gradient "Voir plus" pill.
 
 - [ ] **Step 8: Commit**
@@ -1393,6 +1446,7 @@ git commit -m "style(front): move Services to cream background with sticker card
 ## Task 7: Photo gallery → gradient band
 
 **Files:**
+
 - Modify: `Front/src/app/components/photo-gallery/photo-gallery.component.html`
 - Modify: `Front/src/app/components/photo-gallery/photo-gallery.component.scss`
 - Modify: `Front/src/app/components/photo-gallery/photo-gallery.component.ts`
@@ -1433,8 +1487,10 @@ import { LucideStore } from '@lucide/angular';
     <span class="gallery-kicker">Pièces mises à l'honneur</span>
     <h2 class="gallery-subtitle">Friperie en ligne</h2>
     <p class="gallery-text">
-      Découvrez une sélection unique de vêtements et accessoires de seconde main, choisis avec soin pour allier style, qualité et écoresponsabilité.
-      Une manière simple et accessible de consommer autrement, depuis chez vous !
+      Découvrez une sélection unique de vêtements et accessoires de seconde
+      main, choisis avec soin pour allier style, qualité et écoresponsabilité.
+      Une manière simple et accessible de consommer autrement, depuis chez vous
+      !
     </p>
 
     <div class="gallery-cards">
@@ -1444,12 +1500,18 @@ import { LucideStore } from '@lucide/angular';
           Visitez notre boutique Vinted
         </h4>
         <p>
-          Découvrez encore plus d'articles exclusifs sur notre page Vinted. Une collection variée pour compléter votre style avec des pièces uniques.
+          Découvrez encore plus d'articles exclusifs sur notre page Vinted. Une
+          collection variée pour compléter votre style avec des pièces uniques.
         </p>
       </div>
 
       <div class="gallery-vinted">
-        <a href="https://www.vinted.fr/member/11729892" target="_blank" rel="noopener noreferrer" class="pill pill--light vinted-link">
+        <a
+          href="https://www.vinted.fr/member/11729892"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pill pill--light vinted-link"
+        >
           <span class="new-badge">Nouveau</span>
           Accéder à la boutique Vinted
         </a>
@@ -1461,15 +1523,17 @@ import { LucideStore } from '@lucide/angular';
               <span class="rating">5.0</span>
               <div class="stars">
                 @for (star of [1,2,3,4,5]; track $index) {
-                  <span class="star">⭐</span>
+                <span class="star">⭐</span>
                 }
               </div>
-              <span class="total-reviews">1591 avis vérifiés (707 évaluations membres, 884 automatiques)</span>
+              <span class="total-reviews"
+                >1591 avis vérifiés (707 évaluations membres, 884
+                automatiques)</span
+              >
             </div>
           </div>
         </div>
       </div>
-
     </div>
   </div>
 
@@ -1479,30 +1543,30 @@ import { LucideStore } from '@lucide/angular';
         [@crossFadeZoom]="selectedPhoto?.url"
         [src]="selectedPhoto?.url"
         [alt]="selectedPhoto?.title"
-        loading="lazy"/>
-        <p>{{ selectedPhoto?.title }}</p>
-      </div>
-
-      <div class="thumbnails">
-        @for (photo of getThumbnails(); track photo) {
-          <div
-            class="thumbnail"
-            (click)="selectPhoto(photo)">
-            <img
-              [@crossFadeZoomInv]="photo.url"
-              [src]="photo.url"
-              [alt]="photo.title"
-              loading="lazy"/>
-            </div>
-          }
-        </div>
-      </div>
+        loading="lazy"
+      />
+      <p>{{ selectedPhoto?.title }}</p>
     </div>
 
-    <app-edit-content
-      [photos]="photos"
-      (photosChange)="loadPhotos()"
-    ></app-edit-content>
+    <div class="thumbnails">
+      @for (photo of getThumbnails(); track photo) {
+      <div class="thumbnail" (click)="selectPhoto(photo)">
+        <img
+          [@crossFadeZoomInv]="photo.url"
+          [src]="photo.url"
+          [alt]="photo.title"
+          loading="lazy"
+        />
+      </div>
+      }
+    </div>
+  </div>
+</div>
+
+<app-edit-content
+  [photos]="photos"
+  (photosChange)="loadPhotos()"
+></app-edit-content>
 ```
 
 (This preserves the original file's exact tag nesting/closing structure — do not "fix" the indentation, just apply the class/kicker/icon changes shown.)
@@ -1570,7 +1634,7 @@ import { LucideStore } from '@lucide/angular';
             align-items: center;
 
             h3 {
-              font-family: 'OpenSans', sans-serif;
+              font-family: "OpenSans", sans-serif;
               font-weight: 700;
               letter-spacing: 0;
               color: #ffffff;
@@ -1705,7 +1769,6 @@ import { LucideStore } from '@lucide/angular';
       }
     }
 
-
     .thumbnails {
       display: flex;
       flex-direction: column;
@@ -1720,7 +1783,9 @@ import { LucideStore } from '@lucide/angular';
         position: relative;
         height: 120px;
         width: 120px;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
         border-radius: 12px;
         border: 2px solid var(--neo-ink);
         overflow: hidden;
@@ -1998,6 +2063,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm: the whole section is now a full-width orange→fuchsia band with white text; the photo viewer sits in a white, black-bordered box; the Vinted promo card is a white sticker card with a store icon; the "Accéder à la boutique Vinted" link is a white pill with fuchsia text.
 
 - [ ] **Step 5: Commit**
@@ -2012,10 +2078,12 @@ git commit -m "style(front): turn Photo Gallery into a full-bleed gradient band"
 ## Task 8: Creators gallery restructure
 
 **Files:**
+
 - Modify: `Front/src/app/components/creators-gallery/creators-gallery.component.html`
 - Modify: `Front/src/app/components/creators-gallery/creators-gallery.component.scss`
 
 **Interfaces:**
+
 - Consumes: `.card-sticker`, `.card-sticker--orange`, `.card-sticker--yellow`, `.pill`, `.pill--gradient` from Task 2.
 
 - [ ] **Step 1: Replace `creators-gallery.component.html`**
@@ -2024,25 +2092,37 @@ git commit -m "style(front): turn Photo Gallery into a full-bleed gradient band"
 <div class="creators-container" id="creators">
   <div class="creators-content">
     <span class="creators-kicker">Les créateurs et créatrices du mois</span>
-    <h2 class="creators-subtitle">Découvrez des créations uniques et artisanales.</h2>
+    <h2 class="creators-subtitle">
+      Découvrez des créations uniques et artisanales.
+    </h2>
     <p class="creators-text">
-      Nous mettons en lumière des créateurs, artisans et artistes locaux, en proposant leurs œuvres et créations.
-      Soutenez le savoir-faire et la créativité tout en découvrant des pièces uniques et originales.
+      Nous mettons en lumière des créateurs, artisans et artistes locaux, en
+      proposant leurs œuvres et créations. Soutenez le savoir-faire et la
+      créativité tout en découvrant des pièces uniques et originales.
     </p>
   </div>
 
   <div class="creators-grid">
     @for (creator of creators; track creator; let i = $index) {
-      <div class="creator-card card-sticker" [class.card-sticker--orange]="i % 3 === 1" [class.card-sticker--yellow]="i % 3 === 2">
-        <img [src]="creator.image" [alt]="creator.title" loading="lazy"/>
-        <div class="creator-info">
-          <h3>{{creator.title}}</h3>
-          <p>{{creator.subtitle}}</p>
-          <a [href]="creator.url" target="_blank" rel="noopener noreferrer" class="pill pill--gradient">
-            Découvrir la boutique
-          </a>
-        </div>
+    <div
+      class="creator-card card-sticker"
+      [class.card-sticker--orange]="i % 3 === 1"
+      [class.card-sticker--yellow]="i % 3 === 2"
+    >
+      <img [src]="creator.image" [alt]="creator.title" loading="lazy" />
+      <div class="creator-info">
+        <h3>{{creator.title}}</h3>
+        <p>{{creator.subtitle}}</p>
+        <a
+          [href]="creator.url"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="pill pill--gradient"
+        >
+          Découvrir la boutique
+        </a>
       </div>
+    </div>
     }
   </div>
 </div>
@@ -2061,9 +2141,9 @@ git commit -m "style(front): turn Photo Gallery into a full-bleed gradient band"
   margin: 0 auto;
   padding: 120px 0;
   background: var(--neo-cream);
- }
+}
 
- .creators-content {
+.creators-content {
   text-align: center;
   margin-bottom: 40px;
 
@@ -2088,9 +2168,9 @@ git commit -m "style(front): turn Photo Gallery into a full-bleed gradient band"
     margin: 0 auto;
     color: var(--text-tertiary);
   }
- }
+}
 
- .creators-grid {
+.creators-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
   gap: 40px;
@@ -2162,6 +2242,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm: creator cards are white sticker cards with alternating shadow colors on cream background, and the CTA link is a gradient pill.
 
 - [ ] **Step 4: Commit**
@@ -2176,30 +2257,32 @@ git commit -m "style(front): restyle Creators gallery cards as retro-pop sticker
 ## Task 9: Custom shopping restructure
 
 **Files:**
+
 - Modify: `Front/src/app/components/custom-shopping/custom-shopping.component.html`
 - Modify: `Front/src/app/components/custom-shopping/custom-shopping.component.scss`
 - Modify: `Front/src/app/components/custom-shopping/custom-shopping.component.ts`
 
 **Interfaces:**
+
 - Consumes: `.card-sticker`, `.card-sticker--orange`, `.card-sticker--yellow`, `.icon-badge` from Task 2.
 
 - [ ] **Step 1: Replace `custom-shopping.component.ts`**
 
 ```typescript
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { CarouselComponent } from "../carousel/carousel.component";
-import { LucideShoppingCart, LucidePackagePlus } from '@lucide/angular';
+import { LucideShoppingCart, LucidePackagePlus } from "@lucide/angular";
 
 @Component({
-  selector: 'app-custom-shopping',
+  selector: "app-custom-shopping",
   imports: [CarouselComponent, LucideShoppingCart, LucidePackagePlus],
-  templateUrl: './custom-shopping.component.html',
-  styleUrl: './custom-shopping.component.scss'
+  templateUrl: "./custom-shopping.component.html",
+  styleUrl: "./custom-shopping.component.scss",
 })
 export class CustomShoppingComponent {
   public slides = [
     {
-      src: 'assets/images/moodboard1-1920w.webp',
+      src: "assets/images/moodboard1-1920w.webp",
       srcset: `
         assets/images/moodboard1-480w.webp 480w,
         assets/images/moodboard1-768w.webp 768w,
@@ -2207,7 +2290,7 @@ export class CustomShoppingComponent {
       `,
     },
     {
-      src: 'assets/images/moodboard2-1920w.webp',
+      src: "assets/images/moodboard2-1920w.webp",
       srcset: `
         assets/images/moodboard2-480w.webp 480w,
         assets/images/moodboard2-768w.webp 768w,
@@ -2215,13 +2298,13 @@ export class CustomShoppingComponent {
       `,
     },
     {
-      src: 'assets/images/moodboard3-1920w.webp',
+      src: "assets/images/moodboard3-1920w.webp",
       srcset: `
         assets/images/moodboard3-480w.webp 480w,
         assets/images/moodboard3-768w.webp 768w,
         assets/images/moodboard3-1920w.webp 1920w
       `,
-    }
+    },
   ];
 }
 ```
@@ -2240,12 +2323,17 @@ export class CustomShoppingComponent {
     <h2 class="custom-shopping-subtitle">Votre style sur-mesure</h2>
 
     <p class="custom-shopping-text">
-      Vous avez une idée précise de ce que vous voulez, mais pas le temps ou les moyens de le trouver ? <br>
-      Confiez-nous votre recherche !<br>
-      Envoyez-nous votre moodboard ou vos inspirations, ainsi que vos préférences (taille, couleurs, styles) et nous dénicherons pour vous des pièces de seconde main adaptées à vos envies.<br>
-      Un service sur-mesure pour un dressing éthique et stylé, sans effort !<br>
+      Vous avez une idée précise de ce que vous voulez, mais pas le temps ou les
+      moyens de le trouver ? <br />
+      Confiez-nous votre recherche !<br />
+      Envoyez-nous votre moodboard ou vos inspirations, ainsi que vos
+      préférences (taille, couleurs, styles) et nous dénicherons pour vous des
+      pièces de seconde main adaptées à vos envies.<br />
+      Un service sur-mesure pour un dressing éthique et stylé, sans effort !<br />
       Premier contact par mail:
-      <a href="mailto:neovintage.friperie@gmail.com">neovintage.friperie&#64;gmail.com</a>
+      <a href="mailto:neovintage.friperie@gmail.com"
+        >neovintage.friperie&#64;gmail.com</a
+      >
     </p>
 
     <div class="custom-shopping-cards">
@@ -2253,53 +2341,34 @@ export class CustomShoppingComponent {
         <div class="icon-badge">
           <svg lucideShoppingCart></svg>
         </div>
-        <h4>
-          Panier à 20€ *
-        </h4>
-        <p>
-          Une tenue
-        </p>
-        <p>
-          Un accessoire
-        </p>
+        <h4>Panier à 20€ *</h4>
+        <p>Une tenue</p>
+        <p>Un accessoire</p>
       </div>
 
       <div class="custom-shopping-card card-sticker card-sticker--orange">
         <div class="icon-badge">
           <svg lucideShoppingCart></svg>
         </div>
-        <h4>
-          Panier à 40€ *
-        </h4>
-        <p>
-          Deux tenues
-        </p>
-        <p>
-          Un accessoire
-        </p>
+        <h4>Panier à 40€ *</h4>
+        <p>Deux tenues</p>
+        <p>Un accessoire</p>
       </div>
 
       <div class="custom-shopping-card card-sticker card-sticker--yellow">
         <div class="icon-badge">
           <svg lucidePackagePlus></svg>
         </div>
-        <h4>
-          Panier à 60€ *
-        </h4>
-        <p>
-          Deux tenues
-        </p>
-        <p>
-          Un accessoire
-        </p>
-        <p>
-          Une veste,
-          un manteau ou
-          une paire de chaussures
-        </p>
+        <h4>Panier à 60€ *</h4>
+        <p>Deux tenues</p>
+        <p>Un accessoire</p>
+        <p>Une veste, un manteau ou une paire de chaussures</p>
       </div>
     </div>
-    <p class="price-text">* Le prix de base peut varier en fonction des matériaux utilisés et de la rareté des pièces.</p>
+    <p class="price-text">
+      * Le prix de base peut varier en fonction des matériaux utilisés et de la
+      rareté des pièces.
+    </p>
   </div>
 </section>
 ```
@@ -2465,6 +2534,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm: cream background, three sticker pricing cards with alternating shadows and shopping-cart/package-plus icons.
 
 - [ ] **Step 5: Commit**
@@ -2479,6 +2549,7 @@ git commit -m "style(front): restyle Custom Shopping pricing cards as retro-pop 
 ## Task 10: Reviews + review-form restructure
 
 **Files:**
+
 - Modify: `Front/src/app/components/reviews/reviews.component.html`
 - Modify: `Front/src/app/components/reviews/reviews.component.scss`
 - Modify: `Front/src/app/components/reviews/reviews.component.ts`
@@ -2486,6 +2557,7 @@ git commit -m "style(front): restyle Custom Shopping pricing cards as retro-pop 
 - Modify: `Front/src/app/components/review-form/review-form.component.scss`
 
 **Interfaces:**
+
 - Consumes: `.card-sticker`, `.card-sticker--orange`, `.card-sticker--yellow`, `.pill`, `.pill--gradient`, `.pill--light` from Task 2.
 
 - [ ] **Step 1: Modify `reviews.component.ts` imports**
@@ -2517,13 +2589,13 @@ export class ReviewsComponent implements OnInit {
 ```html
 <div class="reviews-container" id="reviews">
   <div class="current-reviews">
-
     <div class="ratings-summary">
       <div class="average-rating">
         <span class="rating-kicker">Notre réputation</span>
         <h2 class="rating-subtitle">Avis clients vérifiés</h2>
         <p class="rating-description">
-          Découvrez ce que notre communauté pense de nos services et de nos produits. Chaque avis est vérifié pour garantir son authenticité.
+          Découvrez ce que notre communauté pense de nos services et de nos
+          produits. Chaque avis est vérifié pour garantir son authenticité.
         </p>
 
         <div class="rating-stats">
@@ -2531,10 +2603,9 @@ export class ReviewsComponent implements OnInit {
           <div class="rating-details">
             <div class="stars">
               @for (star of [1,2,3,4,5]; track $index) {
-                <span
-                  [class.filled]="star <= averageRating"
-                  class="star">★
-                </span>
+              <span [class.filled]="star <= averageRating" class="star"
+                >★
+              </span>
               }
             </div>
             <span class="total-count">Basé sur {{ reviews.length }} avis</span>
@@ -2553,88 +2624,101 @@ export class ReviewsComponent implements OnInit {
         </div>
 
         <div class="review-cta">
-          <p class="review-prompt">Vous avez acheté chez nous ? Partagez votre expérience !</p>
+          <p class="review-prompt">
+            Vous avez acheté chez nous ? Partagez votre expérience !
+          </p>
           <app-review-form></app-review-form>
         </div>
       </div>
     </div>
 
     <div class="reviews-carousel">
-      <button (click)="previous()" [disabled]="currentStartIndex === 0" class="carousel-button">
+      <button
+        (click)="previous()"
+        [disabled]="currentStartIndex === 0"
+        class="carousel-button"
+      >
         <span class="button-icon">◀</span>
       </button>
 
       <div class="reviews-list">
         @for (review of visibleReviews; track $index) {
-          <div class="review-card card-sticker" [class.card-sticker--orange]="$index % 3 === 1" [class.card-sticker--yellow]="$index % 3 === 2">
-            <div class="review-content">
-              <div class="review-header">
-                <span class="author">{{ review.authorInitials }}</span>
-                <div class="rating-stars">
-                  @for (star of [1,2,3,4,5]; track $index) {
-                    <span
-                      [class.filled]="star <= review.rating"
-                      class="star">★
-                    </span>
-                  }
-                </div>
+        <div
+          class="review-card card-sticker"
+          [class.card-sticker--orange]="$index % 3 === 1"
+          [class.card-sticker--yellow]="$index % 3 === 2"
+        >
+          <div class="review-content">
+            <div class="review-header">
+              <span class="author">{{ review.authorInitials }}</span>
+              <div class="rating-stars">
+                @for (star of [1,2,3,4,5]; track $index) {
+                <span [class.filled]="star <= review.rating" class="star"
+                  >★
+                </span>
+                }
               </div>
-              <span class="review-date">{{ review.date | date:'dd/MM/yyyy' }}</span>
-              <div class="product-name">
-                Article : {{ review.productName }}
-              </div>
-              @if (review.comment.length > 100) {
-                <p class="review-comment">{{ review.comment | slice: 0:100 }}...</p>
-                <button (click)="openModal(review)" class="read-more">Lire la suite</button>
-              } @else {
-                <p class="review-comment">{{ review.comment }}</p>
-              }
             </div>
-            @if (review.verified) {
-              <div class="verified-badge">
-                ✓ Achat vérifié
-              </div>}
+            <span class="review-date"
+              >{{ review.date | date:'dd/MM/yyyy' }}</span
+            >
+            <div class="product-name">Article : {{ review.productName }}</div>
+            @if (review.comment.length > 100) {
+            <p class="review-comment">{{ review.comment | slice: 0:100 }}...</p>
+            <button (click)="openModal(review)" class="read-more">
+              Lire la suite
+            </button>
+            } @else {
+            <p class="review-comment">{{ review.comment }}</p>
+            }
           </div>
+          @if (review.verified) {
+          <div class="verified-badge">✓ Achat vérifié</div>
+          }
+        </div>
         }
       </div>
 
-      <button (click)="next()" [disabled]="currentStartIndex + maxDisplayed >= reviews.length" class="carousel-button">
+      <button
+        (click)="next()"
+        [disabled]="currentStartIndex + maxDisplayed >= reviews.length"
+        class="carousel-button"
+      >
         <span class="button-icon">▶</span>
       </button>
     </div>
 
     <div class="legal-notice">
-      * Ces avis sont collectés et publiés conformément aux lois en vigueur sur les avis en ligne.
-      Chaque avis est vérifié et publié avec le consentement de son auteur.
+      * Ces avis sont collectés et publiés conformément aux lois en vigueur sur
+      les avis en ligne. Chaque avis est vérifié et publié avec le consentement
+      de son auteur.
     </div>
-
   </div>
 </div>
 
 @if (selectedReview) {
-  <div class="modal-overlay" (click)="closeModal()">
-    <div class="modal-content" (click)="$event.stopPropagation()">
-      <button class="close-modal" (click)="closeModal()">×</button>
-      <h2>{{ selectedReview.productName }}</h2>
-      <div class="review-rating">
-        <div class="rating-stars">
-          @for (star of [1,2,3,4,5]; track $index) {
-            <span
-              [class.filled]="star <= selectedReview.rating"
-              class="star">★
-            </span>
-          }
-        </div>
-      </div>
-      <p class="review-comment">{{ selectedReview.comment }}</p>
-      <div class="review-author">
-        <span>{{ selectedReview.authorInitials }}</span>
-      </div>
-      <div class="review-date">
-        <span>{{ selectedReview.date | date: 'dd/MM/yyyy' }}</span>
+<div class="modal-overlay" (click)="closeModal()">
+  <div class="modal-content" (click)="$event.stopPropagation()">
+    <button class="close-modal" (click)="closeModal()">×</button>
+    <h2>{{ selectedReview.productName }}</h2>
+    <div class="review-rating">
+      <div class="rating-stars">
+        @for (star of [1,2,3,4,5]; track $index) {
+        <span [class.filled]="star <= selectedReview.rating" class="star"
+          >★
+        </span>
+        }
       </div>
     </div>
+    <p class="review-comment">{{ selectedReview.comment }}</p>
+    <div class="review-author">
+      <span>{{ selectedReview.authorInitials }}</span>
+    </div>
+    <div class="review-date">
+      <span>{{ selectedReview.date | date: 'dd/MM/yyyy' }}</span>
+    </div>
   </div>
+</div>
 }
 ```
 
@@ -2648,7 +2732,6 @@ export class ReviewsComponent implements OnInit {
   background: var(--gradient-secondary);
 
   .current-reviews {
-
     .ratings-summary {
       border-radius: 15px;
 
@@ -2812,7 +2895,6 @@ export class ReviewsComponent implements OnInit {
               .author {
                 font-weight: bold;
                 color: var(--text-primary);
-
               }
 
               .rating-stars {
@@ -2938,7 +3020,6 @@ export class ReviewsComponent implements OnInit {
   }
 }
 
-
 @media screen and (max-width: 1440px) {
   .reviews-container {
     padding: 80px 20px;
@@ -3046,83 +3127,98 @@ export class ReviewsComponent implements OnInit {
 </div>
 
 @if (showForm) {
-  <div class="review-form-container card-sticker">
-    <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
-      <h3>Donnez votre avis</h3>
+<div class="review-form-container card-sticker">
+  <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
+    <h3>Donnez votre avis</h3>
 
-      <div class="form-group">
-        <label>Note *</label>
-        <div class="rating-input">
-          @for (star of [5,4,3,2,1]; track $index) {
-            <span
-              (click)="selectRating(star)"
-              [class.filled]="star <= reviewForm.get('rating')?.value"
-              class="star clickable">★
-            </span>
-          }
-        </div>
-        @if (reviewForm.get('rating')?.errors?.['required'] && reviewForm.get('rating')?.touched) {
-          <div class="error-message">
-            Veuillez donner une note
-          </div>
+    <div class="form-group">
+      <label>Note *</label>
+      <div class="rating-input">
+        @for (star of [5,4,3,2,1]; track $index) {
+        <span
+          (click)="selectRating(star)"
+          [class.filled]="star <= reviewForm.get('rating')?.value"
+          class="star clickable"
+          >★
+        </span>
         }
       </div>
-
-      <div class="form-group">
-        <label>Initiales *</label>
-        <input type="text" formControlName="authorInitials" maxlength="3" placeholder="Ex: A.B.">
-        @if (reviewForm.get('authorInitials')?.errors?.['required'] && reviewForm.get('authorInitials')?.touched) {
-          <div class="error-message">
-            Les initiales sont requises
-          </div>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Produit acheté *</label>
-        <input type="text" formControlName="productName" placeholder="Nom du produit">
-        @if (reviewForm.get('productName')?.errors?.['required'] && reviewForm.get('productName')?.touched) {
-        <div class="error-message">
-          Le nom du produit est requis
-        </div>
-        }
-      </div>
-
-      <div class="form-group">
-        <label>Votre commentaire *</label>
-        <textarea formControlName="comment" rows="4" placeholder="Partagez votre expérience d'achat"></textarea>
-        @if (reviewForm.get('comment')?.errors?.['required'] && reviewForm.get('comment')?.touched) {
-          <div class="error-message">
-            Un commentaire est requis
-          </div>
-        }
-      </div>
-
-      <div class="form-group checkbox">
-        <label>
-          <input type="checkbox" formControlName="consent">
-          J'accepte que mon avis soit publié sur ce site *
-        </label>
-        @if (reviewForm.get('consent')?.errors?.['required'] && reviewForm.get('consent')?.touched) {
-          <div class="error-message">
-            Vous devez accepter la publication de votre avis
-          </div>
-        }
-      </div>
-
-      <div class="form-actions">
-        <button type="submit" [disabled]="!reviewForm.valid || isSubmitting" class="pill pill--gradient form-submit">
-          {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer mon avis' }}
-        </button>
-      </div>
-
-      @if (submitSuccess) {
-        <div class="success-message">
-          Merci ! Votre avis a été envoyé avec succès.
-        </div>
+      @if (reviewForm.get('rating')?.errors?.['required'] &&
+      reviewForm.get('rating')?.touched) {
+      <div class="error-message">Veuillez donner une note</div>
       }
-    </form>
-  </div>
+    </div>
+
+    <div class="form-group">
+      <label>Initiales *</label>
+      <input
+        type="text"
+        formControlName="authorInitials"
+        maxlength="3"
+        placeholder="Ex: A.B."
+      />
+      @if (reviewForm.get('authorInitials')?.errors?.['required'] &&
+      reviewForm.get('authorInitials')?.touched) {
+      <div class="error-message">Les initiales sont requises</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Produit acheté *</label>
+      <input
+        type="text"
+        formControlName="productName"
+        placeholder="Nom du produit"
+      />
+      @if (reviewForm.get('productName')?.errors?.['required'] &&
+      reviewForm.get('productName')?.touched) {
+      <div class="error-message">Le nom du produit est requis</div>
+      }
+    </div>
+
+    <div class="form-group">
+      <label>Votre commentaire *</label>
+      <textarea
+        formControlName="comment"
+        rows="4"
+        placeholder="Partagez votre expérience d'achat"
+      ></textarea>
+      @if (reviewForm.get('comment')?.errors?.['required'] &&
+      reviewForm.get('comment')?.touched) {
+      <div class="error-message">Un commentaire est requis</div>
+      }
+    </div>
+
+    <div class="form-group checkbox">
+      <label>
+        <input type="checkbox" formControlName="consent" />
+        J'accepte que mon avis soit publié sur ce site *
+      </label>
+      @if (reviewForm.get('consent')?.errors?.['required'] &&
+      reviewForm.get('consent')?.touched) {
+      <div class="error-message">
+        Vous devez accepter la publication de votre avis
+      </div>
+      }
+    </div>
+
+    <div class="form-actions">
+      <button
+        type="submit"
+        [disabled]="!reviewForm.valid || isSubmitting"
+        class="pill pill--gradient form-submit"
+      >
+        {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer mon avis' }}
+      </button>
+    </div>
+
+    @if (submitSuccess) {
+    <div class="success-message">
+      Merci ! Votre avis a été envoyé avec succès.
+    </div>
+    }
+  </form>
+</div>
 }
 ```
 
@@ -3156,7 +3252,6 @@ export class ReviewsComponent implements OnInit {
       label {
         font-weight: bold;
         color: var(--text-primary);
-
       }
 
       input,
@@ -3268,6 +3363,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm: reviews section is a full-width gradient band with white text, review cards are white stickers with alternating shadows, the "Laisser un avis" pill is white/fuchsia, and the expanded review form is a white sticker card with a gradient submit pill.
 
 - [ ] **Step 7: Commit**
@@ -3282,6 +3378,7 @@ git commit -m "style(front): turn Reviews into a gradient band with sticker revi
 ## Task 11: Footer restructure
 
 **Files:**
+
 - Modify: `Front/src/app/components/footer/footer.component.scss`
 
 No HTML/TS changes — only the background and social-icon treatment change.
@@ -3296,7 +3393,7 @@ No HTML/TS changes — only the background and social-icon treatment change.
   position: relative;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     top: 0;
     left: 0;
@@ -3366,7 +3463,9 @@ No HTML/TS changes — only the background and social-icon treatment change.
             border-radius: var(--radius-pill);
             background: rgba(255, 255, 255, 0.1);
             text-decoration: none;
-            transition: transform 0.3s ease, background-color 0.3s ease;
+            transition:
+              transform 0.3s ease,
+              background-color 0.3s ease;
 
             &:hover {
               transform: translateY(-5px);
@@ -3511,6 +3610,7 @@ npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 npm start
 ```
+
 Confirm: footer background is dark ink with a thin gradient liseré at the top edge, social icons sit in subtle translucent circles that turn into the gradient on hover.
 
 - [ ] **Step 3: Commit**
@@ -3525,6 +3625,7 @@ git commit -m "style(front): restyle footer with ink background and pill social 
 ## Task 12: Remove separators and clean up dead code
 
 **Files:**
+
 - Modify: `Front/src/app/pages/landing-page/landing-page.component.html`
 - Modify: `Front/src/app/pages/landing-page/landing-page.component.ts`
 - Delete: `Front/src/app/components/separate/separate.component.ts`
@@ -3538,27 +3639,42 @@ git commit -m "style(front): restyle footer with ink background and pill social 
 
 ```html
 <app-about appScrollAnimate [animationClass]="'animate-fade-in'"></app-about>
-<app-services appScrollAnimate [animationClass]="'animate-fade-in'"></app-services>
-<app-photo-gallery appScrollAnimate [animationClass]="'animate-fade-in'"></app-photo-gallery>
-<app-creators-gallery appScrollAnimate [animationClass]="'animate-fade-in'"></app-creators-gallery>
-<app-custom-shopping appScrollAnimate [animationClass]="'animate-fade-in'"></app-custom-shopping>
-<app-reviews appScrollAnimate [animationClass]="'animate-fade-in'"></app-reviews>
+<app-services
+  appScrollAnimate
+  [animationClass]="'animate-fade-in'"
+></app-services>
+<app-photo-gallery
+  appScrollAnimate
+  [animationClass]="'animate-fade-in'"
+></app-photo-gallery>
+<app-creators-gallery
+  appScrollAnimate
+  [animationClass]="'animate-fade-in'"
+></app-creators-gallery>
+<app-custom-shopping
+  appScrollAnimate
+  [animationClass]="'animate-fade-in'"
+></app-custom-shopping>
+<app-reviews
+  appScrollAnimate
+  [animationClass]="'animate-fade-in'"
+></app-reviews>
 ```
 
 - [ ] **Step 2: Replace `landing-page.component.ts`**
 
 ```typescript
-import { Component } from '@angular/core';
+import { Component } from "@angular/core";
 import { AboutComponent } from "../../components/about/about.component";
 import { CreatorsGalleryComponent } from "../../components/creators-gallery/creators-gallery.component";
 import { CustomShoppingComponent } from "../../components/custom-shopping/custom-shopping.component";
 import { PhotoGalleryComponent } from "../../components/photo-gallery/photo-gallery.component";
 import { ReviewsComponent } from "../../components/reviews/reviews.component";
 import { ServicesComponent } from "../../components/services/services.component";
-import { ScrollAnimateDirective } from '../../shared/scroll-animate.directive';
+import { ScrollAnimateDirective } from "../../shared/scroll-animate.directive";
 
 @Component({
-  selector: 'app-landing-page',
+  selector: "app-landing-page",
   imports: [
     ServicesComponent,
     AboutComponent,
@@ -3566,14 +3682,12 @@ import { ScrollAnimateDirective } from '../../shared/scroll-animate.directive';
     CreatorsGalleryComponent,
     CustomShoppingComponent,
     ReviewsComponent,
-    ScrollAnimateDirective
+    ScrollAnimateDirective,
   ],
-  templateUrl: './landing-page.component.html',
-  styleUrl: './landing-page.component.scss'
+  templateUrl: "./landing-page.component.html",
+  styleUrl: "./landing-page.component.scss",
 })
-export class LandingPageComponent {
-
-}
+export class LandingPageComponent {}
 ```
 
 - [ ] **Step 3: Delete the `separate` component directory**
@@ -3589,6 +3703,7 @@ cd Front
 npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 ```
+
 Expected: build succeeds with no unresolved-import errors for `SeparateComponent`; the Angular test runner no longer picks up `separate.component.spec.ts` (it's deleted) and every remaining spec still passes.
 
 - [ ] **Step 5: Commit**
@@ -3610,6 +3725,7 @@ git commit -m "chore(front): remove separator component, rhythm now comes from s
 grep -rn "fa-solid\|fas fa-\|far fa-\|fab fa-\|fortawesome" Front/src
 grep -rn "app-separate\|SeparateComponent" Front/src
 ```
+
 Expected: no matches for either command.
 
 - [ ] **Step 2: Full build (includes SSR prerender) and full test suite**
@@ -3619,6 +3735,7 @@ cd Front
 npm run build
 npm test -- --watch=false --browsers=ChromeHeadless
 ```
+
 Expected: both succeed with zero errors/failures. `npm run build` exercises `prerender: true` from `angular.json`, which is the SSR safety check — a `window`/`document` misuse in a section would throw during prerender.
 
 - [ ] **Step 3: Responsive check across breakpoints**
@@ -3626,6 +3743,7 @@ Expected: both succeed with zero errors/failures. `npm run build` exercises `pre
 ```bash
 npm start
 ```
+
 In the browser dev tools, check the full page at these widths, since they're the breakpoints already used across the touched files: 1920px, 1440px, 1024px, 768px, 480px, 375px. Confirm at each: no horizontal scrollbar, hero polaroids/cards wrap sensibly, gradient bands (photo gallery, reviews) stay full-bleed, nav collapses to the hamburger/modal below 1024px.
 
 - [ ] **Step 4: Contrast check on the two gradient bands**
@@ -3635,10 +3753,12 @@ In the photo-gallery and reviews sections, confirm every text element sitting di
 - [ ] **Step 5: Commit only if Step 4 required fixes**
 
 If Step 4 found and fixed a contrast issue:
+
 ```bash
 git add -u
 git commit -m "fix(front): correct text contrast on gradient bands"
 ```
+
 If no fixes were needed, skip this step (nothing to commit for a pass-only verification task).
 
 ---
