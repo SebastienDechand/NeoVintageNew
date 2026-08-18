@@ -4,10 +4,15 @@
   display: flex;
   gap: 100px;
   width: 85%;
-  background: var(--neo-cream);
+  background:
+    radial-gradient(circle 160px at 22% 22%, rgba(255, 87, 51, 0.32), transparent 70%),
+    radial-gradient(circle 200px at 78% 75%, rgba(255, 62, 137, 0.26), transparent 70%),
+    radial-gradient(circle 190px at 52% 45%, rgba(255, 215, 0, 0.28), transparent 70%),
+    var(--neo-cream);
 
   .carousel-container {
     display: block;
+    margin: auto;
     height: 600px;
     width: 30%;
     border-radius: var(--radius-arch);
@@ -59,28 +64,108 @@
 
     .custom-shopping-cards {
       display: flex;
-      gap: 30px;
+      gap: 46px;
       justify-content: center;
+      padding-top: 26px;
 
-      .custom-shopping-card {
-        padding: 30px;
+      .basket-card {
+        position: relative;
         flex: 1;
-        max-width: 300px;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
+        max-width: 280px;
+        min-height: 260px;
 
-        h3 {
-          font-size: 18px;
-          color: var(--text-primary);
-          margin-bottom: 10px;
+        .basket-svg {
+          position: absolute;
+          inset: 0;
+          width: 100%;
+          height: 100%;
+          overflow: visible;
         }
 
-        p {
-          font-size: 16px;
-          color: var(--text-tertiary);
-          line-height: 1.4;
+        .basket-shadow-path {
+          fill: var(--neo-fuchsia);
+        }
+
+        .basket-body-path {
+          fill: #ffffff;
+          stroke: var(--neo-ink);
+          stroke-width: 3;
+          stroke-linejoin: round;
+        }
+
+        .basket-handle {
+          position: absolute;
+          top: -28px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 84px;
+          height: 42px;
+          border: 3px solid var(--neo-ink);
+          border-bottom: none;
+          border-radius: 60px 60px 0 0;
+          z-index: 2;
+        }
+
+        .basket-content {
+          position: relative;
+          z-index: 3;
+          height: 100%;
+          padding: 44px 30px 26px;
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+
+          .basket-icon {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            background: var(--neo-fuchsia);
+            margin-bottom: 12px;
+
+            svg {
+              width: 20px;
+              height: 20px;
+              color: #ffffff;
+            }
+          }
+
+          h3 {
+            font-size: 18px;
+            color: var(--text-primary);
+            margin-bottom: 10px;
+          }
+
+          p {
+            font-size: 15px;
+            color: var(--text-tertiary);
+            line-height: 1.4;
+          }
+        }
+
+        &--orange {
+          .basket-shadow-path {
+            fill: var(--neo-orange);
+          }
+          .basket-icon {
+            background: var(--neo-orange);
+          }
+        }
+
+        &--yellow {
+          .basket-shadow-path {
+            fill: var(--neo-yellow);
+          }
+          .basket-icon {
+            background: var(--neo-yellow);
+
+            svg {
+              color: var(--neo-ink);
+            }
+          }
         }
       }
     }
@@ -92,13 +177,16 @@
     padding: 80px 0;
     .custom-shopping-content {
       .custom-shopping-cards {
-        .custom-shopping-card {
-          padding: 20px;
-          h3 {
-            font-size: 16px;
-          }
-          p {
-            font-size: 15px;
+        .basket-card {
+          .basket-content {
+            padding: 40px 22px 22px;
+
+            h3 {
+              font-size: 16px;
+            }
+            p {
+              font-size: 14px;
+            }
           }
         }
       }
@@ -147,10 +235,12 @@
     .custom-shopping-content {
       .custom-shopping-cards {
         flex-direction: column;
-        gap: 20px;
-        .custom-shopping-card {
-          padding: 20px;
-          max-width: 100%;
+        align-items: center;
+        gap: 40px;
+
+        .basket-card {
+          width: 100%;
+          max-width: 280px;
         }
       }
     }
