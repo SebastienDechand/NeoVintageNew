@@ -10,6 +10,9 @@
 /build
 /dist
 
+# scripts with hardcoded credentials
+/scripts
+
 # misc
 .DS_Store
 .env
