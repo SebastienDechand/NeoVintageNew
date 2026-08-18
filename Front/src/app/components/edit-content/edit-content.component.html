@@ -12,9 +12,10 @@
 }
 
 @if (showLoginModal) {
-  <div class="modal-overlay" (click)="closeModals($event)">
-    <div class="modal-content">
-      <form  [formGroup]="loginForm" (ngSubmit)="enableEdit()" class="login-container">
+  <div class="modal-overlay">
+    <div class="modal-content login-modal card-sticker" (click)="$event.stopPropagation()">
+      <form [formGroup]="loginForm" (ngSubmit)="enableEdit()" class="login-container">
+        <span class="login-kicker">Accès réservé</span>
         <h3>Connexion Admin</h3>
 
         <div class="form-group">
@@ -34,7 +35,26 @@
 
         <div class="form-group">
           <label>Mot de passe</label>
-          <input type="password" formControlName="password" placeholder="Mot de passe" autocomplete="current-password">
+          <div class="password-field">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              formControlName="password"
+              placeholder="Mot de passe"
+              autocomplete="current-password"
+            >
+            <button
+              type="button"
+              class="password-toggle"
+              (click)="togglePasswordVisibility()"
+              [attr.aria-label]="showPassword ? 'Masquer le mot de passe' : 'Afficher le mot de passe'"
+            >
+              @if (showPassword) {
+                <svg lucideEyeOff></svg>
+              } @else {
+                <svg lucideEye></svg>
+              }
+            </button>
+          </div>
           @if (loginForm.get('password')?.errors?.['required'] && loginForm.get('password')?.touched) {
             <div class="error-message">
               Le mot de passe est requis
@@ -43,13 +63,11 @@
         </div>
 
         <div class="modal-buttons">
-          <button type="submit" [disabled]="!loginForm.valid || isLoggedIn" class="btn-submit">
+          <button type="submit" [disabled]="!loginForm.valid || isLoggedIn" class="pill pill--gradient">
             {{ isLoggedIn ? 'Envoi en cours...' : 'Se connecter' }}
           </button>
-          <button (click)="showLoginModal = false" class="btn-submit">Annuler</button>
+          <button type="button" (click)="showLoginModal = false" class="pill pill--light">Annuler</button>
         </div>
-
-
       </form>
     </div>
   </div>
@@ -57,12 +75,13 @@
 
 @if (editMode) {
   <div class="modal-overlay" (click)="closeModals($event)">
-    <div class="modal-content edit-mode">
+    <div class="modal-content edit-mode" (click)="$event.stopPropagation()">
+      <span class="edit-mode-kicker">Espace admin</span>
       <h2>Mode Édition</h2>
 
       <h3>Articles</h3>
       @for (photo of photos; track $index) {
-        <div class="content-edit">
+        <div class="content-edit card-sticker">
           <label>Titre :</label>
           <input [(ngModel)]="photos[$index].title" />
           <label>URL :</label>
@@ -72,7 +91,7 @@
 
       <h3>Créateurs</h3>
       @for (creator of creators; track $index) {
-        <div class="content-edit">
+        <div class="content-edit card-sticker card-sticker--orange">
           <label>Titre :</label>
           <input [(ngModel)]="creators[$index].title" />
           <label>Sous-titre :</label>
@@ -85,8 +104,8 @@
       }
 
       <div class="modal-buttons">
-        <button (click)="saveAll()">Sauvegarder</button>
-        <button (click)="editMode = false">Fermer</button>
+        <button (click)="saveAll()" class="pill pill--gradient">Sauvegarder</button>
+        <button (click)="editMode = false" class="pill pill--light">Fermer</button>
       </div>
     </div>
   </div>
