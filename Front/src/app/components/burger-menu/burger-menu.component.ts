@@ -1,10 +1,9 @@
 import {
-  AfterViewInit,
+  afterNextRender,
   Component,
   ElementRef,
   HostListener,
   Inject,
-  OnDestroy,
   PLATFORM_ID,
   ViewChild,
 } from '@angular/core';
@@ -18,7 +17,7 @@ import { RouterModule } from '@angular/router';
   templateUrl: './burger-menu.component.html',
   styleUrl: './burger-menu.component.scss',
 })
-export class BurgerMenuComponent implements AfterViewInit, OnDestroy {
+export class BurgerMenuComponent {
   @ViewChild('toggleButton') toggleButtonRef?: ElementRef<HTMLButtonElement>;
   @ViewChild('menuPanel') menuPanelRef?: ElementRef<HTMLElement>;
 
@@ -35,21 +34,21 @@ export class BurgerMenuComponent implements AfterViewInit, OnDestroy {
   ];
 
   private isBrowser: boolean;
-  private sectionObserver?: IntersectionObserver;
-  private readonly visibleSections = new Map<string, number>();
 
   constructor(@Inject(PLATFORM_ID) platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
+    afterNextRender(() => {
+      if (this.isBrowser) {
+        this.updateActiveSection();
+      }
+    });
   }
 
-  ngAfterViewInit(): void {
+  @HostListener('window:scroll')
+  onWindowScroll(): void {
     if (this.isBrowser) {
-      this.observeSections();
+      this.updateActiveSection();
     }
-  }
-
-  ngOnDestroy(): void {
-    this.sectionObserver?.disconnect();
   }
 
   toggleMenu(): void {
@@ -93,36 +92,15 @@ export class BurgerMenuComponent implements AfterViewInit, OnDestroy {
     target?.focus();
   }
 
-  private observeSections(): void {
-    if (typeof IntersectionObserver === 'undefined') {
-      return;
-    }
-
-    this.sectionObserver = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          this.visibleSections.set(entry.target.id, entry.intersectionRatio);
-        }
-        let topSection = this.activeSection;
-        let topRatio = 0;
-        for (const [id, ratio] of this.visibleSections) {
-          if (ratio > topRatio) {
-            topRatio = ratio;
-            topSection = id;
-          }
-        }
-        if (topRatio > 0) {
-          this.activeSection = topSection;
-        }
-      },
-      { threshold: [0.25, 0.5, 0.75] }
-    );
-
+  private updateActiveSection(): void {
+    const referenceY = window.innerHeight * 0.4;
+    let current = this.sections[0].id;
     for (const section of this.sections) {
       const element = document.getElementById(section.id);
-      if (element) {
-        this.sectionObserver.observe(element);
+      if (element && element.getBoundingClientRect().top <= referenceY) {
+        current = section.id;
       }
     }
+    this.activeSection = current;
   }
 }
