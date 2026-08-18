@@ -1,5 +1,9 @@
 .services-container {
-  background: var(--neo-cream);
+  background:
+    radial-gradient(circle 220px at 18% 72%, rgba(255, 215, 0, 0.3), transparent 70%),
+    radial-gradient(circle 170px at 84% 28%, rgba(255, 87, 51, 0.3), transparent 70%),
+    radial-gradient(circle 140px at 45% 20%, rgba(255, 62, 137, 0.32), transparent 70%),
+    var(--neo-cream);
   padding: 120px;
 
   .services-kicker {

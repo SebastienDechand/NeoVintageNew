@@ -3,6 +3,7 @@
   isolation: isolate;
   z-index: 0;
   width: 100%;
+  height: fit-content;
   max-width: 1600px;
   margin: 0 auto;
   padding: 100px 60px;
@@ -13,13 +14,18 @@
   gap: 60px;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     bottom: -220px;
     right: -80px;
     width: 680px;
     height: 680px;
-    background: radial-gradient(circle, rgba(255, 62, 137, 0.3), rgba(255, 87, 51, 0.22) 50%, transparent 72%);
+    background: radial-gradient(
+      circle,
+      rgba(255, 62, 137, 0.3),
+      rgba(255, 87, 51, 0.22) 50%,
+      transparent 72%
+    );
     border-radius: 50%;
     filter: blur(8px);
     z-index: 0;
@@ -27,13 +33,17 @@
   }
 
   &::after {
-    content: '';
+    content: "";
     position: absolute;
     top: -60px;
     left: -100px;
     width: 380px;
     height: 380px;
-    background: radial-gradient(circle, rgba(255, 215, 0, 0.22), transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(255, 215, 0, 0.22),
+      transparent 70%
+    );
     border-radius: 50%;
     filter: blur(6px);
     z-index: 0;
@@ -134,26 +144,26 @@
   position: relative;
   z-index: 1;
   display: flex;
-  align-items: flex-start;
   justify-content: center;
   flex-wrap: wrap;
   gap: 40px;
-  padding: 0 20px 100px;
+  max-width: 1600px;
+  margin: 0 auto;
+  padding: 0 60px 100px;
 
-  app-cards-banner:nth-child(2) {
-    margin-top: -28px;
-  }
-
-  app-cards-banner:nth-child(3) {
-    margin-top: 14px;
+  app-cards-banner {
+    flex: 1 1 0;
+    min-width: 280px;
+    max-width: 420px;
   }
 }
 
 @media screen and (max-width: 1024px) {
   .card-container {
-    app-cards-banner:nth-child(2),
-    app-cards-banner:nth-child(3) {
-      margin-top: 0;
+    padding: 0 40px 60px;
+
+    app-cards-banner {
+      flex: 1 1 260px;
     }
   }
 }
@@ -192,6 +202,10 @@
 }
 
 @media screen and (max-width: 1200px) {
+  .hero-wrapper {
+    overflow-x: hidden;
+  }
+
   .hero-container {
     flex-direction: column;
     text-align: center;
@@ -271,8 +285,6 @@
 
 @media screen and (max-width: 425px) {
   .hero-container {
-    overflow-x: hidden;
-
     &::before {
       width: 220px;
       height: 220px;
@@ -314,8 +326,5 @@
         }
       }
     }
-  }
-  .card-container {
-    gap: 20px;
   }
 }
