@@ -18,28 +18,3 @@
   ></span>
   <p class="card-description">{{ description }}</p>
 </div>
-
-<div
-  class="round card-sticker"
-  [class.card-sticker--orange]="accent === 'orange'"
-  [class.card-sticker--yellow]="accent === 'yellow'"
-  [class.round--expanded]="expanded"
-  (click)="toggle()"
-  (keydown.enter)="toggle()"
-  (keydown.space)="toggle()"
-  role="button"
-  tabindex="0"
-  [attr.aria-expanded]="expanded"
->
-  <div class="round-icon">
-    <svg [lucideIcon]="icon"></svg>
-  </div>
-  <h3 class="round-title">{{ title }}</h3>
-  <span class="round-hint">Toucher pour en savoir plus</span>
-
-  <div class="round-description-wrapper">
-    <div class="round-description-inner">
-      <p class="round-description">{{ description }}</p>
-    </div>
-  </div>
-</div>

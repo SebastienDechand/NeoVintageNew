@@ -1,8 +1,7 @@
 .card {
   position: relative;
-  width: 300px;
-  min-height: 280px;
-  flex-shrink: 0;
+  width: 100%;
+  min-height: 210px;
   padding: 40px 26px 26px;
   text-align: left;
   transition: transform 0.3s ease;
@@ -63,99 +62,35 @@
   }
 
   .card-description {
-    font-size: 0.95rem;
+    font-size: 1.05rem;
     color: var(--text-tertiary);
-    line-height: 1.4;
+    line-height: 1.6;
   }
 }
 
-.round {
-  display: none;
-}
-
-@media screen and (max-width: 768px) {
+@media screen and (max-width: 480px) {
   .card {
-    display: none;
-  }
-  .round {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    cursor: pointer;
-    width: 100%;
-    max-width: 320px;
-    padding: 24px 20px;
-    transition: transform 0.15s ease;
+    min-height: auto;
+    padding: 36px 20px 20px;
 
-    &:active {
-      transform: scale(0.97);
-    }
-
-    .round-icon {
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 70px;
-      height: 70px;
-      border-radius: 50%;
-      background: var(--gradient-secondary);
-      margin: 0 auto;
+    .card-tab {
+      width: 38px;
+      height: 38px;
+      top: -16px;
+      left: 18px;
 
       svg {
-        width: 32px;
-        height: 32px;
-        color: var(--text-secondary);
+        width: 18px;
+        height: 18px;
       }
     }
 
-    .round-title {
-      font-size: 1.2rem;
-      margin-top: 14px;
-      text-align: center;
-      color: var(--text-primary);
+    .card-title {
+      font-size: 1.15rem;
     }
 
-    .round-hint {
-      display: inline-block;
-      font-weight: 700;
-      font-size: 0.75rem;
-      letter-spacing: 0.4px;
-      color: var(--neo-fuchsia);
-      background: rgba(255, 62, 137, 0.1);
-      border-radius: var(--radius-pill);
-      padding: 4px 12px;
-      margin-top: 10px;
-      opacity: 1;
-      transition: opacity 0.2s ease;
-    }
-
-    .round-description-wrapper {
-      display: grid;
-      grid-template-rows: 0fr;
-      width: 100%;
-      transition: grid-template-rows 0.3s ease;
-    }
-
-    .round-description-inner {
-      overflow: hidden;
-      min-height: 0;
-    }
-
-    .round-description {
-      font-size: 0.9rem;
-      color: var(--text-tertiary);
-      line-height: 1.4;
-      text-align: center;
-      margin: 10px auto 0;
-    }
-
-    &--expanded {
-      .round-hint {
-        opacity: 0;
-      }
-      .round-description-wrapper {
-        grid-template-rows: 1fr;
-      }
+    .card-description {
+      font-size: 1rem;
     }
   }
 }

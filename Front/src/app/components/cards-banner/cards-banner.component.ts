@@ -12,10 +12,4 @@ export class CardsBannerComponent {
   @Input() title: string = '';
   @Input() description: string = '';
   @Input() accent: 'fuchsia' | 'orange' | 'yellow' = 'fuchsia';
-
-  expanded = false;
-
-  toggle(): void {
-    this.expanded = !this.expanded;
-  }
 }
