@@ -5,9 +5,21 @@
   gap: 100px;
   width: 85%;
   background:
-    radial-gradient(circle 160px at 22% 22%, rgba(255, 87, 51, 0.32), transparent 70%),
-    radial-gradient(circle 200px at 78% 75%, rgba(255, 62, 137, 0.26), transparent 70%),
-    radial-gradient(circle 190px at 52% 45%, rgba(255, 215, 0, 0.28), transparent 70%),
+    radial-gradient(
+      circle 160px at 22% 22%,
+      rgba(255, 87, 51, 0.32),
+      transparent 70%
+    ),
+    radial-gradient(
+      circle 200px at 78% 75%,
+      rgba(255, 62, 137, 0.26),
+      transparent 70%
+    ),
+    radial-gradient(
+      circle 190px at 52% 45%,
+      rgba(255, 215, 0, 0.28),
+      transparent 70%
+    ),
     var(--neo-cream);
 
   .carousel-container {
