@@ -1,6 +1,11 @@
 .about-container {
   padding: 70px 0 120px 0;
   display: flex;
+  background:
+    radial-gradient(circle 210px at 22% 28%, rgba(255, 215, 0, 0.35), transparent 70%),
+    radial-gradient(circle 150px at 80% 22%, rgba(255, 87, 51, 0.32), transparent 70%),
+    radial-gradient(circle 230px at 65% 68%, rgba(255, 62, 137, 0.28), transparent 70%),
+    var(--neo-cream);
 
   .about-image {
     width: 50%;
@@ -9,24 +14,31 @@
 
     img {
       margin: auto;
-      width: 70%;
+      width: 65%;
       max-height: 80%;
-      border-radius: 5%;
+      border-radius: var(--radius-arch);
+      border: 3px solid var(--neo-ink);
       object-fit: cover;
       object-position: right 50%;
+      transform: rotate(-2deg);
     }
   }
 
   .about-content {
+    position: relative;
+    z-index: 1;
     width: 50%;
     display: flex;
     flex-direction: column;
     justify-content: center;
 
-    .about-title {
-      font-size: 20px;
-      padding-bottom: 10px;
-      color: var(--neo-orange);
+    .about-kicker {
+      display: block;
+      font-family: var(--font-decorative);
+      font-style: italic;
+      font-size: 18px;
+      color: var(--neo-fuchsia);
+      padding-bottom: 6px;
       text-align: left;
     }
 
@@ -45,37 +57,70 @@
       line-height: 1.4;
     }
 
-    .about-cards {
+    .about-tags {
       display: flex;
-      gap: 30px;
-      justify-content: center;
-      flex-direction: column;
-      width: 70%;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      gap: 20px 24px;
+      width: 100%;
 
-      .about-card {
-        background: var(--gradient-secondary);
-        border-radius: 8px;
-        padding: 30px;
-        width: 100%;
+      .about-tag {
+        position: relative;
+        width: 240px;
+        padding: 30px 18px 18px;
+        text-align: center;
 
-        h4 {
+        &--1 {
+          transform: rotate(-4deg);
+          margin-top: 14px;
+        }
+
+        &--2 {
+          transform: rotate(3deg);
+          margin-top: 28px;
+        }
+
+        &--3 {
+          transform: rotate(-2deg);
+          margin-top: 6px;
+        }
+
+        &-string {
+          position: absolute;
+          top: -8px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 18px;
+          height: 11px;
+          border: 2px solid var(--neo-ink);
+          border-bottom: none;
+          border-radius: 10px 10px 0 0;
+        }
+
+        &-hole {
+          position: absolute;
+          top: 6px;
+          left: 50%;
+          transform: translateX(-50%);
+          width: 9px;
+          height: 9px;
+          border-radius: 50%;
+          background: var(--neo-cream);
+          border: 2px solid var(--neo-ink);
+        }
+
+        h3 {
           font-size: 18px;
-          margin-bottom: 10px;
-          color: var(--text-secondary);
-          display: flex;
-          i {
-            display: flex;
-            align-items: center;
-            color: var(--text-secondary);
-            margin-right: 10px;
-          }
+          margin-top: 6px;
+          margin-bottom: 8px;
+          color: var(--text-primary);
         }
 
         p {
-          margin-left: 24px;
-          font-size: 17px;
-          color: var(--text-secondary);
+          font-size: 14px;
+          color: var(--text-tertiary);
           line-height: 1.4;
+          text-align: center;
         }
       }
     }
@@ -95,15 +140,16 @@
         width: 90%;
       }
 
-      .about-cards {
-        width: 90%;
-        .about-card {
-          h4 {
+      .about-tags {
+        .about-tag {
+          width: 210px;
+
+          h3 {
             font-size: 16px;
           }
 
           p {
-            font-size: 15px;
+            font-size: 13px;
           }
         }
       }
@@ -130,15 +176,22 @@
       padding: 0;
       align-items: center;
 
+      .about-kicker,
+      .about-subtitle {
+        text-align: center;
+      }
+
       .about-text {
         width: 80%;
       }
 
-      .about-cards {
+      .about-tags {
         width: 80%;
-        .about-card {
-          h4 {
-            font-size: 14px;
+        justify-content: center;
+
+        .about-tag {
+          h3 {
+            font-size: 15px;
           }
 
           p {
@@ -169,7 +222,7 @@
         width: 90%;
       }
 
-      .about-cards {
+      .about-tags {
         width: 90%;
       }
     }
@@ -195,8 +248,20 @@
         width: 100%;
       }
 
-      .about-cards {
+      .about-tags {
         width: 100%;
+        justify-content: center;
+
+        .about-tag {
+          width: 88%;
+
+          &--1,
+          &--2,
+          &--3 {
+            transform: rotate(-1deg);
+            margin-top: 8px;
+          }
+        }
       }
     }
   }

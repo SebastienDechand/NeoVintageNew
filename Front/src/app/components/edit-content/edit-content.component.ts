@@ -5,13 +5,15 @@ import { FormBuilder, FormGroup, FormsModule, ReactiveFormsModule, Validators } 
 import { forkJoin } from 'rxjs';
 import { environment } from '../../environments/environment';
 import { AuthService } from '../../services/auth.service';
+import { ToastService } from '../../services/toast.service';
+import { LucideLogOut, LucideSquarePen, LucideEye, LucideEyeOff } from '@lucide/angular';
 
 @Component({
   selector: 'app-edit-content',
   templateUrl: './edit-content.component.html',
   styleUrls: ['./edit-content.component.scss'],
   standalone: true,
-  imports: [FormsModule, ReactiveFormsModule]
+  imports: [FormsModule, ReactiveFormsModule, LucideLogOut, LucideSquarePen, LucideEye, LucideEyeOff]
 })
 export class EditContentComponent implements OnInit {
   @Input() photos: any[] = [];
@@ -22,6 +24,7 @@ export class EditContentComponent implements OnInit {
   editMode = false;
   showLoginModal = false;
   isLoggedIn = false;
+  showPassword = false;
   loginForm: FormGroup;
   private clickTimer: any;
   private clickCount = 0;
@@ -31,6 +34,7 @@ export class EditContentComponent implements OnInit {
   constructor(
     private http: HttpClient,
     private authService: AuthService,
+    private toastService: ToastService,
     private fb: FormBuilder
   ) {
     this.loginForm = this.fb.group({
@@ -75,6 +79,7 @@ export class EditContentComponent implements OnInit {
         this.editMode = true;
         this.showLoginModal = false;
         this.resetForm();
+        this.toastService.success('Connexion réussie !');
       },
       error: (error) => this.handleError(error)
     });
@@ -82,6 +87,11 @@ export class EditContentComponent implements OnInit {
 
   resetForm(): void {
     this.loginForm.reset();
+    this.showPassword = false;
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
   logout(): void {
@@ -102,7 +112,7 @@ export class EditContentComponent implements OnInit {
       next: () => {
         this.photosChange.emit(this.photos);
         this.creatorsChange.emit(this.creators);
-        alert('Contenu mis à jour avec succès !');
+        this.toastService.success('Contenu mis à jour avec succès !');
         this.editMode = false;
       },
       error: this.handleError.bind(this)
@@ -111,10 +121,10 @@ export class EditContentComponent implements OnInit {
 
   private handleError(error: any): void {
     if (error.status === 401) {
-      alert('Identifiants incorrects !');
+      this.toastService.error('Identifiants incorrects !');
       this.authService.logout();
     } else {
-      alert('Erreur : ' + (error.error?.error || 'Erreur inconnue'));
+      this.toastService.error('Erreur : ' + (error.error?.error || 'Erreur inconnue'));
     }
   }
 

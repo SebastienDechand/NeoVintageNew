@@ -1,11 +1,11 @@
 <div class="add-review-button">
-  <button (click)="showForm = !showForm" class="btn-primary">
+  <button (click)="showForm = !showForm" class="pill pill--light">
     {{ showForm ? 'Fermer' : 'Laisser un avis' }}
   </button>
 </div>
 
 @if (showForm) {
-  <div class="review-form-container">
+  <div class="review-form-container card-sticker">
     <form [formGroup]="reviewForm" (ngSubmit)="onSubmit()" class="review-form">
       <h3>Donnez votre avis</h3>
 
@@ -70,7 +70,7 @@
       </div>
 
       <div class="form-actions">
-        <button type="submit" [disabled]="!reviewForm.valid || isSubmitting" class="btn-submit">
+        <button type="submit" [disabled]="!reviewForm.valid || isSubmitting" class="pill pill--gradient form-submit">
           {{ isSubmitting ? 'Envoi en cours...' : 'Envoyer mon avis' }}
         </button>
       </div>

@@ -1,29 +1,12 @@
 .add-review-button {
   text-align: center;
   margin: 20px 0;
-
-  .btn-primary {
-    background: var(--neo-orange);
-    color: var(--text-secondary);
-    border: none;
-    padding: 10px 20px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: all 0.3s;
-
-    &:hover {
-      background: var(--gradient-secondary);
-    }
-  }
 }
 
 .review-form-container {
   margin: 20px auto;
-  padding: 20px;
-  background-color: var(--text-secondary);
-  border-radius: 8px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 24px;
+  max-width: 500px;
 
   h3 {
     color: var(--text-primary);
@@ -49,7 +32,7 @@
       textarea {
         padding: 10px;
         border: 1px solid var(--background-tertiary);
-        border-radius: 4px;
+        border-radius: 8px;
         font-size: 14px;
 
         color: var(--text-tertiary);
@@ -103,26 +86,17 @@
 
     .form-actions {
       margin-top: 20px;
+      display: flex;
+      justify-content: center;
 
-      .btn-submit {
-        background-color: var(--neo-orange);
-        color: var(--text-secondary);
-        border: none;
-        padding: 12px 24px;
-        border-radius: 4px;
-        cursor: pointer;
-        font-size: 16px;
+      .form-submit {
         width: 100%;
-        transition: all 0.3s;
-
-
-        &:hover:not(:disabled) {
-          background: var(--gradient-secondary);
-        }
 
         &:disabled {
-          background-color: var(--background-tertiary);
+          background: var(--background-tertiary);
+          color: var(--text-tertiary);
           cursor: not-allowed;
+          transform: none;
         }
       }
     }

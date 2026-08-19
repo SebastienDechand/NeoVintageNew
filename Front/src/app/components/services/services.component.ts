@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { CardsServicesComponent } from "../cards-services/cards-services.component";
-import { link } from 'fs';
 
 @Component({
   selector: 'app-services',
@@ -20,6 +19,7 @@ export class ServicesComponent {
       title: 'Friperie en ligne',
       description: 'Découvrez une sélection de vêtements vintage.',
       link: 'photos',
+      accent: 'fuchsia' as const,
     },
     {
       image: 'assets/images/creators-1920w.webp',
@@ -31,6 +31,7 @@ export class ServicesComponent {
       title: 'Créateurs',
       description: 'Découvrez des créations uniques et artisanales.',
       link: 'creators',
+      accent: 'orange' as const,
     },
     {
       image: 'assets/images/cart-1920w.webp',
@@ -42,6 +43,7 @@ export class ServicesComponent {
       title: 'Panier personnalisé',
       description: 'Composez votre propre sélection.',
       link: 'custom-shopping',
+      accent: 'yellow' as const,
     },
   ];
 }

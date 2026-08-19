@@ -3,8 +3,8 @@
 
     <div class="ratings-summary">
       <div class="average-rating">
-        <h2 class="rating-title">Notre réputation</h2>
-        <h3 class="rating-subtitle">Avis clients vérifiés</h3>
+        <span class="rating-kicker">Notre réputation</span>
+        <h2 class="rating-subtitle">Avis clients vérifiés</h2>
         <p class="rating-description">
           Découvrez ce que notre communauté pense de nos services et de nos produits. Chaque avis est vérifié pour garantir son authenticité.
         </p>
@@ -26,11 +26,11 @@
 
         <div class="rating-highlights">
           <div class="highlight-item">
-            <i class="fas fa-check-circle"></i>
+            <svg lucideCircleCheck></svg>
             <span>100% des avis sont vérifiés</span>
           </div>
           <div class="highlight-item">
-            <i class="fas fa-star"></i>
+            <svg lucideStar></svg>
             <span>{{ getPositiveReviewsPercentage() }}% d'avis positifs</span>
           </div>
         </div>
@@ -44,12 +44,12 @@
 
     <div class="reviews-carousel">
       <button (click)="previous()" [disabled]="currentStartIndex === 0" class="carousel-button">
-        <span class="button-icon">◀</span>
+        <svg lucideChevronLeft></svg>
       </button>
 
       <div class="reviews-list">
         @for (review of visibleReviews; track $index) {
-          <div class="review-card">
+          <div class="review-card card-sticker" [class.card-sticker--ink]="$index % 2 === 0" [class.card-sticker--yellow]="$index % 2 === 1">
             <div class="review-content">
               <div class="review-header">
                 <span class="author">{{ review.authorInitials }}</span>
@@ -82,7 +82,7 @@
       </div>
 
       <button (click)="next()" [disabled]="currentStartIndex + maxDisplayed >= reviews.length" class="carousel-button">
-        <span class="button-icon">▶</span>
+        <svg lucideChevronRight></svg>
       </button>
     </div>
 

@@ -1,12 +1,20 @@
-<div class="card">
-  <i class="{{ icon }}"></i>
-  <h2 class="card-title">{{ title }}</h2>
-  <p class="card-description">{{ description }}</p>
-</div>
-
-<div class="round">
-  <div class="round-icon">
-    <i class="{{ icon }}"></i>
+<div
+  class="card card-sticker"
+  [class.card-sticker--orange]="accent === 'orange'"
+  [class.card-sticker--yellow]="accent === 'yellow'"
+>
+  <div
+    class="card-tab"
+    [class.card-tab--orange]="accent === 'orange'"
+    [class.card-tab--yellow]="accent === 'yellow'"
+  >
+    <svg [lucideIcon]="icon"></svg>
   </div>
-  <h2 class="round-title">{{ title }}</h2>
+  <h3 class="card-title">{{ title }}</h3>
+  <span
+    class="card-rule"
+    [class.card-rule--orange]="accent === 'orange'"
+    [class.card-rule--yellow]="accent === 'yellow'"
+  ></span>
+  <p class="card-description">{{ description }}</p>
 </div>

@@ -1,150 +1,206 @@
 .navbar {
-  position: fixed;
+  position: sticky;
+  top: 0;
   display: flex;
-  justify-content: end;
-  top: 30px;
-  right: 30px;
-  z-index: 100;
+  align-items: center;
+  justify-content: space-between;
   width: 100%;
-  &__menu {
-    position: fixed;
-    top: 70px;
-    right: 70px;
-    width: 20%;
-    height: 45vh;
-    flex-direction: column;
+  padding: 12px 40px;
+  background-color: var(--neo-cream);
+  border-bottom: 2px solid var(--neo-ink);
+  z-index: 100;
+
+  &__brand {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    line-height: 0;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
     background-color: var(--neo-orange);
-    transform: translateX(150%);
-    z-index: 1000;
-    border-radius: 20px;
-    transition: transform 0.3s ease-in-out;
-    padding-bottom: 40px;
-    &.active {
-      transform: translateX(0);
-    }
-    &-link {
-      font-size: 1.5rem;
-      margin: auto;
-      overflow: hidden;
-    }
-    &-list {
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      list-style: none;
-      gap: 1.5rem;
-      height: 100%;
-    }
-    &-item {
-      display: flex;
-      align-items: center;
-      overflow: hidden;
-      min-height: 20px;
-      &-logo {
-        width: 150px;
-        display: none;
-      }
-    }
-    &-link {
-      text-decoration: none;
-      font-size: 1rem;
-      transition: color 0.2s;
-      color: var(--text-secondary);
-      cursor: pointer;
-      &:hover {
-        opacity: 0.6;
-      }
-    }
-    .btn {
-      display: flex;
-      align-items: center;
-      background-color: var(--color-primary-button);
-      color: var(--color-text);
-      padding: 15px 20px;
-      border-radius: 5px;
-      transition: all 0.3s;
-      &:hover {
-        background-color: var(--color-primary-button-hover);
-      }
+
+    &-logo {
+      width: 28px;
+      height: auto;
     }
   }
+
   &__hamburger {
-    display: flex;
+    display: none;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     gap: 5px;
-    background-color: var(--text-secondary);
-    width: 50px;
-    height: 50px;
+    background-color: var(--neo-orange);
+    border: none;
+    width: 44px;
+    height: 44px;
+    padding: 0;
     border-radius: 50%;
+
     &-bar {
-      width: 25px;
+      width: 22px;
       height: 3px;
-      background: var(--neo-orange);
+      background: var(--text-secondary);
       transition: transform 0.3s ease-in-out;
     }
+
     &.active {
-      &-bar:nth-child(1) {
+      .navbar__hamburger-bar:nth-child(1) {
         transform: rotate(45deg) translateY(8px);
       }
-      &-bar:nth-child(2) {
+      .navbar__hamburger-bar:nth-child(2) {
         opacity: 0;
       }
-      &-bar:nth-child(3) {
+      .navbar__hamburger-bar:nth-child(3) {
         transform: rotate(-45deg) translateY(-8px);
       }
     }
   }
 
-  /* Responsive Rules */
-  @media (max-width: 1440px) {
-    &__menu {
-      width: 25%;
+  &__menu {
+    &-card {
+      /* No visual box on desktop - the card treatment only applies inside
+         the mobile media query below. */
+      display: contents;
     }
-  }
 
-  @media (max-width: 1024px) {
-    &__menu {
-      width: 30%;
+    &-close {
+      display: none;
     }
-  }
 
-  @media (max-width: 768px) {
-    &__menu {
-      position: fixed;
-      right: 0;
-      top: 0;
-      width: 100%;
-      height: 100vh;
-      justify-content: start;
+    &-list {
+      display: flex;
       align-items: center;
-      background-color: var(--neo-orange);
-      transform: translateX(100%);
-      z-index: 1000;
-      border-radius: 0;
-      &.active {
-        transform: translateX(0);
+      list-style: none;
+      gap: 0.25rem;
+    }
+
+    &-item {
+      display: flex;
+      align-items: center;
+    }
+
+    &-link {
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 600;
+      color: var(--text-primary);
+      cursor: pointer;
+      padding: 8px 16px;
+      border-radius: 999px;
+      transition: color 0.2s, background-color 0.2s;
+
+      &:hover,
+      &:focus-visible {
+        background-color: rgba(255, 87, 51, 0.1);
       }
-      &-item {
-        &-logo {
-          display: block;
-        }
-      }
-      &-link {
-        font-size: 1.5rem;
-        margin: auto;
+
+      &--active {
+        color: var(--neo-orange);
+        background-color: rgba(255, 87, 51, 0.12);
       }
     }
-    &__menu-list {
-      flex-direction: column;
-      gap: 3rem;
-    }
+  }
+
+  /* Below this width the label set no longer fits inline: collapse into a hamburger */
+  @media (max-width: 1024px) {
+    padding: 12px 20px;
+
     &__hamburger {
       display: flex;
+    }
+
+    &__menu {
+      /* Sized with vw/vh instead of top/right/bottom/left: 0 so the
+         overlay reliably covers the full viewport regardless of the
+         navbar's own (small, sticky) box. */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      background-color: rgba(20, 10, 10, 0.4);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity 0.25s ease, visibility 0s linear 0.25s;
+      z-index: 1000;
+
+      &.active {
+        opacity: 1;
+        visibility: visible;
+        transition-delay: 0s;
+
+        .navbar__menu-card {
+          transform: scale(1);
+        }
+      }
+
+      &-card {
+        position: relative;
+        display: block;
+        width: min(360px, 100%);
+        max-height: 80vh;
+        overflow-y: auto;
+        padding: 48px 40px;
+        border-radius: 24px;
+        background: var(--gradient-secondary);
+        border: 3px solid var(--neo-ink);
+        box-shadow: 8px 8px 0 var(--neo-ink);
+        transform: scale(0.94);
+        transition: transform 0.25s ease;
+      }
+
+      &-close {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: absolute;
+        top: 12px;
+        right: 12px;
+        width: 36px;
+        height: 36px;
+        border: none;
+        border-radius: 50%;
+        background-color: rgba(255, 255, 255, 0.35);
+        color: var(--text-primary);
+        font-size: 1rem;
+        line-height: 1;
+        cursor: pointer;
+        transition: background-color 0.2s;
+
+        &:hover,
+        &:focus-visible {
+          background-color: rgba(255, 255, 255, 0.55);
+        }
+      }
+
+      &-list {
+        flex-direction: column;
+        gap: 1.75rem;
+      }
+
+      &-link {
+        font-size: 1.25rem;
+
+        &:hover,
+        &:focus-visible {
+          background-color: rgba(255, 255, 255, 0.25);
+        }
+
+        &--active {
+          color: var(--text-primary);
+          background-color: rgba(255, 255, 255, 0.35);
+        }
+      }
     }
   }
 }

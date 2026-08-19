@@ -1,27 +1,56 @@
-<section class="banner-container" id="banner">
-  <img
-    src="assets/images/banner1.webp"
-    alt="Une femme avec un chapeau et un poncho coloré regarde l'objectif"
-    class="banner-img"
-  />
+<div class="hero-wrapper">
+<section class="hero-container" id="banner">
+  <div class="hero-copy">
+    <img
+      src="assets/images/logo_color-1920w.webp"
+      srcset="assets/images/logo_color-480w.webp 480w, assets/images/logo_color-768w.webp 768w, assets/images/logo_color-1920w.webp 1920w"
+      sizes="110px"
+      alt="Logo de la friperie Neo Vintage"
+      class="hero-logo"
+      loading="lazy"
+    />
+    <span class="hero-badge">Friperie · Seconde main</span>
 
-  <div class="banner-content">
-    <img src="assets/images/logo-480w.webp" alt="Logo" class="banner-logo" />
-    <div class="banner-text-container">
-      <h1 class="banner-title">
-        La mode responsable à portée de toutes et tous
-      </h1>
-    </div>
+    <h1 class="hero-title">
+      LA MODE <span class="hero-title-accent">RESPONSABLE</span>
+    </h1>
+    <p class="hero-subtitle">à portée de toutes et tous</p>
+
+    <a class="pill pill--gradient hero-cta" href="#about"
+      >Découvrir la boutique</a
+    >
+  </div>
+
+  <div class="hero-showcase">
+    <img
+      src="assets/images/banner1.webp"
+      alt="Une femme avec un chapeau et un poncho coloré regarde l'objectif"
+      class="hero-main-photo"
+    />
+    <img
+      src="assets/images/hero-polaroid-shop.webp"
+      alt="Cliente essayant une veste dans la friperie Neo Vintage"
+      class="hero-polaroid hero-polaroid--shop"
+      loading="lazy"
+    />
+    <img
+      src="assets/images/hero-polaroid-wall.webp"
+      alt="Cliente posant devant une fresque murale colorée"
+      class="hero-polaroid hero-polaroid--wall"
+      loading="lazy"
+    />
   </div>
 </section>
 
 <div class="card-container">
   @for (card of cards; track $index) {
-  <app-cards-banner
-    [icon]="card.icon"
-    [title]="card.title"
-    [description]="card.description"
-  >
-  </app-cards-banner>
+    <app-cards-banner
+      [icon]="card.icon"
+      [accent]="card.accent"
+      [title]="card.title"
+      [description]="card.description"
+    >
+    </app-cards-banner>
   }
+</div>
 </div>

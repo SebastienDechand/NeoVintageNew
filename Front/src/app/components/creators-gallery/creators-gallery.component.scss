@@ -2,16 +2,24 @@
   width: 85%;
   margin: 0 auto;
   padding: 120px 0;
+  background:
+    radial-gradient(circle 170px at 16% 32%, rgba(255, 62, 137, 0.3), transparent 70%),
+    radial-gradient(circle 130px at 84% 68%, rgba(255, 215, 0, 0.32), transparent 70%),
+    radial-gradient(circle 200px at 52% 75%, rgba(255, 87, 51, 0.26), transparent 70%),
+    var(--neo-cream);
  }
 
  .creators-content {
   text-align: center;
   margin-bottom: 40px;
 
-  .creators-title {
-    font-size: 20px;
-    margin-bottom: 15px;
-    color: var(--neo-orange);
+  .creators-kicker {
+    display: block;
+    font-family: var(--font-decorative);
+    font-style: italic;
+    font-size: 18px;
+    margin-bottom: 8px;
+    color: var(--neo-fuchsia);
   }
 
   .creators-subtitle {
@@ -20,7 +28,7 @@
   }
 
   .creators-text {
-    font-size: 1.1rem;
+    font-size: 16px;
     line-height: 1.6;
     max-width: 800px;
     margin: 0 auto;
@@ -31,20 +39,18 @@
  .creators-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 30px;
+  gap: 40px;
   padding: 20px 0;
 
   .creator-card {
-    background: var(--text-secondary);
-    border-radius: 12px;
     overflow: hidden;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: transform 0.3s ease;
 
     img {
       width: 100%;
       height: 250px;
       object-fit: cover;
+      border-bottom: 2.5px solid var(--neo-ink);
     }
 
     .creator-info {
@@ -52,28 +58,15 @@
       text-align: center;
 
       h3 {
-        font-size: 1.5rem;
+        font-size: 1.4rem;
         margin-bottom: 10px;
+        color: var(--text-primary);
       }
 
       p {
         color: var(--text-tertiary);
         margin-bottom: 15px;
         line-height: 1.4;
-      }
-
-      a {
-        display: inline-block;
-        padding: 10px 20px;
-        background: var(--neo-orange);
-        color: var(--text-secondary);
-        text-decoration: none;
-        border-radius: 6px;
-        transition: all 0.3s ease;
-
-        &:hover {
-          background: var(--gradient-secondary);
-        }
       }
     }
   }

@@ -6,12 +6,13 @@ import { environment } from '../../environments/environment';
 import { EditContentComponent } from '../edit-content/edit-content.component';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { provideAnimations } from '@angular/platform-browser/animations';
+import { LucideStore } from '@lucide/angular';
 
 @Component({
   selector: 'app-photo-gallery',
   templateUrl: './photo-gallery.component.html',
   styleUrls: ['./photo-gallery.component.scss'],
-  imports: [FormsModule, EditContentComponent],
+  imports: [FormsModule, EditContentComponent, LucideStore],
   standalone: true,
   providers: [provideAnimations()],
   animations: [
@@ -50,7 +51,7 @@ export class PhotoGalleryComponent implements OnInit {
   selectedPhoto: any;
   currentIndex = 0;
 
-  private readonly API_URL = `${environment.apiUrl}/photos` || process.env['API_URL_PHOTOS'] || '';
+  private readonly API_URL = `${environment.apiUrl}/photos`;
 
   constructor(
     private http: HttpClient,
